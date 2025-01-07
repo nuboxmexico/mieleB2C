@@ -1,0 +1,166 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= Spree.t(:summary) %></h3>
+  </div>
+
+  <table class="table table-condensed table-bordered" id="order_tab_summary" data-hook>
+    <tbody class="additional-info">
+      <tr>
+        <td id="order_status" width="35%" data-hook>
+          <strong><%= Spree.t(:status) %>:</strong>
+        </td>
+        <td>
+          <span class="state label label-<%= @order.state %>">
+            <%= Spree.t(@order.miele_state, scope: :miele_states) %>
+          </span>
+        </td>
+      </tr>
+      <% if @order.user%>
+      <tr>
+        <td id="order_folio_b2b" width="35%" data-hook>
+          <strong><%= 'Folio B2B' %>:</strong>
+        </td>
+        <% if @order.folio_b2b %>
+          <td>
+            <%= @order.folio_b2b %>
+          </td>
+        <% else %>
+          <td>
+            <%= link_to t(:data_upload_upload_orders_to_miele_b2b_btn),'resend_order_to_b2b', class: 'btn btn-sm btn-danger'%>
+          </td>
+        <% end %>
+      </tr>
+      <% end %>
+      <tr>
+      	<td id="order_document" width="35%" data-hook>
+          <strong>Tipo documento:</strong>
+        </td>
+        <td>
+          <%= (@order.document_type == 'ticket' ? 'Boleta' : 'Factura') %>
+        </td>
+      </tr>
+      <tr>
+        <td data-hook='admin_order_tab_subtotal_title'>
+          <strong><%= Spree.t(:subtotal) %>:</strong>
+        </td>
+        <td id='item_total'>
+          <%= @order.display_item_total.to_html %>
+        </td>
+      </tr>
+
+      <% if @order.checkout_steps.include?("delivery") && @order.ship_total > 0 %>
+        <tr>
+          <td data-hook='admin_order_tab_ship_total_title'>
+            <strong><%= Spree.t(:ship_total) %>:</strong>
+          </td>
+          <td id='ship_total'>
+            <%= @order.display_ship_total.to_html %>
+          </td>
+        </tr>
+      <% end %>
+       <tr>
+          <td data-hook='admin_order_tab_additional_tax_title'>
+            <strong>Total Instalación</strong>
+          </td>
+          <td id='additional_tax_total'>
+            <%= Spree::Money.new(@order.instalation_value) %>
+          </td>
+        </tr>
+
+      <% if @order.included_tax_total != 0 %>
+        <tr>
+          <td data-hook='admin_order_tab_included_tax_title'>
+            <strong><%= Spree.t(:tax_included) %>:</strong>
+          </td>
+          <td id='included_tax_total'>
+            <%= @order.display_included_tax_total.to_html %>
+          </td>
+        </tr>
+      <% end %>
+
+      <% if @order.additional_tax_total != 0 %>
+        <tr>
+          <td data-hook='admin_order_tab_additional_tax_title'>
+            <strong><%= Spree.t(:tax) %>:</strong>
+          </td>
+          <td id='additional_tax_total'>
+            <%= @order.display_additional_tax_total.to_html %>
+          </td>
+        </tr>
+      <% end %>
+
+      <tr>
+        <td data-hook='admin_order_tab_total_title'>
+          <strong><%= Spree.t(:total) %>:</strong>
+        </td>
+        <td id='order_total'><%= @order.display_total.to_html %></td>
+      </tr>
+
+      <% if @order.completed? %>
+        <tr>
+          <td data-hook='admin_order_tab_date_completed_title'>
+            <strong><%= Spree.t(:date_completed) %>:</strong>
+          </td>
+          <td id='date_complete'>
+            <%= pretty_time(@order.completed_at) %>
+          </td>
+        </tr>
+        <% if @order.webpay_data.present? %>
+        <% data = @order.webpay_data.gsub('[','').gsub(']','').gsub('"','').split(',') %>
+        <tr>
+          <td data-hook='admin_order_tab_payment_type_webpay'>
+            <strong><%= Spree.t(:payment_type) %>:</strong>
+          </td>
+          <td id='date_complete'>
+            <%= 'Webpay Plus Débito' if data[8].to_s.strip == 'VD' %>
+            <%= 'Webpay Plus Crédito' if data[8].to_s.strip != 'VD' %> 
+          </td>
+        </tr>
+        <tr>
+          <td data-hook='admin_order_tab_payment_facilities_webpay'>
+            <strong><%= Spree.t(:payment_facilities) %>:</strong>
+          </td>
+          <td id='date_complete'>
+            <%= 'Sin Cuotas' if data[8].to_s.strip == 'VD' %>
+            <%= 'Sin Cuotas' if data[8].to_s.strip == 'VN' %>
+            <%= 'Cuotas normales' if data[8].to_s.strip == 'VC' %>
+            <%= 'Sin interés' if data[8].to_s.strip == 'SI' %>
+            <%= 'Sin interés' if data[8].to_s.strip == 'S2' %>
+            <%= 'Sin interés' if data[8].to_s.strip == 'NC' %>
+          </td>
+        </tr>
+        <tr>
+          <td data-hook='admin_order_tab_payment_quota_webpay'>
+            <strong><%= Spree.t(:payment_quota) %>:</strong>
+          </td>
+          <td id='date_complete'>
+            <%= data[9] %>
+          </td>
+        </tr>
+        <% end %>
+      <% end %>
+
+      <% if @order.approved? %>
+        <tr>
+          <td><strong><%= Spree.t(:approver) %></strong></td>
+          <td><%= @order.approver.email %></td>
+        </tr>
+        <tr>
+          <td><strong><%= Spree.t(:approved_at) %></strong></td>
+          <td><%= pretty_time(@order.approved_at) %></td>
+        </tr>
+      <% end %>
+
+      <% if @order.canceled? && @order.canceler && @order.canceled_at %>
+        <tr>
+          <td><strong><%= Spree.t(:canceler) %></strong></td>
+          <td><%= @order.canceler.email %></td>
+        </tr>
+        <tr>
+          <td><strong><%= Spree.t(:canceled_at) %></strong></td>
+          <td><%= pretty_time(@order.canceled_at) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

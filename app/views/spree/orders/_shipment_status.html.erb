@@ -1,0 +1,10 @@
+<div class="row shipment-state-data">
+  <article class="steps">
+    <ul class="mdl-progressbar">
+      <li class="step-link <%= ['paid','ready', 'shipped', 'delivered'].include?(state) ? "active" : "pendding"%>"><a href="#">Pagado</a></li>
+      <li class="step-link <%= ['ready', 'shipped', 'delivered'].include?(state) ? "active" : "pendding"%>" ><a href="#">Aprobado</a></li>
+      <li class="step-link <%= ['shipped', 'delivered'].include?(state) ? "active" : "pendding"%>" ><a href="#">Enviado</a></li>
+      <li class="step-link <%= state == 'delivered' ? "active" : "pendding"%>" ><a href="#">Entregado</a></li>
+    </ul> 
+  </article>
+</div>

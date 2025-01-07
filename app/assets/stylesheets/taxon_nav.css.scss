@@ -1,0 +1,204 @@
+@import "spree/frontend/variables";
+
+.user-menu-ul{
+    margin-top:20px;
+}
+.taxon-nav {
+    background-color: $brand-primary;
+    margin-top: 3px;
+}
+/* relevant styling */
+
+body { overflow-x: hidden; } /* trick from css-tricks comments */
+
+/* FIRST LEVEL */
+.nav .drop-menu > li > ul{ 
+    width: 100%!important;
+    height: 400px!important;
+    overflow:hidden;
+    display:inline-block;
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.nav .drop-menu > li > ul div div{
+    height: 150px;
+    display:block;
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+   
+}
+/* SECOND LEVEL */
+
+.nav .drop-menu > li > ul {
+    position: absolute;
+    left: 0;
+    z-index: 101;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.nav .drop-menu > li:hover > ul {    
+    visibility: visible;
+    opacity: 1;
+}
+
+.nav .drop-menu > li > ul > li {
+    padding: 3px 0;
+}
+
+.nav .drop-menu > li:hover .drop {
+    font-weight: bold;
+    background-color: $brand-secondary!important; 
+}
+.dropdown-cat div div a{ 
+    font-size:12px;
+   
+}
+.dropdown-cat div div a:hover{ 
+    color: black!important;
+}
+.taxon-nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    }
+    
+.taxon-nav ul li {
+    display:inline-block;
+    z-index: 999!important;
+}
+.taxon-nav ul li a{
+    color:#FFF;
+}
+.taxon-nav ul li div{
+    border-right: 1px solid;
+    border-color: $light-grey;
+}
+.taxon-nav ul li div a{
+    color:#000;
+}
+
+.taxon-nav a {
+    display:block;
+    padding:0 10px; 
+    color:#FFF;
+    font-size:14px;
+    line-height: 50px;
+    text-decoration:none!important;
+}
+.taxon-nav a:hover { 
+    background-color: $brand-secondary; 
+    color:#FFF;
+}
+.taxon-nav ul li a:hover { 
+    background-color: $brand-secondary; 
+    color:#fff;
+}
+.popover{
+    background-color: $brand-primary!important;
+    width: 100%!important;
+    height: auto!important;
+}
+/* Hide Dropdowns by Default */
+.taxon-nav ul ul {
+    position: absolute; 
+    top: 50px; /* the height of the main .taxon-nav */
+}
+/* Fisrt Tier Dropdown */
+.taxon-nav ul ul li {
+    float:none;
+    display:list-item;
+}
+.taxon-nav ul li div{
+    margin-left: 15px!important;
+}
+.taxon-nav ul li div a{
+    margin: -15px!important;
+}
+.taxon-nav ul li div div ul li{
+    padding: -30px!important;
+    margin-left: -15px!important;
+}
+.taxon-nav ul li div div ul li a{
+    margin: -30px!important;
+    margin-left: -15px!important;
+}
+.taxon-nav ul li div a:hover { 
+    background-color: rgba(0, 0, 0, 0.9)!important; 
+    color:#fff!important;
+}
+.taxon-nav ul li div div ul li a:hover { 
+    background-color: rgba(0, 0, 0, 0)!important;
+    color: $light-grey!important;
+}
+.taxon-nav a {
+    display:block;
+    padding:0 10px; 
+    color:#FFF;
+    font-size:14px;
+    line-height: 50px;
+    text-decoration:none!important;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.taxon-nav a:hover { 
+    background-color: $brand-secondary; 
+    color:#FFF;
+}
+.taxon-nav ul li a:hover { 
+    background-color: $brand-secondary; 
+    color:#fff;
+}
+.navbar .popover {
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    overflow: scroll;
+}
+.fixed-me{
+    transition: all 1s ;
+}
+.fixed-me{
+    padding: 0px  !important;
+    margin-bottom: 5px;
+    position: fixed;
+    top:0;
+    z-index:888;
+    width: 100%;
+    -webkit-box-shadow: 0px 5px 8px #888;
+    -moz-box-shadow: 0px 5px 8px #888;
+    box-shadow: 0px 5px 8px #888;
+}
+
+.navbar-me {    
+   transition: all 1s ;
+}
+.navbar-me{
+    padding: 2px 0px;
+    top: -5px;
+    border: 0px;
+    border-radius: 0px;
+}
+.navbar-collapse{
+    text-align: center;
+    border-top-width: 0px;
+    padding-top: 10px;
+    margin-top: 5px;
+}
+.menu-collapsed-button{
+    margin: 20px 15px 10px 15px !important;
+}
+.search-bar-cat{
+    padding: 15px;
+}

@@ -1,0 +1,63 @@
+<% content_for :page_title do %>
+  Páginas estáticas
+<% end %>
+
+<h4>Footer</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @footer_pages.each do |page| %>
+      <tr>
+        <td>
+          <%= page.name %>
+        </td>
+        <td>
+          <%= link_to main_app.edit_static_page_path(page), class: 'btn btn-primary btn-sm' do %>
+            <span class="icon icon-edit"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h4 class="blog-title">
+  Blog
+  <div class="pull-right">
+    <%= link_to main_app.new_static_page_path, class: 'btn btn-success' do %>
+      Nueva entrada del blog
+    <% end %>
+  </div>
+</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>URL</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @blog_pages.each do |page| %>
+      <tr>
+        <td>
+          <%= page.name %>
+        </td>
+        <td>
+          <%= "#{request.base_url}/static_pages/#{page.slug}" %>
+        </td>
+        <td data-hook="admin_users_index_row_actions" class="actions actions-2 text-right">
+          <%= link_to main_app.edit_static_page_path(page), class: 'btn btn-primary btn-sm' do %>
+            <span class="icon icon-edit"></span>
+          <% end %>
+          <%= link_to_delete(page, {url: "#{request.base_url}/static_pages/#{page.slug}" , no_text: true}) if can? :destroy, page %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

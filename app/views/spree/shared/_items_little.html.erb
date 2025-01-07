@@ -1,0 +1,107 @@
+<% if order %>
+  <div class="stock-contents" data-hook="stock-contents">
+    <% order.line_items.each_with_index do |item, index| %>
+      <div class="row only-left cart-item" data-variant="<%= item.variant_id %>" data-item="<%= item.id %>">
+        <div class="col-xs-2 cart-item-img">
+          <%= mini_image(item.variant) %>
+        </div>
+        <div class="col-xs-5 col-sm-6 cart-item-info">
+          <div class="item-sku">
+            <%= item.variant.sku %>
+          </div>
+          <div class="item-name">
+            <%= item.variant.name %>
+          </div>
+          <% if item.product.offer_price_available? %>
+            <div class="item-price">
+              <%= Spree::Money.new(item.price, no_cents: true) %>
+            </div>
+            <div class="strikethrough-price">
+              <%= Spree::Money.new(item.product.price, no_cents: true) %>
+            </div>
+          <% else %>
+            <div class="item-price">
+              <%= Spree::Money.new(item.price, no_cents: true) %>
+            </div>
+          <% end %>
+
+          <% if item.variant.product.specific_attribute.instalation == true && (controller_name == "checkout" || controller_name == "orders") && ( current_order.try(:state) == "delivery" || current_order.try(:state) == "payment") %>
+            <div class="item-instalation-div">
+              <div class="instalation-selector">
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect mdl-miele-switch" for="item-switch-<%= index %>"> 
+                  <input type="checkbox" id="item-switch-<%= index %>" data-line-item-id="<%= item.id %>" class="mdl-switch__input line-item-installation-checkbox" <%= item.instalation ? "checked" : "" %> onclick="detectInstalationCheckbox()">
+                    <span class="mdl-switch__label">Servicio Instalación Miele</span>
+                </label>
+              </div>
+              <div id="disclaimer-3months-text-<%= index %>" class="disclaimer-item-little disclaimer-3months-text">Los equipos instalados por terceros, tendrán la <strong>garantía legal de seis(6) meses contados desde la entrega del equipo al consumidor.</strong><a href="/static_pages/servicio-instalacion-miele" target="_blank"> Ver más información</a></div>
+              <div id="disclaimer-2years-text-<%= index %>" class="disclaimer-item-little disclaimer-2years-text">Los equipos instalados por Miele o por un servicio técnico autorizado, tendrán una <strong> garantía convencional de dos(2) años contados desde la entrega del equipo al consumidor.</strong><a href="/static_pages/servicio-instalacion-miele" target="_blank"> Ver más información</a></div>
+            </div>
+          <% end if item.variant.product.specific_attribute %>
+        </div>
+        <div class="col-xs-2">
+          <div class="text-center cart-stepper-container">
+            <% if item.quantity > 1 %>
+              <div class="cart-stepper" data-step="down" data-item="<%= item.id %>">
+                <span>-</span>
+              </div>
+            <% else %>
+              <div class="empty-step">
+                <span>-</span>
+              </div>
+            <% end %>
+            <div class="item-quantity">
+              <%= item.quantity %>
+            </div>
+              <% if controller.controller_name == 'checkout' && controller.action_name == 'edit' %>
+
+              <% else %>
+                <% if item.product.stock_items[0].try(:count_on_hand).to_i > item.quantity and !item.variant.product.service %>
+                  <div class="cart-stepper" data-step="up" data-item="<%= item.id %>">
+                    <span>+</span>
+                  </div>
+                <% else %>
+                  <div class="empty-step">
+                    <span>-</span>
+                  </div>
+                <% end %>
+              <% end %>      
+          </div>
+        </div>
+        <div class="col-xs-3 col-sm-2">
+          <div class="text-right">
+            <i class="fa fa-trash-o fa-2x remove-item" data-item="<%= item.id %>"></i>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+ 
+
+<script type="text/javascript">
+
+window.onload = detectInstalationCheckbox();
+
+function detectInstalationCheckbox() {
+  var inputArray = ($('.item-instalation-div'));  
+  
+
+
+  for (var i = 0; i < inputArray.length; i++) {
+     var threeMonthsId = 'disclaimer-3months-text';
+     var twoYearsId = 'disclaimer-2years-text';
+     var checkId = "mdl-switch__input";
+     if ($(inputArray[i]).find("#" + threeMonthsId) || $(inputArray[i]).find("#" + twoYearsId)) {
+      if ($(inputArray[i]).find("." + checkId).is(":checked")) {
+        $(inputArray[i]).find("." + threeMonthsId).addClass('hidden');
+        $(inputArray[i]).find("." + twoYearsId).removeClass('hidden');
+      } else {
+        $(inputArray[i]).find("." + threeMonthsId).removeClass('hidden');
+        $(inputArray[i]).find("." + twoYearsId).addClass('hidden');  
+        }
+      }
+    }
+  }
+ 
+  
+</script>

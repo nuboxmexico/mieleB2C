@@ -1,0 +1,43 @@
+<fieldset id="password-credentials">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom">
+    <%= f.text_field :name, class: 'mdl-textfield__input', required: true %>
+    <%= f.label :name, class: 'mdl-textfield__label' do %>
+      <%= Spree.t(:name) %>
+    <% end %>
+  </div>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom">
+    <%= f.text_field :last_name, class: 'mdl-textfield__input', required: true %>
+    <%= f.label :last_name, class: 'mdl-textfield__label' do %>
+      <%= Spree.t(:last_name) %>
+    <% end %>
+  </div>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom">
+    <%= f.text_field :rut, class: 'mdl-textfield__input', 'aria-describedby' => "helpBlock", required: true, oninput: "validateRut(this);" %>
+    <%= f.label :rut, class: 'mdl-textfield__label' do %>
+      RUT
+    <% end %>
+  </div>
+  <b id="helpBlock" class="help-block"></b>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom">
+    <%= f.text_field :email, class: 'mdl-textfield__input', required: true %>
+    <%= f.label :email, class: 'mdl-textfield__label' do %>
+      <%= Spree.t(:email_label) %>
+    <% end %>
+  </div>
+  
+  <hr />
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom">
+    <%= f.password_field :password, class: 'mdl-textfield__input' %>
+    <%= f.label :password, class: 'mdl-textfield__label' do %>
+      <%= Spree.t(:password) %>
+    <% end %>
+  </div>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom">
+    <%= f.password_field :password_confirmation, class: 'mdl-textfield__input' %>
+    <%= f.label :password_confirmation, class: 'mdl-textfield__label' do %>
+      <%= Spree.t(:password) %>
+    <% end %>
+  </div>
+</fieldset>
+<div data-hook="signup_below_password_fields"></div>

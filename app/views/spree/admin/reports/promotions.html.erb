@@ -1,0 +1,36 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:reports), spree.admin_reports_url %> /
+  Informe de uso de cupones de descuento (promociones)
+<% end %>
+<%= link_to(admin_download_promotions_url(format: 'xlsx'), onclick: '$(".loader-page").remove();') do %>
+  <div class="btn btn-success"><i class="fa fa-download"></i> Descargar</div>
+<% end %>
+<%= paginate @promotions %>
+
+<% if @promotions.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:code) %></th>
+        <th><%= Spree.t(:usage_limit) %></th>
+      	<th>Ganancias</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @promotions.each do |promotion| %>
+        <tr id="<%= spree_dom_id promotion %>">
+          <td><%= link_to promotion.name, edit_admin_promotion_path(promotion) %> (<%= promotion.description %>)</td>
+          <td><%= promotion.code %></td>
+          <td><%= promotion.usage_limit.nil? ? "∞" : promotion.usage_limit  %> (<%= Spree.t(:current_promotion_usage, count: promotion.credits_count) %>)</td>
+        	<td>$ <%= number_to_currency(promotion.orders.sum(:total).to_i,precision: 0 ,unit: "", separator: "", delimiter: ".")%></td>
+        	<td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Promotion)) %>,
+  </div>
+<% end %>

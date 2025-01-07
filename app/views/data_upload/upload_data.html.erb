@@ -1,0 +1,208 @@
+<% content_for :page_title do %>
+	<%=t :data_upload_title %>
+<% end %>
+
+<% content_for :page_actions do %>
+	<%= render partial: 'spree/admin/shared/help', locals: {title_help: t(:admin_help_dataupload_title), body_help: t(:admin_help_dataupload_body)} %>
+<% end %>
+
+<% if !session.nil? and !session[:errors].nil? and session[:errors].first == -1 %>
+	<div class="row">
+		<div class="alert alert-danger" role="alert">
+			<i class="fa fa-exclamation-triangle"></i> <b>Las cabeceras son erróneas</b>
+		</div>
+	</div>
+<% elsif !session.nil? and !session[:errors].nil? and session[:errors].first == -2 %>
+	<div class="row">
+		<div class="alert alert-danger" role="alert">
+			<i class="fa fa-exclamation-triangle"></i> <b>El formato del archivo es incorrecto</b>
+		</div>
+	</div>
+<% elsif !session.nil? and !session[:errors].nil? and session[:errors].size != 0 %>
+	<div class="row">
+		<div class="alert alert-danger" role="alert">
+			<i class="fa fa-exclamation-triangle"></i> 
+			<b>Las siguientes filas presentaron problemas en la carga: </b>
+			<% session[:errors].each do |error| %>
+			<% if error == session[:errors].last %>
+			<%= error %>
+			<% else %>
+			<%= error %>, 
+			<% end %>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+<% session[:errors] = nil %>
+
+<div class="row">
+	<div class="col col-md-6 col-lg-6 col-sm-6 col-xs-12">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3><%=t :data_upload_categories_title %></h3>
+			<p><%=t :data_upload_categories_desc %> <b><a href="/dataUpload/download_categories_template">plantilla de carga </a></b>.</p>
+			<%= form_tag 'import_categories', multipart: true do %>
+				<div class="file-field input-field">
+					<span>Cargar archivo XLSX</span>
+					<input type="file" name="file" required="true" id="categories_upload">
+				</div>
+				<br>
+				<button type="submit" class='btn btn-sm btn-success' onclick='$(".loader-page").fadeIn();'><%= t(:data_upload_categories_btn)%></button>
+			<% end %>
+		</div>
+	</div>
+	<div class="col col-md-6 col-lg-6 col-sm-6 col-xs-12">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3><%=t :data_upload_products_title %></h3>
+			<p><%=t :data_upload_products_desc %> <b><a href="/dataUpload/download_products_template">plantilla de carga </a></b>.</p>
+			<%= form_tag 'import_products', multipart: true do %>
+				<div class="file-field input-field">
+					<span>Cargar archivo XLSX</span>
+					<input type="file" name="file" required="true" id="products_upload">
+				</div>
+				<br>
+				<button type="submit" class='btn btn-sm btn-success' onclick='$(".loader-page").fadeIn();'>
+					<%= t(:data_upload_products_btn)%>
+				</button>
+				<%= link_to 'Descargar Productos', main_app.download_products_path(format: :xlsx), class: 'btn btn-sm btn-primary no-loading' %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col col-md-6 col-lg-6 col-sm-4">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3><%=t :data_upload_images_title %></h3>
+			<p><%=t :data_upload_images_desc %></p>
+			<%= form_tag 'import_images', multipart: true do %>
+				<div class="file-field input-field">
+					<span>Cargar imagenes</span>
+					<input type="file" name="file[]" required="true" multiple="true"  accept="image/gif, image/jpeg, image/png" id="images_upload">
+				</div>
+				<br>
+				<button type="submit" class='btn btn-sm btn-success' onclick='$(".loader-page").fadeIn();'><%= t(:data_upload_images_btn)%></button>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="col col-md-6 col-lg-6 col-sm-6">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3><%=t :data_upload_stock_title %></h3>
+			<p><%=t :data_upload_stock_desc %> <b><a href="/dataUpload/download_stock_template">plantilla de carga</a></b>.</p>
+			<%= form_tag 'import_stock', multipart: true do %>
+				<div class="file-field input-field">
+					<span>Cargar archivo XLSX</span>
+					<input type="file" name="file" required="true" id="stock_upload">
+				</div>
+				<br>
+				<button type="submit" class='btn btn-sm btn-success' onclick='$(".loader-page").fadeIn();'><%= t(:data_upload_stock_btn)%></button>
+				<%= link_to 'Descargar Stock', main_app.download_stock_path(format: :xlsx), class: 'btn btn-sm btn-primary no-loading', id: 'download-stock' %>
+			<% end %>
+		</div>
+	</div>		
+</div>
+
+<div class="row">
+	<div class="col col-md-6 col-lg-6 col-sm-4">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3>
+				<%=t :data_upload_docs_title %>
+			</h3>
+			<p>
+				Los archivos deben ser de tipo PDF (.pdf) y el nombre de los archivos deben tener el formato "TNR_NÚMERO1".
+			</p>
+			<%= form_tag '/dataUpload/import_tech_documents', multipart: true do %>
+				<div class="file-field input-field">
+					<span>Cargar Documentos</span>
+					<input type="file" name="file[]" required="true" multiple="true"  accept="application/pdf" id="documents_upload">
+				</div>
+				<br>
+				<button type="submit" class='btn btn-sm btn-success' onclick='$(".loader-page").fadeIn();'>
+					<%= t(:data_upload_docs_btn)%>
+				</button>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="col-md-6 col-sm-4">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<%= render 'comparable_attributes' %>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col col-md-6 col-lg-6 col-sm-4">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3><%=t :data_upload_related_products_title %></h3>
+			<p><%=t :data_upload_related_products_desc %><b><a href="/dataUpload/download_related_products_template"> plantilla de carga</a></b>.</p></p>
+			<%= form_tag 'import_related_products', multipart: true do %>
+				<div class="file-field input-field">
+					<span>Cargar archivo XLSX</span>
+					<input type="file" name="file" required="true" id="related_products_upload">
+				</div>
+				<br>
+				<button type="submit" class='btn btn-sm btn-success' onclick='$(".loader-page").fadeIn();'><%= t(:data_upload_related_products_btn)%></button>
+				<%= link_to t('data_upload_download_related_products_btn'), main_app.download_related_products_path(format: :xlsx), class: 'btn btn-sm btn-primary no-loading', id: 'download-related-products' %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="col col-md-6 col-lg-6 col-sm-4">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3><%=t :data_upload_offer_prices_title %></h3>
+			<p><%=t :data_upload_offer_prices_desc %><b><a href="/dataUpload/download_offer_prices_template"> plantilla de carga</a></b>.</p></p>
+			<%= form_tag 'import_offer_prices', multipart: true do %>
+				<div class="file-field input-field">
+					<span>Cargar archivo XLSX</span>
+					<input type="file" name="file" required="true" id="offer_prices_upload">
+				</div>
+				<br>
+				<button type="submit" class='btn btn-sm btn-success' onclick='$(".loader-page").remove();'><%= t(:data_upload_offer_prices_btn)%></button>
+				<%= link_to t('data_upload_download_offer_prices_btn'), main_app.download_offer_prices_path(format: :xlsx), class: 'btn btn-sm btn-primary no-loading', id: 'download-offer-prices' %>
+			<% end %>
+		</div>
+	</div>			
+</div>
+
+<div class="row">
+	<div class="col col-md-6 col-lg-6 col-sm-4">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3><%=t :data_upload_products_metadata_title %></h3>
+			<p><%=t :data_upload_products_metadata_desc %><b><a href="/dataUpload/download_products_metadata_template"> plantilla de carga</a></b>.</p></p>
+			<%= form_tag 'import_products_metadata', multipart: true do %>
+				<div class="file-field input-field">
+					<span><%= Spree.t(:upload_file) %> XLSX</span>
+					<input type="file" name="file" required="true" id="offer_prices_upload">
+				</div>
+				<br>
+				<button type="submit" class='btn btn-sm btn-success' onclick='$(".loader-page").remove();'><%= t(:data_upload_products_metadata_btn)%></button>
+				<%= link_to t('data_upload_download_products_metadata_btn'), main_app.download_products_metadata_path(format: :xlsx), class: 'btn btn-sm btn-primary no-loading', id: 'download-products-metadata' %>
+			<% end %>
+		</div>
+	</div>
+	<div class="col col-md-6 col-lg-6 col-sm-4">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3><%=t :data_upload_categories_metadata_title %></h3>
+			<p><%=t :data_upload_categories_metadata_desc %><b><a href="/dataUpload/download_categories_metadata_template"> plantilla de carga</a></b>.</p></p>
+			<%= form_tag 'import_categories_metadata', multipart: true do %>
+				<div class="file-field input-field">
+					<span><%= Spree.t(:upload_file) %> XLSX</span>
+					<input type="file" name="file" required="true" id="offer_prices_upload">
+				</div>
+				<br>
+				<button type="submit" class='btn btn-sm btn-success' onclick='$(".loader-page").remove();'><%= t(:data_upload_categories_metadata_btn)%></button>
+					<%= link_to t('data_upload_download_categories_metadata_btn'), main_app.download_categories_metadata_path(format: :xlsx), class: 'btn btn-sm btn-primary no-loading', id: 'download-categories-metadata' %>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col col-md-6 col-lg-6 col-sm-4">
+		<div class="mdl-card mdl-shadow--2dp load-data-card">
+			<h3><%=t :data_upload_synchronize_products_with_miele_core_title %></h3>
+			<p><%=t :data_upload_synchronize_products_with_miele_core_desc %></p>
+			<%= link_to t(:data_upload_synchronize_products_with_miele_core_btn), "/dataUpload/synchronize_products_with_miele_core", class: 'btn btn-sm btn-success'%>
+		</div>
+	</div>
+</div>

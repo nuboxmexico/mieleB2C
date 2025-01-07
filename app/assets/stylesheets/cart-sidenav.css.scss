@@ -1,0 +1,176 @@
+@import "spree/frontend/variables";
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 10000; /* Stay on top. With this index is under sweet alert (1060) */
+    top: 0;
+    right: 0;
+    background-color: $brand-primary-white; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    // padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+
+  .sidenav .nav-cart-container {
+    padding: 25px;
+  }
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  font-size: 14px;
+  padding-top: 32px!important;
+  color: $brand-var1;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.sidenav .btn-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sidenav .btn{
+	font-weight: 400;
+}
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+} 
+
+.close-side-nav-cart-container {
+  margin-bottom: 20px;
+}
+
+.close-side-nav-cart-container span {
+  font-weight: normal;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: $secondary-gray;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.cart-item {
+  margin-bottom: 20px;
+}
+
+.cart-item-info {
+  .item-sku {
+    font-weight: 400;
+    font-size: 12px;
+    color: $secondary-gray;
+  }
+  .item-name {
+    font-weight: 400;
+    font-size: 14px;
+    color: $brand-secondary;
+  }
+  .item-price {
+    font-weight: normal;
+    font-size: 18px;
+    color: $brand-secondary;
+  }
+  .strikethrough-price{
+    color: $secondary-gray;
+    text-decoration: line-through;
+  }
+}
+
+.cart-stepper-container {
+  font-weight: 400;
+  font-size: 18px;
+  color: $brand-secondary;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+
+  min-width: 95px;
+  margin-left: -25px;
+
+  div {
+    padding: 5px 10px;
+    border: 1px solid #ECECEC;
+  }
+
+  .cart-stepper {
+    z-index: 99;
+    cursor: pointer;
+  }
+
+  .empty-step {
+    color: transparent;
+    border: none;
+  }
+}
+
+.order-summary {
+  border-bottom: 1px solid #DDD;
+  padding: 20px 0;
+}
+
+.order-total {
+  padding: 20px 0;
+}
+
+.order-summary div p, .order-total div p {
+  font-weight: 400;
+  font-size: 16px;
+  color: $brand-secondary;
+}
+
+.order-total div p {
+  font-weight: normal;
+}
+
+#summary-order-total {
+  color: $brand-primary;
+}
+
+.close-side-nav-cart {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  color: $secondary-gray;
+}
+
+.close-side-nav-cart:hover {
+  color: $secondary-gray-light;
+  text-decoration: none;
+}
+
+#checkout-summary {
+  background-color: $brand-primary-white;
+  padding-top: 55px;
+  margin-top: -50px;
+  margin-right: -15px;
+  padding-right: 15px;
+}
+
+@media(max-width: 992px){
+  #checkout-summary {
+    background-color: $brand-primary-white;
+    padding-top: 55px;
+    margin-top: 0px;
+    margin-right: 0px;
+    padding-right: 15px;
+  }
+}

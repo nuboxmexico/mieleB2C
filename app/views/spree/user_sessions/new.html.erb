@@ -1,0 +1,24 @@
+<% @body_id = 'login' %>
+<div id="login-box" class="user-form-box col-xs-12 col-md-4 col-md-offset-4">
+  <div class="user-form-container">
+    <h1>
+      <%= Spree.t(:login_welcome) %>
+    </h1>
+    <section>
+      <p class="welcome-message">
+        <%= Spree.t(:welcome_message) %>
+      </p>
+      <p class="signup-option">
+        o <%= link_to Spree.t(:signup_message), spree.signup_path %> en Miele
+      </p>
+    </section>
+    <div id="existing-customer" class="panel-body" data-hook="login">
+      <% if flash[:alert] %>
+        <div class="alert alert-danger"><%= flash[:alert] %></div>
+      <% end %>
+      <%= render :partial => 'spree/shared/login' %>
+      <%= link_to Spree.t(:forgot_password_message), spree.recover_password_path, id: "recover_password" %>
+      <div data-hook="login_extras"></div>
+    </div>
+  </div>
+</div>

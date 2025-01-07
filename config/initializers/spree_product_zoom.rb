@@ -1,0 +1,1 @@
+Spree::ProductZoom::Config[:default_image_style] = :large

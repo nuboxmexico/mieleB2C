@@ -1,0 +1,13 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Venta de productos') do |sheet|
+  headers = ['TNR', 'Producto', 'Cantidad', 'Ventas']
+  sheet.add_row headers
+  
+  @product_array.each do |product|
+    sheet.add_row [product['sku'].capitalize,
+                   product['product'],
+                   product['quantity'],
+                   "$ #{number_to_currency(product["amount"].to_i,precision: 0 ,unit: "", separator: "", delimiter: ".")}"]
+  end
+end

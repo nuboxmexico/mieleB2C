@@ -1,0 +1,22 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Metadata de productos') do |sheet|
+  headers = [
+    'TNR',
+    'Meta title',
+    'Meta name',
+    'Meta description'
+  ]
+  sheet.add_row headers
+  
+  @variants.each do |variant|
+    product = variant.product
+    
+    sheet.add_row [
+      variant.sku,
+      product.meta_title,
+      product.meta_keywords,
+      product.meta_description
+    ]
+  end
+end

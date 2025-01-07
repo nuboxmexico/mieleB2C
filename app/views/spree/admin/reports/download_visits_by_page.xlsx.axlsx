@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Páginas visitadas') do |sheet|
+  headers = ['Página', 'Nº visitas']
+  sheet.add_row headers
+  
+  @visits.each do |visit|
+    sheet.add_row [visit[0],
+                   visit[1]]
+  end
+end

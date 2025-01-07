@@ -1,0 +1,26 @@
+var dataLayer = window.dataLayer || [];dataLayer.push({ ecommerce: null });
+dataLayer.push({
+  'event': 'purchase',
+  'ecommerce': {
+    'transaction_id': '<%= @order.number %>', // ID, número único de transacción o pedido ”T1234”
+    'affiliation': 'Shop Miele Chile', // Afiliación de comercio electrónico: “Shop Miele Chile”
+    'coupon': '<%= @order&.coupon_code ? @order.coupon_code : '' %>', // Cupón de comercio electrónico: “Cyber_Day”
+    'currency': 'CLP', // Moneda de comercio electrónico: “CLP”
+    'value': '<%= @order.total %>', // Valor de neto de la venta: 59890
+    'tax': '<%= @order.item_total * 0.19 %>', // Suma de de los impuesto: 4900
+    'shipping': '<%= @order.shipment_total %>', // Precio del envío: 10000
+    'items': [
+      <% @order.line_items.each do |item| %>
+          {
+            'item_name': '<%= item.name %>', // Nombre del producto: “Aspiradora ADER”
+            'item_id': '<%= item.sku %>', // Identificador único del producto “12345”
+            'item_brand': 'Miele', // Marca del producto : “Miele”
+            'item_category': '<%= item.product.taxons.last.name %>', // Categoría del producto : “aspiradoras”
+            'item_variant': '', // Variantes del producto: “Azul”
+            'price': '<%= item.price %>', // Precio neto del producto : 45000
+            'quantity': '<%= item.quantity %>' // Valor numérico de cantidad: 1
+          },  
+      <% end %>
+    ]
+  }
+});

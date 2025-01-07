@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comparator_id: 
+  spree_variant_id: 
+
+two:
+  comparator_id: 
+  spree_variant_id: 

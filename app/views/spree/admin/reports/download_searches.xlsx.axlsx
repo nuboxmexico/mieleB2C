@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Palabras más buscadas') do |sheet|
+  headers = ['Palabras', 'Nº Búsquedas']
+  sheet.add_row headers
+  
+  @searches.each do |search|
+    sheet.add_row [search.name,
+                   search.search_count]
+  end
+end

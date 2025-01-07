@@ -1,0 +1,9 @@
+<section class="quotation-success">
+  <%= inline_svg_tag 'exito-cotizacion.svg' %>
+  <h1>Tu cotización ha sido registrada con éxito</h1>
+  <h3>Nuestro equipo de ventas se pondrá en contacto a la brevedad</h3>
+  <p>
+    Para más información o si tienes dudas con respecto a tu cotización, favor comunicarte al <span class="contact-info"><%= Spree.t(:phone_contact) %></span> o a <span class="contact-info"><%= Spree.t(:email_contact) %></span>
+  </p>
+  <%= link_to 'Volver al inicio', spree.root_path, class: 'btn btn-tertiary' %>
+</section>

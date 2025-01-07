@@ -1,0 +1,13 @@
+$(".loader-page").fadeOut("slow");
+<% if @success %>
+  $('#checkout-summary').empty();
+  $('#checkout-summary')
+    .html("<%= j render partial: 'spree/checkout/summary', locals: {order: @order} %>");
+    alertify.success("Servicio agregado con éxito.");
+    $("#cart-service-<%= params[:variant_id] %>").html('<button type="button" class="btn btn-service" id="added-service<%= params[:variant_id] %>" disabled><span>EN EL CARRO</span></button>')
+<% else %>
+alertify.error("Solo puedes agregar una vez los servicios al carro.");
+<% end %>
+Spree.fetch_cart();
+
+ componentHandler.upgradeDom();

@@ -1,0 +1,45 @@
+<tr id="edit-attribute-<%= attribute_name %>">
+  <td colspan="3">
+    <%= form_for @attribute,
+                 url: admin_update_product_specific_attribute_path(@attribute.product, @attribute) do |f| %>
+      <div class="form-group">
+        <% case @attr_type %>
+          <% when 'boolean' %>
+            <%= f.select @attribute_name, options_for_select([['Si', true], ['No', false]], @attribute.read_attribute(@attribute_name)), {}, class: 'form-control' %>
+          <% when 'string' %>
+            <%= f.text_field @attribute_name, class: 'form-control' %>
+          <% when 'text' %>
+            <%= f.text_area @attribute_name, class: 'edit-specific-attribute-input' %>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= hidden_field_tag :attribute_name, @attribute_name %>
+        <%= f.submit 'Guardar', class: 'btn btn-primary' %>
+        <%= link_to admin_product_specific_attributes_path(@attribute.product), class: 'btn btn-default cancel-attribute-edition' do %>
+          <span class="icon icon-delete"></span>
+          Cancelar
+        <% end %>
+      </div>
+    <% end %>
+  </td>
+</tr>
+
+<script>
+  $('.cancel-attribute-edition').click(function(e){
+    var path_to_redirect = $(this).attr('href');
+    e.preventDefault();
+    swal({
+      text: 'Se perderan todos los cambios que no hayan sido guardados',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        $('.loader-page').fadeIn();
+        window.location = path_to_redirect;
+      }
+    })
+  })
+</script>

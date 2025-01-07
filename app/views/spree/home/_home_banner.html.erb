@@ -1,0 +1,11 @@
+<div class="banner-content">
+  <%= image_tag banner.image.url(:large), alt: banner.alt, class: 'normal-img' %> 
+  <%= image_tag banner.mobile_image.url(:normal), alt: banner.alt, class: 'mobile-img' %> 
+
+  <div class="banner-title">
+    <h3><%= banner.title %></h3>
+    <%= link_to banner.link, class: 'btn btn-primary' do %>
+      Ver más
+    <% end %>
+  </div>
+</div>

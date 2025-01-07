@@ -1,0 +1,87 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement":
+    [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item":{
+          "@id": "<%= request.base_url %>",
+          "name": "Miele Shop Chile"
+        }
+      }
+      <% taxon_tree.each_with_index do |taxon, index| %>
+      ,
+      {
+        "@type": "ListItem",
+        "position": <%= index + 2 %>,
+        "item":{
+            "@id": "<%= request.base_url %><%= seo_url(taxon) %>",
+            "name": "<%= taxon.name %>"
+        }
+      } 
+      <% end %>      
+    ]
+  }
+</script>
+
+<div class="taxon-container">
+  <div class="banner-container">
+    <div class="banner-image"
+         style="<%= taxon_banner %>">
+      <h1 class="taxon-name">
+        <%= "#{@taxon.parent.name} -" if @taxon.parent %> <%= @taxon.name %>
+      </h1>
+    </div>
+  </div>
+  <div class="row taxon-header">
+    <div class="col-xs-12 col-md-6 no-padding">
+      <ul class="taxon-tree">
+        <% taxon_tree.each do |taxon| %>
+          <li>
+            <%= link_to taxon.name, seo_url(taxon) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-md-6 no-padding">
+      <p class="total-products">
+        Mostrando <%= pluralize(@products.count, 'producto') %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <% if @promotional_banner %>
+      <div class="hidden-xs hidden-sm col-md-2">
+        <div class="sidebar-banner-container">
+          <%= link_to @promotional_banner.link do %>
+            <%= image_tag @promotional_banner.image.url(:large), 
+                          alt: @promotional_banner.alt %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-xs-12 
+              <%= @promotional_banner ? 'col-md-10' : 'col-md-10 col-md-offset-1' %>">
+      <div class="row">
+        <% @products.each do |product| %>
+          <div class="col-sm-6 col-md-4 product-card-container">
+            <%= render partial: 'spree/shared/product', 
+                       locals: { product: product } %>
+            
+          </div>
+        <% end %>
+      </div>
+      <%== pagy_nav(@pagy) %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    homologateBoxHeights('.product-card')
+  })
+</script>

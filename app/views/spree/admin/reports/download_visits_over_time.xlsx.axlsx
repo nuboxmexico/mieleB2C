@@ -1,0 +1,14 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Visitas últimos 12 meses') do |sheet|
+  headers = ['Mes', 'Nº visitas', 'Sesiones']
+  sheet.add_row headers
+  
+  @last_year.each do |month|
+    sheet.add_row [month['month'].capitalize,
+                   month['visits'],
+                   month['sessions']]
+  end
+
+  sheet.add_row ['Resumen', @visits, @sessions]
+end

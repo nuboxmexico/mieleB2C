@@ -1,0 +1,29 @@
+<% content_for :page_title do %>
+  <%= "Agregar banner" %>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for @promotional_banner, 
+                 url: "/promotional_banners/#{@promotional_banner.id}", 
+                 multipart: true do |f| %>
+      
+      <div class="form-group">
+        <%= label_tag 'Categoría' %>
+        <h5><%= @taxon.name %></h5>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :image, 'Imagen' %>
+        <%= f.file_field :image %>
+      </div>  
+
+      <div class="form-group">
+        <%= f.hidden_field :taxon_id, value: @taxon.id %>
+        <%= f.hidden_field :location, value: :taxon %>
+        <%= f.hidden_field :alt, value: "Banner de categoría #{@taxon.name}" %>
+        <%= f.submit 'Guardar banner', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

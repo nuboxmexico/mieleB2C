@@ -1,0 +1,18 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Productos relacionados') do |sheet|
+  headers = [
+    'TNR base',
+    'TNR relacionado'
+  ]
+  sheet.add_row headers
+  
+  @products.each do |product|
+    product.relations do |relation| 
+      sheet.add_row [
+        relation.relatable.sku,
+        relation.related_to.sku
+      ]
+    end 
+  end
+end

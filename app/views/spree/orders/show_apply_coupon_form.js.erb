@@ -1,0 +1,3 @@
+$('#promotional-code-container')
+  .empty()
+  .html("<%= j render partial: 'spree/orders/promotion_form', locals: { order: @order, special_class: '' } %>");

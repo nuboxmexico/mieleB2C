@@ -1,0 +1,30 @@
+<section class="row quotation-container">
+  <%= form_for @quotation, url: main_app.quotations_path do |f| %>
+  <%= f.invisible_captcha :gotcha %>
+    <div class="col-xs-12 col-md-8">
+      <div class="section-header">
+        <div class="title">
+          <h1>Solicitud de cotización</h1>
+          <div class="back-to-category">
+            <%= link_to (request.env["HTTP_REFERER"] || root_path), class: 'quotation' do %>
+              <i class="material-icons">chevron_left</i> Volver
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <h3>Ingresa tus datos</h3>
+      <%= f.fields_for :user do |user_form| %>
+        <%= render 'user_form', user_form: user_form %>
+      <% end %>
+      <%= f.fields_for :address do |address_form| %>
+        <%= render 'address_form', address_form: address_form %>
+      <% end %>
+
+      <%= f.hidden_field :product, value: @product.id %>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <%= render 'product_details', form: f %>
+    </div>
+  <% end %>
+</section>
+

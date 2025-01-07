@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import "spree/frontend/variables";
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.logo-admin{
+	border: 0;
+  	-ms-interpolation-mode: bicubic;
+  	max-width: 100%;
+	margin-top: -20px!important;
+	width: auto!important;
+	height: 270%!important;
+}
+.default-user{
+	width: 50%;
+	height: 50%;
+}
+.center-image{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.user-menu{
+	text-align:center;
+	list-style-type: none;
+}
+.user-menu a:link{
+	color: $white-color;
+	text-decoration: none;
+}
+.user-menu a:active, 
+.user-menu a:visited, 
+.user-menu a:hover {
+  color: $white-color
+}
+#main-sidebar,
+#main-sidebar ul li,
+.collapsed, 
+.collapse, 
+.collapsing { 
+	background-color: $brand-secondary!important;
+	border-color: $brand-secondary!important;
+}
+
+#main-sidebar ul li a {
+	color: #f1f1f1!important;
+}
+
+#main-sidebar ul li a:active,
+#main-sidebar ul li a:visited,
+#main-sidebar ul li a:focus {
+  background-color: #2D2D2D !important;
+}
+#main-sidebar ul li a:hover {
+  background-color: #333 !important;
+}
+.nav-shadow{
+	box-shadow: 0px 1px 0px $brand-secondary;
+  	padding-left: 10px!important;
+
+}
+#main-sidebar {
+  width: 210px!important;
+}
+#wrapper.sidebar-minimized #main-sidebar {
+  width: 50px!important;
+}
+.filter-wrap{
+  background-color: $white-color!important;
+}
+.swal2-cancel{
+  margin: 5px;
+}
+.swal2-custom-content{
+    font-size: 18px;
+    text-align: center;  
+    font-weight: bold; 
+}
+.select2-search-choice-close:before{
+  content: "\2716"!important;
+}
+
+.navbar-header {
+	background-color: $brand-secondary !important;
+}
+
+.navbar-admin {
+	background-color: $brand-secondary !important;
+}
+
+.navbar-brand {
+	margin-left: -40px !important;
+}
+
+.swal2-buttonswrapper {
+  button {
+    font-size: 16px !important;
+    font-weight: 400 !important;
+  }
+
+  button:focus {
+    box-shadow: none !important;
+  }
+
+  .btn-success, .swal2-confirm {
+    background-color: $brand-primary !important;
+  }
+
+  .btn-danger, .swal2-cancel {
+    background-color: $brand-secondary !important;
+  }
+}
+.swal2-icon.swal2-warning {
+  color: $secondary-orange;
+  border-color: $secondary-orange;
+}
+
+.blog-title {
+  margin-top: 60px;
+}
+
+.multiple-change {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.change-selector-container {
+  display: flex;
+  margin-left: 40px;
+}
+
+.change-selector {
+  min-width: 120px !important;
+  margin-right: 15px;
+}

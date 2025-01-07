@@ -1,0 +1,53 @@
+<% if spree_current_user %>
+	   <li class="dropdown user-menu sign-in dropdown-users  dropdown-users-sm  hidden-md hidden-lg">
+			<a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<%= inline_svg_tag 'user.svg', class: 'user-icon' %>
+				<!-- <span class="hidden-xs"> 
+					<%=spree_current_user.email%>
+				</span>&nbsp; -->
+				<span class="caret hidden-xs"></span>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-right nav nav-pills nav-stacked">
+				<li class="sidebar-menu-item">
+					<%= link_to spree.account_path, class: "" do %>
+						<i class="fa fa-user-circle"></i> <%= Spree.t(:my_account)%>
+					<% end %>
+				</li>
+				<% if can?(:admin, spree_current_user) or spree_current_user.has_spree_role?('Vendedor') %>
+					<br>
+					<li class="sidebar-menu-item">
+						<a href="/admin" class= "" target="_blank"><i class="fa fa-cogs"></i> <%=  Spree.t(:admin_dashboard) %></a>
+					</li>
+				<% end %>
+				<li role="separator" class="divider"></li>
+				<li class="sidebar-menu-item"><%= link_to spree.logout_path, class: "" do %>
+					<i class="fa fa-sign-out"></i> <%= Spree.t(:logout)%>
+					<% end %>
+				</li>
+			</ul>
+		</li>
+	   <li class="dropdown user-menu dropdown-users hidden-sm hidden-xs">
+			<a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<%= inline_svg_tag 'user.svg', class: 'user-icon' %> &nbsp;</i><span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu nav nav-pills nav-stacked">
+				<b> <%=spree_current_user.email%></b><br><br>
+				<li class="sidebar-menu-item">
+					<%= link_to spree.account_path, class: "" do %>
+						<i class="fa fa-user-circle"></i> <%= Spree.t(:my_account)%>
+					<% end %>
+				</li>
+				<% if can?(:admin, spree_current_user) or spree_current_user.has_spree_role?('Vendedor')%>
+					<br>
+					<li class="sidebar-menu-item">
+						<a href="/admin" class= "" target="_blank"><i class="fa fa-cogs"></i> <%=  Spree.t(:admin_dashboard) %></a>
+					</li>
+				<% end %>
+				<li role="separator" class="divider"></li>
+				<li class="sidebar-menu-item"><%= link_to spree.logout_path, class: "" do %>
+					<i class="fa fa-sign-out"></i> <%= Spree.t(:logout)%>
+					<% end %>
+				</li>
+			</ul>
+		</li>
+<% end%>

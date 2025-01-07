@@ -1,0 +1,74 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:reports), spree.admin_reports_url %> /
+  Informe de páginas visitadas por clientes
+<% end %>
+
+<div class="well">
+    <div class="box-tools pull-right">
+      <button id="btn-collapse" class="btn btn-box-tool" ><i class="fa fa-minus"></i></button>
+    </div>
+    <script>
+      $("#btn-collapse").on('click',function() {
+        $("#collapse").toggle();
+      });
+    </script>    <div class="collapse-in" id="collapse">
+  <br>
+  <%= search_form_for @search, url: spree.visits_by_page_admin_reports_path  do |s| %>
+    <div class="form-group date-range-filter">
+      <%= label_tag nil, Spree.t(:date_range) %>
+      <div class="date-range-filter row">
+        <div class="col-md-6 input-date">
+          <%= s.text_field :completed_at_gt, class: 'datepicker datepicker-from form-control', value: datepicker_field_value(params[:q][:completed_at_gt]), required: true %>
+        </div>
+        <div class="col-md-6 input-date">
+          <%= s.text_field :completed_at_lt, class: 'datepicker datepicker-to form-control', value: datepicker_field_value(params[:q][:completed_at_lt]), required: true%>
+      </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= button Spree.t(:search), 'search' %>
+      <%= link_to(admin_download_visits_by_page_url(format: 'xlsx', gt: params[:q][:completed_at_gt], lt: params[:q][:completed_at_lt]), onclick: '$(".loader-page").remove();', id: "download-btn") do %>
+        <div class="btn btn-success" id="download-button"><i class="fa fa-download"></i> Descargar</div>
+      <% end %>
+    </div>
+  <% end %>
+    </div>
+</div>
+
+<br>
+<% if @visits.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Página</th>
+      	<th>N° Visitas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @visits.each do |visit| %>
+        <tr>
+       		<td><%= visit[0]%></td>
+        	<td><%= visit[1]%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    No se han encontrado clientes
+  </div>
+<% end %>
+
+<%= paginate @visits %>
+
+<script>
+   if ($("#date-from").val() == "" && $("#date-from").val() == "") {
+     $("#download-btn").css('pointer-events', 'none');
+     $("#download-button").attr('disabled', true);
+   }
+   $(".input-date").click(function() {
+     $("#download-button").attr('disabled', true);
+     $("#download-btn").css('pointer-events', 'none');
+   });
+</script>

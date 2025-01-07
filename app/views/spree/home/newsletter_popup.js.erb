@@ -1,0 +1,5 @@
+<% if @show_popup %>
+  $('#newsletter-popup').empty()
+                        .append("<%= j render partial: 'newsletter_subscribers/popup' %>")
+                        .fadeIn();
+<% end %>

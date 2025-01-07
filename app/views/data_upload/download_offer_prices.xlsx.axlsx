@@ -1,0 +1,21 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Precios de oferta') do |sheet|
+  headers = [
+    'TNR',
+    'Precio oferta',
+    'Precio oferta desde',
+    'Precio oferta hasta'
+  ]
+  sheet.add_row headers
+  
+  @offer_prices.each do |offer_price|
+    
+    sheet.add_row [
+      offer_price.variant.sku,
+      offer_price.offer_price,
+      offer_price.offer_price_start,
+      offer_price.offer_price_end
+    ]
+  end
+end

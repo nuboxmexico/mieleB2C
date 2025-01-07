@@ -1,0 +1,40 @@
+<div id="mySidenav" class="sidenav">
+  <br><br>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav();"><i class="fa fa-close"></i>&nbsp;&nbsp; CERRAR</a>
+  <div class="cart-container">
+    <% unless current_order.nil? %>
+      <% if current_order.line_items.any?%>
+        <%= render partial: "spree/checkout/summary", locals: { order: current_order, side: true } %>
+      <% else %>
+        <br><br>
+        <h4><b>Aún no hay productos en tu carro.</b></h4>
+        <br><br>
+      <% end %>
+    <% end %>
+  </div>
+  <br>
+  <br>
+  <% unless current_order.nil? %>
+    <% if current_order.line_items.any?%>
+      <div class="btn-container">
+        <a href="/cart" class="btn btn-tertiary btn-block btn-lg" > Realizar pedido</a> 
+      </div>
+    <% end %>
+  <% end %>
+  <div class="btn-container cart-continue">
+    <div class="btn btn-tertiary btn-block btn-lg" onclick="closeNav();"> Seguir comprando</div>  
+  </div>
+</div>
+<script>
+var windowsize;
+$( document ).ready(function() {
+
+  windowsize = $(window).width();
+
+  $(window).resize(function(event) {
+    windowsize = $(window).width();
+  });
+
+  /* Set the width of the side navigation to 0 */
+});
+</script>

@@ -1,0 +1,39 @@
+<%= link_to '/newsletter_subscribers' do %>
+	<i class="fa fa-arrow-left">&nbsp;Volver</i>
+<% end %>
+<h1>Editar o inhabilitar subscriptor</h1>
+
+<%= form_for @newsletter_subscriber, :url => '/newsletter_subscribers/'+@newsletter_subscriber.id.to_s, :method=> :put do |f| %>
+  <% if @newsletter_subscriber.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@newsletter_subscriber.errors.count, "error") %> prohibited this newsletter_subscriber from being saved:</h2>
+
+      <ul>
+      <% @newsletter_subscriber.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-field">
+    <%= f.label "Ingrese el correo" %><br>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+
+<% 
+class_input = "hidden"
+if !current_spree_user.nil?
+  if current_spree_user.admin?
+    class_input = ""
+  end
+end
+%>
+  <div class="input-field <%= class_input %>">
+    <%= f.label "Activo" %><br>
+    <%= f.check_box :active %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Enviar", class: "btn btn-success" %>
+  </div>
+<% end %>

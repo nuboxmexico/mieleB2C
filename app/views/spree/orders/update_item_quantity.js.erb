@@ -1,0 +1,28 @@
+<% if @error %>
+  alertify.error("<%= @error %>");
+<% else %>
+  <% if @order.line_items.any? %>
+    $('#checkout-summary').empty();
+    $('#checkout-summary')
+      .html("<%= j render partial: 'spree/checkout/summary', locals: {order: @order} %>");
+    <% if @adjust_quantity_to_available_stock_error %>
+      alertify.error("<%= @adjust_quantity_to_available_stock_error %>");
+    <% end %>
+  <% else %>
+    $("#ajax-sidebar")
+      .html("<%= j render partial: 'spree/shared/cart_sidenav', locals: {current_order: @order} %>");
+  <% end %>
+
+  Spree.fetch_cart();
+  <% if @removed %>
+    $(".loader-page").fadeOut("slow");
+    $("#cart-service-<%= @removed.to_s %>").html('<button type="button" class="btn btn-service add-to-cart-service-<%= @removed.to_s %>" id="service<%= @removed.to_s %>"><span>AGREGAR</span></button>');
+    $(".add-to-cart-service-<%= @removed.to_s %>").click(function(){
+      $('.loader-page').fadeIn();
+      $.post('/orders/populate_service.js', {'variant_id': '<%= @removed.to_s %>', 'quantity': 1});
+    });
+  <% end %>
+<% end %>
+$('.loader-page').fadeOut();
+
+ componentHandler.upgradeDom();

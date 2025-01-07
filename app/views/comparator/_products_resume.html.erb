@@ -1,0 +1,15 @@
+<div id="comparator-resume" >
+  <% variants.each do |variant| %>
+    <div class="product">
+      <div class="info">
+        <h5><%= variant.name %></h5>
+        <p>
+          <%= number_to_currency variant.price %>
+        </p>
+        <%= link_to variant.product, class: 'btn btn-tertiary' do %>
+          Ver detalles
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

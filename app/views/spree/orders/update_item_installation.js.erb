@@ -1,0 +1,15 @@
+<% if @error %>
+  alertify.error("<%= @error %>");
+<% else %>
+  <% if @order.line_items.any? %>
+    $('#checkout-summary').empty();
+    $('#checkout-summary')
+      .html("<%= j render partial: 'spree/checkout/summary', locals: {order: @order} %>")
+  <% else %>
+    $("#ajax-sidebar")
+      .html("<%= j render partial: 'spree/shared/cart_sidenav', locals: {current_order: @order} %>");
+  <% end %>
+  Spree.fetch_cart();
+<% end %>
+$('.loader-page').fadeOut();
+ componentHandler.upgradeDom();

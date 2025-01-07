@@ -1,0 +1,381 @@
+@import "spree/frontend/variables";
+
+.comparator-container {
+  display: flex;
+  justify-content: center;
+
+  .product {
+    max-width: 30%;
+    min-width: 30%;
+    text-align: center;
+
+    .info {
+      margin: 30px;
+      background-color: $brand-primary-white;
+      padding: 30px 0;
+      
+      img {
+        width: 70%;
+      }
+
+      h2 {
+        font-size: 16px;
+        font-weight: normal;
+        color: #333;
+        margin: 20px 0;
+        min-height: 3em;
+      }
+
+      .price {
+        font-size: 21px;
+        font-weight: bold;
+        color: #333;
+        line-height: 25px;
+        margin-bottom: 30px;
+      }
+    }
+
+    .attributes {
+      color: #262626;
+      letter-spacing: 0;
+      margin-top: 60px;  
+      border-right: 2px solid $brand-primary-white;
+      
+      h3 {
+        font-size: 14px;
+        line-height: 17px;
+      }
+
+      p {
+        font-size: 24px;
+        line-height: 34px;
+        margin-bottom: 60px;  
+      }
+    }
+
+  }
+  .product:last-child {
+    .attributes {
+      border-right: none;
+    }
+  }
+}
+
+#comparator-resume {
+  position: fixed;
+  top: 83px !important;
+  width: 100%;
+  display: none;
+  justify-content: center; 
+
+  .product {
+    background-color: $brand-secondary !important;
+    color: #F6F6F6;
+    width: 30%;
+    text-align: center;
+    border-right: 2px solid rgba(246, 246, 246, 0.5);
+
+    .info {
+      background-color: $brand-secondary !important;
+      margin: 0 30px;
+      padding: 30px 0;
+      min-height: 200px;
+
+      p, h5 {
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 400;
+      }
+
+      h5 {
+        min-height: 6.5rem;
+      }
+
+      .btn {
+        padding: 10px 15px !important;
+      }
+    }
+  }
+
+  .product:last-child {
+    border-right: none;
+  }
+}
+
+
+@media (max-width: 542px) {
+  .info {
+    margin: 30px;
+    background-color: $brand-primary-white;
+    padding: 10px 0;
+  }  
+}
+
+@media (max-width: 542px) {
+  .comparator-container {
+    justify-content: flex-start;
+    min-width: 60%;
+    overflow-x: scroll;
+    overflow-y: auto;
+
+    .product {
+      max-width: inherit;
+      min-width: inherit;
+
+      .info {
+        margin: 10px;
+        min-height: 380px;
+
+        h2 {
+          padding: 0 10px;
+          min-height: 85px;
+        }
+
+        .btn {
+          padding: 15px !important;
+        }
+      }
+    }
+
+    #comparator-resume {
+      top: 80px !important;
+      justify-content: flex-start;
+      min-width: 60%;
+      overflow-x: scroll;
+
+      .product {
+
+        .info {
+          min-height: auto;
+
+          h5 {
+            min-height: 5.5em;
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: 400;
+          }
+
+          .btn {
+            padding: 10px !important;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+.comparator-card{
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  background: #262626;
+  position: fixed;
+  left: 59%;
+  bottom: 50px;
+  transform: translate(-50%);
+  margin: 0 auto;
+  padding: 20px 20px 10px 20px;
+  box-shadow: 0px 3px 6px #262626;
+  color: #fff!important;
+
+  i {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: #fff;
+    font-style: normal;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}
+
+@media(max-width: 768px){
+  .comparator-card{
+    left: 0%;
+    transform: translate(-0%);
+    width: 100%;
+  }
+}
+
+@media(min-width: 769px) and (max-width: 992px){
+  .comparator-card{
+    left: 50%;
+  }
+}
+
+@media(min-width: 992px) and (max-width: 1200px){
+  .comparator-card{
+    left: 51%;
+  }
+}
+
+.product-box{
+  padding: 30px 20px;
+  background: #fff;
+  margin: 30px 0px;
+}
+
+@media(max-width: 768px){
+  .product-box{
+    margin: 10px 0px;
+    min-height: 350px;
+  }
+}
+
+.extra-padding{
+  padding: 0px 60px!important;
+}
+
+.pt24{
+  font-size: 24px;
+}
+
+.separator-pad{
+  padding: 40px 20px;
+}
+
+.left-border-comparator{
+  border-left: 2px solid #fff;
+}
+
+.product-name-comp{
+  font-size: 16px;
+  color: #333333;
+}
+
+.product-sku-comp{
+  font-size: 14px;
+  color: #333333;
+}
+
+.old-comp-price{
+  font-size: 16px;
+  color: #B3B3B3;
+}
+
+.new-price-comp{
+  color: $brand-primary!important;
+  font-size: 21px;
+}
+
+
+.comp-price {
+  text-align: center;
+  font-size: 21px;
+  margin: 15px 0px;
+  font-weight: bold;
+  color: $brand-secondary;
+}
+
+.extra-pad-button{
+  padding: 10px 30px!important;
+}
+
+#comparator-resume {
+  position: fixed;
+  top: 0px !important;
+  display: none;
+  width: 88%;
+  justify-content: center;
+  z-index: 1030!important;
+}
+#comparator-resume .product {
+  background-color: #1F1F1F;
+  color: #F6F6F6;
+  text-align: center;
+  border-right: 2px solid rgba(246, 246, 246, 0.5);
+}
+#comparator-resume .product .info {
+  margin: 0 30px;
+  padding: 30px 0;
+}
+#comparator-resume .product .info p {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: bold;
+}
+#comparator-resume .product .info .btn {
+  padding: 10px 15px !important;
+}
+#comparator-resume .product:last-child {
+  border-right: none;
+}
+
+.comparator-img{
+  width: 180px;
+  height: 180px;
+  margin: 0;
+}
+
+.pad-mobile-comparator{
+  padding: 10px;
+}
+
+.pt-14-11{
+  font-size: 14px;
+}
+
+@media(min-width: 768px) and (max-width: 1200px){
+  .extra-padding{
+    padding: 0px 10px!important;
+  }
+  .comparator-img{
+    width: 110px;
+    height: auto;
+  }
+  #comparator-resume {
+    width: 85%;
+  }
+}
+
+@media(max-width: 768px){
+  .comparator-img{
+    width: 83px;
+    height: auto;
+  }
+  .product-name-comp{
+    font-size: 14px;
+  }
+  .new-price-comp{
+    font-size: 14px;
+  }
+  .old-comp-price{
+    font-size: 12px;
+  }
+  .comp-price{
+    font-size: 14px;
+  }
+  .extra-pad-button{
+    padding: 5px 10px!important;
+  }
+  .pt24{
+    font-size: 16px;
+  }
+  .pt-14-11{
+    font-size: 11px;
+  }
+  .separator-pad{
+    padding: 20px 10px;
+  }
+
+  .product-sku-comp{
+    font-size: 12px;
+  }
+}
+
+.bot-mobile-comparator{
+  margin-bottom: 0px;
+}
+
+@media(max-width: 768px){
+  .bot-mobile-comparator{
+    margin-bottom: 40px;
+  }
+}
+
+.top-space{
+  margin-top: 20px;
+}

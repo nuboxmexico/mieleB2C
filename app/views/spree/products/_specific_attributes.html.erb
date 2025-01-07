@@ -1,0 +1,152 @@
+<section class="specific-attributes">
+  <% if @product.specific_attribute.features.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Características
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.features.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.specs.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Especificaciones
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.specs.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.technical_specs.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Especificaciones técnicas
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.technical_specs.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.product_functions.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Funciones
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.product_functions.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.drink.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Especialidades de bebidas
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.drink.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.basket_design.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Diseño de los cestos
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.basket_design.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.wash_program.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Programa de lavado
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.wash_program.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.dry_program.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Programa de secado
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.dry_program.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.care.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Cuidado y mantenimiento
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.care.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.security.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Seguridad
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.security.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.sustain.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Eficiencia y sostenibilidad
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.sustain.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.specific_attribute.accessories.present? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Accesorios y suministro
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <%= @product.specific_attribute.accessories.html_safe %>
+      </div>
+    </div>
+  <% end %>
+  <% if @product.technical_documents.any? %>
+    <div class="specific-attribute-container">
+      <h4>
+        Descargas
+        <span class="material-icons">keyboard_arrow_down</span>
+      </h4>
+      <div>
+        <% @product.technical_documents.each do |d| %>
+        <div class="technical-documents">
+          <p>
+            <%= d.document_type ? d.document_type : 'Ficha técnica' %>
+          </p>
+          <%= link_to 'Descargar', d.document.url(:original), class: "btn btn-primary no-loading download-file", target: "_blank" %>
+        </div>
+        <% end %> 
+      </div>
+    </div>
+  <% end %>
+</section>

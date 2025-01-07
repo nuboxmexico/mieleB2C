@@ -1,0 +1,129 @@
+<% variant = line_item.variant %>
+<div class="">
+<%= order_form.fields_for :line_items, line_item do |item_form| %>
+  <div class="row white-dark-back line-item-cart" style="">
+    <div class="col col-lg-6 col-md-6 col-sm-6">
+      <div class="row">
+          <div class="col col-lg-4 col-md-4 col-sm-4">
+            <div class="cart-item-image" data-hook="cart_item_image">
+              <% if variant.images.length == 0 %>
+                <%= link_to small_image(variant.product), variant.product %>
+              <% else %>
+                <%= link_to image_tag(variant.images.first.attachment.url(:small)), variant.product %>
+              <% end %>
+            </div>
+          </div>
+          <div class="col col-lg-8 col-md-8 col-sm-8">
+          <div class="cart-item-description" data-hook="cart_item_description">
+            <h4><%= link_to line_item.name, product_path(variant.product) %></h4>
+            <%= variant.options_text %>
+            <% 
+            if line_item.insufficient_stock? 
+              stock_icon = '<i class="fa fa-close red-text"></i>'    
+            else 
+              stock_icon = '<i class="fa fa-check green-text"></i>'
+            end 
+            %>
+            
+            <span class="line-item-description color-grey" data-hook="line_item_description">
+              <% "TNR: " + (line_item.variant.sku.to_s) %>
+              
+              Stock: <%= stock_icon.html_safe %>
+            </span>
+          </div>
+       </div>
+      </div>
+    </div>
+    <div class="col col-lg-2 col-md-2 col-sm-2 ">
+    </div>
+    <div class="col col-lg-3 col-md-3 col-sm-3">
+       <%
+        offer = ""
+        if !line_item.product.master.prices[0].offer_price.nil?
+          if line_item.product.master.prices[0].offer_price > 0
+            price_class = "offer-price"
+            offer = "Oferta: "
+          else
+            price_class = "normal-price"
+            offer = "Precio unidad: "
+          end  
+        else
+          price_class = "normal-price"
+            offer = "Precio unidad: "
+        end 
+      %>
+      <!--<div class="cart-item-quantity" data-hook="cart_item_quantity" valign="center">
+      </div>-->
+      <div class="lead text-primary cart-item-price" data-hook="cart_item_price">
+        <div class="row">
+          <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <p class="total-price-cart">Cantidad:</p>
+          </div>
+          <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <%= item_form.number_field :quantity, min: 0, class: "form-control line_item_quantity", id: "quantity"+ variant.id.to_s, size: 5 %>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <p class="total-price-cart"><%= offer %></p>
+            <p class="total-price-cart"> Precio total: </p>
+          </div>
+          <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <p class="<%= price_class %>" align="right"><%= (line_item.single_money.to_s) %></p>
+            <p class="total-price-cart" align="right"><span class="red-text" id="item-total<%=variant.id%>"><%= line_item.display_amount.to_html unless line_item.quantity.nil? %> </span> </p> 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-lg-1 col-md-1 col-sm-1 col-xs-1">
+      <div class="cart-item-delete trash-cart" data-hook="cart_item_delete">
+        <%= link_to '/lineItem/destroy_item?line_item='+line_item.id.to_s, id: 'delete_line_item_'+line_item.id.to_s do %><i class="fa fa-trash"></i><% end %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
+</div>
+<script>
+  $("#delete_line_item_<%=line_item.id.to_s%>").click(function(e){
+
+    e.preventDefault();
+    swal({
+      title: '¿Esta seguro?',
+      text: "Si lo elmina, debera volver al catálogo para recuperarlo",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+      cancelButtonText: 'No, quiero matenerlo ',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+      }).then((result) => {
+        if (result.value) {
+          $.post( "/lineItem/destroy_item?line_item=<%=line_item.id%>")
+          .done(function( data ) {
+              Spree.fetch_cart();    
+              swal(
+                'ELiminado!',
+                'El producto ha sido devuelto a su lugar.',
+                'success'
+              )
+              location.reload();
+          })
+            .fail(function() {
+              alertify.success('Ha ocurrido un error');     
+          });
+        } else if (result.dismiss === 'cancel') {
+          swal(
+            'Cancelado',
+            'El producto se ha mantenido en su carro',
+            'error'
+          )
+        }
+      })
+  });
+</script>

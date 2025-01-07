@@ -1,0 +1,30 @@
+<style>
+  .swal2-content{
+    text-align: left!important;
+    font-size: 15px!important;
+  }
+  .swal2-buttonswrapper{
+    margin-top: 0px!important;
+  }
+  .swal2-icon{
+    margin: 0px auto 0px;
+  }
+</style>
+<div class="btn btn-info" id="info-btn<%= (defined? option_id) ? option_id : "" %>">
+  <i class="fa fa-question-circle clickeable"></i> Ayuda
+</div>
+
+<script>
+  $("#info-btn<%= (defined? option_id) ? option_id : "" %>").click(function(){
+      swal({
+        title: '<h1><%= title_help %></h1>',
+        type: 'info',
+        html: '<%= body_help.html_safe %>',
+        showCloseButton: true,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> ¡Entendido!',
+        confirmButtonAriaLabel: '¡Entendido!',
+      })
+  });
+</script>

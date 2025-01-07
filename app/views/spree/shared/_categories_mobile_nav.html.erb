@@ -1,0 +1,58 @@
+<%# if (controller_name != 'products' && controller_name != 'taxons')%>
+	<% if @taxonomies %>
+		<ul class="nav navi nav-list mobile-nav hidden-lg hidden-md">
+	    <div id="wrapper">
+		    <div class="overlay"></div>
+		      <nav class="navbar navbar-inverse navbar-fixed-top scroll-navi" id="sidebar-wrapper" role="navigation">
+		          <ul class="nav sidebar-nav">
+		              <li class="sidebar-brand">
+		                <figure>
+						          <a href="<%= spree.root_path%>">
+						            <%= image_tag('logo/logo.png', alt: 'Logo', class: "customer-logo")%>
+						          </a> 
+						        </figure>
+		              </li>
+		              <% @taxonomies.each do |taxonomy| %>
+				          	<% temp_taxon = Spree::Taxon.find_by(name: taxonomy.name) %>
+				          	<li class="dropdown li-nav">
+        	            <% if taxonomy.root and taxonomy.root.children.size > 0 %>
+				               <a class="drop dropdown-toggle" href="<%= seo_url(temp_taxon) %>" data-toggle="dropdown">
+				                <%=taxonomy.name%>
+												<% if taxonomy.root.children.size > 0 %>
+													<span class="caret"></span>
+				                <% end %>
+				                </a> 
+			                  <% taxonomy.root.children.each do |taxon| %>
+				  		        		<ul class="dropdown-menu">
+				                    <li class="li-nav"><%= link_to(taxon.name, seo_url(taxon)) %></li>
+				                	</ul>
+			                  <% end %> 
+					            <% else %>
+					              <a class="drop" href="<%= seo_url(temp_taxon) if temp_taxon %>"><%=taxonomy.name%></a>
+					            <% end %>
+				          	</li>
+				          <% end %>
+				          <li id="oportunities-section" class="dropdown li-nav">
+				            <%= link_to cyberday, spree.oportunities_path %>
+				          </li>
+		          </ul>
+		      </nav>
+	        <div id="page-content-wrapper">
+            <button type="button" id="nav-burger" class="hamburger is-closed" data-toggle="offcanvas">
+          	  <%= inline_svg_tag 'menu.svg' %>
+            </button>
+		      </div>
+		  </div>
+		</ul>
+	<% end %>
+<%# end %>
+<script>
+	$(function() 
+	  {
+	    var overlay = $('.overlay');
+	    $("#nav-burger").click(function(){
+	      mobile_nav_overlay(overlay);
+	      closeNav(); // Cierra el carro
+	    });
+	  });
+</script>

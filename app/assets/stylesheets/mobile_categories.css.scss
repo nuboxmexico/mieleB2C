@@ -1,0 +1,228 @@
+@import 'https://fonts.googleapis.com/css?family=Fira+Sans:300,400';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import "spree/frontend/variables";
+
+$black: #252525;
+$white: #fff;
+$grey: #eaeaea;
+
+$primary-color: $brand-secondary;
+$primary-color-dark: $primary-color;
+$primary-color-tint-1: $primary-color;
+$primary-color-tint-2: $primary-color;
+$primary-color-tint-3: $primary-color;
+$primary-color-tint-4: $primary-color;
+$primary-color-tint-5: $primary-color;
+$primary-font: "Helvetica Neue", Arial, sans-serif;
+
+$link-color: $brand-primary-white;
+
+* { box-sizing: border-box; }
+body {
+  background-color: $primary-color;
+  font-family: $primary-font;
+  font-size: 16px;
+  line-height: 1.875em;
+  &::after {
+    position: absolute;
+    z-index: 99;
+    background-color: rgba($primary-color-dark, 0.8);
+    height: 100vh;
+    width: 100vw;
+    transition: 0.4s;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+a {
+  text-decoration: none;
+}
+.nav-top {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 101;
+  padding: 10px 20px;
+  width: 30%;
+  height: 50px;
+  background-color: $primary-color-dark;
+  
+  .hamburger {
+    margin-left: auto;
+    color: $white;
+    cursor: pointer;
+  }
+}
+.nav-drill {
+  margin-top: 50px;
+  transform: translateX(-100%);
+}
+.nav-is-toggled {
+  .nav-drill {
+    transform: translateX(0);
+  }
+  &::after {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+// ---------------------------------------
+// important stuff starts here
+
+$nav-width: 250px;
+$nav-padding: 0.875em 1em;
+$nav-border-color: $primary-color-tint-5;
+$nav-background-color: $primary-color;
+$nav-icon-font: 'Material Icons';
+$nav-icon-arrow-right: 'chevron_right';
+$nav-icon-arrow-left: 'chevron_left';
+
+$nav-level-border-color: $primary-color;
+$nav-level-background-color: $primary-color-tint-5;
+
+$nav-level3-background-color: $primary-color-tint-4;
+$nav-level4-background-color: $primary-color-tint-3;
+$nav-level5-background-color: $primary-color-tint-2;
+
+.nav {
+  &-drill {
+    display: flex;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: -1px;
+    width: $nav-width;
+    height: 100vh;
+    background-color: $nav-background-color;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    transition: 0.45s;
+  }
+  
+  &-items {
+    flex: 0 0 100%;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  &-item {
+    &:not(:last-child) {
+      border-bottom: solid 1px $nav-border-color;
+    }
+  }
+  
+  &-link {
+    display: block;
+    padding: $nav-padding;
+    background-color: $nav-background-color;
+    color: $link-color;
+    font-size: 16px;
+    line-height: 1.5em;
+    font-weight: 300;
+  }
+
+  &-link:focus, &-link:active, &-link:hover {
+    text-decoration: none;
+    color: $link-color;
+  }
+  
+  &-expand {
+    &-content {
+      position: absolute;
+      top: 0;
+      left: -1px;
+      width: 100%;
+      height: 100%;
+      transform: translateX(100%);
+      background-color: $nav-level-background-color;
+      transition: 0.3s;
+      visibility: hidden;
+      
+      .nav-item {
+        &:not(:last-child) {
+          border-bottom: solid 1px $nav-level-border-color;
+        }
+      }
+
+      .nav-link {
+        background-color: $nav-level-background-color;
+      }
+
+      .nav-back-link {
+        display: flex;
+        align-items: center;
+        background-color: $primary-color !important;
+        color: $white;
+        
+        &::before {
+          content: $nav-icon-arrow-left;
+          margin-right: 0.5em;
+          font-family: $nav-icon-font;
+        }
+      }
+    }
+    
+    &-link {
+      display: flex;
+      justify-content: space-between;
+      
+      &::after {
+        content: $nav-icon-arrow-right;
+        flex: 0 1 auto;
+        font-family: $nav-icon-font;
+      }
+    }
+    
+    &.active {
+      > .nav-expand-content {
+        transform: translateX(0);
+        visibility: visible;
+      }
+    }
+    
+    // quick example for other level colours
+    .nav-expand-content {
+      background-color: $nav-level-background-color;
+      .nav-link {
+        background-color: $nav-level-background-color;
+      }
+      .nav-expand-content {
+        background-color: $nav-level3-background-color;
+        .nav-link {
+          background-color: $nav-level3-background-color;
+        }
+        .nav-expand-content {
+          background-color: $nav-level4-background-color;
+          .nav-link {
+            background-color: $nav-level4-background-color;
+          }
+          .nav-expand-content {
+            background-color: $nav-level5-background-color;
+            .nav-link {
+              background-color: $nav-level5-background-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.go-to-taxon {
+  font-weight: bold;
+}
+
+.last-taxon::after {
+  content: $nav-icon-arrow-right;
+  flex: 0 1 auto;
+  font-family: $nav-icon-font;
+  float: right;
+}
+
+@media (min-width: 768px) {
+  #ham, .hide-mobile-categories {
+    display: none;
+  }
+}

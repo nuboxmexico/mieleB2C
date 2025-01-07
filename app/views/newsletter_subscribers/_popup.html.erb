@@ -1,0 +1,26 @@
+<%= form_for @newsletter_subscriber, html: { class: "" }, url: newsletter_create_path, method: :post do |f| %>
+
+  <h5>Regístrate a nuestro newsletter para recibir novedades y promociones</h5>
+  
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-invalid no-margin-top">
+    <%= f.email_field :email, class: 'mdl-textfield__input', required: true, pattern: "^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" %>
+    <%= f.label 'Ingresa tu email', class: 'mdl-textfield__label' %>
+  </div>
+
+  <div class="hidden">
+    <%= f.label :active %>
+    <%= f.check_box :active, {checked: true} %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Sí, quiero registrarme', class: 'btn btn-block btn-primary' %>
+    <a href="#" id="close-popup" class="btn btn-block btn-link">No, gracias</a>
+  </div>
+<% end %>
+
+<script>
+  $('#close-popup').click(function(e){
+    e.preventDefault();
+    $('#newsletter-popup').fadeOut();
+  })
+</script>

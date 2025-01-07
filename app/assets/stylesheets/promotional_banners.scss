@@ -1,0 +1,122 @@
+@import "spree/frontend/variables";
+
+@keyframes slide-up {
+  0% { 
+    margin-top: -30px;
+    transform: translateY(100%); 
+  }   
+  100% { 
+    opacity: 1;
+    margin-top: 0;
+    transform: translateY(0); 
+  }
+}
+@keyframes slide-down {
+  0% { 
+    margin-top: 0;
+    transform: translateY(0); 
+  }
+  100% { 
+    opacity: 0;
+    margin-top: -30px;
+    transform: translateY(100%); 
+  }   
+}
+
+.promotional-banners {
+  padding: 30px 50px;
+
+  .banner-container {
+    overflow: hidden;
+    max-height: 70vh;
+    background-color: #000;
+
+    img {
+      min-width: 100%;
+      width: 100%;
+      height: auto;
+      -webkit-mask-image: linear-gradient(to top, transparent 25%, black 75%);
+      mask-image: linear-gradient(to top, transparent 25%, black 75%);
+    }
+
+    .mobile-img {
+      display: none;
+    }
+
+    .banner-title {
+      position: absolute;
+      bottom: 40px;
+      padding: 0 40px;
+      overflow-y: hidden; 
+
+      h3 {
+        color: $brand-primary-white;
+        font-size: 28px;
+        font-weight: 400;
+      }
+
+      .btn {
+        animation: slide-down .3s linear;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+  .banner-content:hover {
+    .banner-title {
+      .btn {
+        display: inline-block;
+        animation: slide-up .3s linear;
+      }
+    }
+  } 
+
+  .banner-section{
+    padding-bottom: 30px;
+  }
+  .banner-section:nth-child(odd) {
+    padding-right: 15px;
+  }
+  .banner-section:nth-child(even) {
+    padding-left: 15px;
+  }
+}
+
+.sidebar-banner-container {
+  overflow: hidden;
+  margin-bottom: 50px;
+  height: fit-content;
+
+  img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 525px) {
+  .promotional-banners {
+    padding: 30px 20px;
+
+    .banner-container {
+      max-height: 30vh;
+
+      .normal-img {
+        display: none;
+      }
+
+      .mobile-img {
+        display: block;
+        height: 30vh;
+      }
+      .banner-title {
+        padding: 0 20px;
+        h3 {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .banner-section {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<h1>Configuraciones del Ecommerce</h1>
+<ul data-hook="admin_configurations_sidebar_menu" class="nav nav-pills nav-stacked" id="sidebar-configuration">
+  <h2>Generales</h2>
+  <%= configurations_sidebar_menu_item(Spree.t(:general_settings), spree.edit_admin_general_settings_path) if can? :manage, Spree::Config %>
+<!--   <%= configurations_sidebar_menu_item(Spree.t(:roles), spree.admin_roles_path) if can? :manage, Spree::Role %> -->
+  <%= configurations_sidebar_menu_item("Google " + Spree.t(:analytics_trackers), spree.admin_trackers_path) if can? :manage, Spree::Tracker %>
+  <li class="sidebar-menu-item"><a href="/tag_manager">Google Tag Manager</a></li>
+<!--   <li<%== " class=\"active\"" if controller.controller_name == "editor_settings" %>><%= link_to Spree.t(:rich_editor), spree.edit_admin_editor_settings_path %></li> -->
+  <%= configurations_sidebar_menu_item Spree.t(:review_settings, scope: :spree_reviews), edit_admin_review_settings_path %>
+  
+  <h2>Direcciones</h2>
+  <%= configurations_sidebar_menu_item(Spree.t(:zones), spree.admin_zones_path) if can? :manage, Spree::Zone %>
+  <%= configurations_sidebar_menu_item(Spree.t(:countries), spree.admin_countries_path) if can? :manage, Spree::Country %>
+  <% if country = Spree::Country.find_by_id(Spree::Config[:default_country_id]) || Spree::Country.first %>
+    <%= configurations_sidebar_menu_item(Spree.t(:states), spree.admin_country_states_path(country)) if can? :manage, Spree::Country %>
+  <% end %>
+  
+  <h2>Envíos</h2>
+  <%= configurations_sidebar_menu_item(Spree.t(:shipping_categories), spree.admin_shipping_categories_path) if can? :manage, Spree::ShippingCategory %>
+  <%= configurations_sidebar_menu_item(Spree.t(:shipping_methods), spree.admin_shipping_methods_path) if can? :manage, Spree::ShippingMethod %>
+
+  <h2>Pagos</h2>
+  <%= configurations_sidebar_menu_item(Spree.t(:payment_methods), spree.admin_payment_methods_path) if can? :manage, Spree::PaymentMethod %>
+  
+  <h2>Stock</h2>
+  <%= configurations_sidebar_menu_item(Spree.t(:stock_locations), spree.admin_stock_locations_path) if can? :manage, Spree::StockLocation %>
+  <%= configurations_sidebar_menu_item(Spree.t(:stock_transfers), spree.admin_stock_transfers_path) if can? :manage, Spree::StockTransfer %>
+
+  <h2>Impuestos</h2>
+  
+  <%= configurations_sidebar_menu_item(Spree.t(:tax_categories), spree.admin_tax_categories_path) if can? :manage, Spree::TaxCategory %>
+  <%= configurations_sidebar_menu_item(Spree.t(:tax_rates), spree.admin_tax_rates_path) if can? :manage, Spree::TaxRate %>
+
+
+  <!--REEMBOLSOS: volver a habilitar cuando la funcionalidad se encuentre testeada y probada-->
+  <% configurations_sidebar_menu_item(Spree.t(:store_credit_categories), spree.admin_store_credit_categories_path) if can? :manage, Spree::StoreCreditCategory %>
+  <% configurations_sidebar_menu_item(Spree.t(:refund_reasons), spree.admin_refund_reasons_path) if can? :manage, Spree::RefundReason %>
+  <% configurations_sidebar_menu_item(Spree.t(:reimbursement_types), spree.admin_reimbursement_types_path) if can? :manage, Spree::ReimbursementType %>
+  <% configurations_sidebar_menu_item(Spree.t(:return_authorization_reasons), spree.admin_return_authorization_reasons_path) if can? :manage, Spree::ReturnAuthorizationReason %>
+  <!-------------------------------------------------------------------------------------------->
+  
+  
+</ul>

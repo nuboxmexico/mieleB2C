@@ -1,0 +1,9 @@
+<div style="background-image: url('<%= @static_page.try(:background_image).try(:url) %>'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; background-color: #333333; background-position: center;">
+  <div class="static-page-container">
+    <h1 class="static-page-title"><%= @static_page.try(:name) %></h1>
+    <div class="static-page-content">
+      <%= @static_page.try(:content).try(:html_safe) %>
+      <br><br>
+    </div>
+  </div>
+</div>

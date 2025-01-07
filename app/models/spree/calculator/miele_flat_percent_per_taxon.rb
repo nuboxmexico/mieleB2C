@@ -1,0 +1,44 @@
+require_dependency 'spree/calculator'
+
+module Spree
+  class Calculator::MieleFlatPercentPerTaxon < Calculator
+    preference :flat_percent, :decimal, default: 0
+
+    def self.description
+      'Porcentaje fijo Miele para promo de categoría'
+    end
+
+    def compute(object=nil)
+      return 0 if object.nil?
+      object.line_items.reduce(0) do |sum, line_item|
+        sum += value_for_line_item(line_item)
+      end
+    end
+
+    private
+
+      # Returns all products that match this calculator, but only if the calculator
+      # is attached to a promotion. If attached to a ShippingMethod, nil is returned.
+      # Copied from per_item.rb
+      def matching_products
+        if compute_on_promotion?
+          self.calculable.promotion.rules.map do |rule|
+            rule.respond_to?(:taxons) ? rule.products : []
+          end.flatten
+        end
+      end
+
+      def value_for_line_item(line_item)
+        return 0 if line_item.product.offer_price_available?
+        if compute_on_promotion?
+          return 0 unless matching_products.blank? or matching_products.include?(line_item.product)
+        end
+        ((line_item.price * line_item.quantity) * preferred_flat_percent) / 100
+      end
+
+      # Determines wether or not the calculable object is a promotion
+      def compute_on_promotion?
+        @compute_on_promotion ||= self.calculable.respond_to?(:promotion)
+      end
+  end
+end

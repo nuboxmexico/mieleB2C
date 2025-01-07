@@ -1,0 +1,41 @@
+@import "spree/frontend/variables";
+
+.ribbon-green {
+  font: bold 15px Sans-Serif;
+  color: #333;
+  text-align: center;
+  -webkit-transform: rotate(45deg);
+  -moz-transform:    rotate(45deg);
+  -ms-transform:     rotate(45deg);
+  -o-transform:      rotate(45deg);
+  position: relative;
+  width: 90px;
+  top: 12px;
+  right: -24px;
+  float: right;
+  background-color: $primary-ribbon;
+  background-image: -webkit-gradient(linear, left top, left bottom, from($primary-ribbon), to($secondary-ribbon)); 
+  background-image: -webkit-linear-gradient(top, $primary-ribbon, $secondary-ribbon); 
+  background-image:    -moz-linear-gradient(top, $primary-ribbon, $secondary-ribbon); 
+  background-image:     -ms-linear-gradient(top, $primary-ribbon, $secondary-ribbon); 
+  background-image:      -o-linear-gradient(top, $primary-ribbon, $secondary-ribbon); 
+  color: #fff;
+  z-index: 100;
+}
+.ribbon-green:before, .ribbon-green:after {
+  content: "";
+  border-top:   3px solid $secondary-ribbon;   
+  border-left:  3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: -3px;
+}
+.ribbon-green:before {
+  left: 0;
+}
+.ribbon-green:after {
+  right: 0;
+}
+.red{
+  color: $primary-ribbon;
+}

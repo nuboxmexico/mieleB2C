@@ -1,0 +1,27 @@
+<table class="row header">
+  <tr>
+    <td>
+      <p class="lede">
+        <%= Spree.t('order_mailer.recover_cart.dear_customer') %>
+      </p>
+      <p>
+        <%= Spree.t('order_mailer.recover_cart.instructions') %>
+      </p>
+      <table class="container">
+        <tr>
+          <td class="wrapper last">
+            <table class="twelve columns">
+              <%= render collection: @order.line_items, partial: 'spree/shared/mailer_line_item', as: :line_item %>
+              <%= render 'spree/order_mailer/subtotal', order: @order %>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <p>
+        <%= Spree.t('order_mailer.recover_cart.contact_text') %>
+        <%= link_to 'Ir a formulario de contacto', spree.contact_url %>
+      </p>
+    </td>
+    <td class="expander"></td>
+  </tr>
+</table>

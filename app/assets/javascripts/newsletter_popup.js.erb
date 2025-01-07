@@ -1,0 +1,12 @@
+<% unless Rails.env.test? %>
+  $(document).ready(function(){
+    showNewsletterBox();
+  });
+<% end %>
+
+
+function showNewsletterBox(timeout = 5000) {
+  setTimeout(function(){
+    $.get('/newsletter/popup');
+  }, timeout);
+}

@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pixel_id: MyString
+  active: false
+  search: false
+  view_content: false
+  add_to_cart: false
+  initiate_checkout: false
+  add_payment_info: false
+  purchase: false
+  lead_client: MyString
+  boolean: MyString
+  complete_registration: false
+
+two:
+  pixel_id: MyString
+  active: false
+  search: false
+  view_content: false
+  add_to_cart: false
+  initiate_checkout: false
+  add_payment_info: false
+  purchase: false
+  lead_client: MyString
+  boolean: MyString
+  complete_registration: false

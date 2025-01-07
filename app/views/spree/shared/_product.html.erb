@@ -1,0 +1,126 @@
+<%
+if defined? type_v
+  if type_v.nil?
+    type_v = ""
+  end 
+else
+  type_v = ""
+end
+%>
+
+<article id="product_<%= product.id %>" 
+ class="product-card" 
+ data-hook="products_list_item">
+  <% if product.offer_price_available? %>
+    <div class="offer-price-container">
+      <p>
+        <%= "#{product.discount_percentage}%" %>
+      </p>
+    </div>
+  <% end %>
+  <%= link_to spree.product_path(product, taxon_id: @taxon.try(:id)), class:'link-product' do %>
+    <%= large_image(product, itemprop: "image") %><br/>
+    <div class="product-name">
+      <%= truncate(product.name, length: 55) %>
+    </div>
+  <% end %>
+  <% if product.offer_price_available? %>
+    <div class="product-price">
+      <%= Spree::Money.new(product.master.prices[0].offer_price) %>
+    </div>
+    <div class="strikethrough-price">
+      <%= display_price(product) %>
+    </div>
+  <% else %>
+    <div class="product-price">
+      <%= display_price(product) %>
+    </div>
+  <% end %>
+  <%= link_to spree.product_path(product, taxon_id: @taxon.try(:id)), 
+  class: 'btn btn-primary mdl-button mdl-js-button mdl-button--raised' do %>
+    Ver detalles
+  <% end %>
+  <%= form_for :order, url: populate_orders_path, remote: true, authenticity_token: true, class:'comparator-btn' do |f| %>
+    <%= hidden_field_tag 'variant_id', product.master.id %>
+    <%= hidden_field_tag 'quantity', 1 %>
+    <button type="button" class="add-cart-button" id="add-<%= product.id %>">
+      <%= inline_svg 'vermas.svg' %> AGREGAR AL CARRO
+    </button>
+  <% end %>
+  <script>
+    $("#add-<%= product.id %>").click(function(){
+      $(".loader-page").fadeIn();
+      $(this).submit();
+    })
+  </script>
+  <%= link_to "/comparator/add_product/#{product.id}", method: :post, class: 'comparator-btn', data: {variant: product.id} do %>
+    <%= inline_svg 'comparador.svg' %> Ver en comparador
+  <% end if product.comparable_attributes.any? %>
+</article>
+
+<script>
+  $("#add-<%= product.id %>").click(function(e) {
+    dataLayer.push({ ecommerce: null });
+    dataLayer.push({
+      event: "add_to_cart",
+      ecommerce: {
+        items: [
+          {              
+            "item_name": "<%= !product.name.blank? ? product.name : "" %>", // Nombre del producto: “Aspiradora ADER”
+            "item_id": "<%= !product.sku.blank? ? product.sku  : "" %>", // Identificador único del producto “12345”
+            "item_brand": "Miele", // Marca del producto : “Miele”
+            "item_category": "<%= !product.taxons.blank? ? product.taxons.last.name : "" %>", // Categoría del producto : “aspiradoras”
+            "item_variant": "", // Variantes del producto: “Azul”
+            "price": "<%= !product.price.blank? ? product.price : "" %>", // Precio neto del producto : 45000
+            "quantity": 1 // Valor numérico de cantidad: 1
+          } 
+        ]
+      }
+    });
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "<%= product.name %>",
+  "description": "<%= product.description.to_s if product.description %>",
+  "sku": "<%= product.sku.to_s %>",
+  "brand": {
+    "@type": "Brand",
+    "name": "MIELE"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "<%= spree.product_url(product) %>",
+    "priceCurrency": "CLP",
+    "price": "<%= product.price %>",
+    <% if product.offer_price_available?%>
+    "lowPrice":"<%= product.master.prices[0].offer_price %>",
+    <%end%>
+    <% if !product.master.prices[0].offer_price_end.nil?%>
+    "priceValidUntil": "<%=product.master.prices[0].offer_price_end.strftime("%Y-%m-%d")%>",
+    <% end %>
+    "itemCondition": "https://schema.org/NewCondition",
+    <% if product.current_stock == 0 %>
+    "availability": "https://schema.org/InStock"
+    <%else%>
+    "availability": "https://schema.org/OutOfStock"
+    <%end%>
+  },
+  "image": [
+    <% if product.images.first.nil?%>
+      ""
+    <%else%>
+      <% product.images.each do |image| %>
+        <% if image == product.images.last %>
+          "<%= absolute_image_url(image.attachment.url(:large))%>"
+        <% else %>
+          "<%= absolute_image_url(image.attachment.url(:large))%>",
+        <% end %>
+      <% end %>
+    <%end%>
+  ]
+}
+</script>

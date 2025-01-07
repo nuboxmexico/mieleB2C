@@ -1,0 +1,40 @@
+<% 
+unless (defined? taxon).nil?
+  unless taxon.nil?
+    @type_v_temp = taxon.try(:name).split.join("_") 
+  else
+    @type_v_temp = ""
+  end
+else  
+  @type_v_temp = ""
+end
+%>
+<% @type_v5 =  @type_v_temp + "all"%>
+<% @products.each do |product| %>
+	
+	$('#products').append("<%= j render partial: 'spree/shared/product', locals: { product: product , type_v: @type_v5} %>");
+<% end %>
+$('#catalog-preloader').addClass("hidden");
+<% if @products.next_page %>
+  $('.pagination').replaceWith("<%= j will_paginate @products, theme: 'twitter-bootstrap-3' %>");
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>
+
+$(window).scroll(function() {
+    if($(this).scrollTop()>5) {
+        $( ".navbar-me" ).addClass("fixed-me");
+        $('#cart-cat').append( $('#cart-nav>div')); 
+        $('#logo-cat').append( $('#logo>a')); 
+        $('#search-bar-fixed').append( $('#search-bar>div')); 
+        $( "#br-cat" ).removeClass("hidden");
+    
+    } else {
+        $('#cart-nav').append( $('#cart-cat>div')); 
+        $('#logo').append( $('#logo-cat>a'));
+        $('#search-bar').append( $('#search-bar-fixed>div')); 
+        $( "#br-cat" ).addClass("hidden");  
+        $( ".navbar-me" ).removeClass("fixed-me");
+    }
+});

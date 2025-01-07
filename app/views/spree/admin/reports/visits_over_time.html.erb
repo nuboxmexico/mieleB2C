@@ -1,0 +1,61 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:reports), spree.admin_reports_url %> /
+  Informe de visitas en los últimos 12 meses
+<% end %>
+<%= link_to(admin_download_visits_over_time_url(format: 'xlsx'), onclick: '$(".loader-page").remove();') do %>
+  <div class="btn btn-success"><i class="fa fa-download"></i> Descargar</div>
+<% end %>
+<div id="visits-chart" style="margin-top: 15px"></div>
+<br>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Mes</th>
+        <th>Visitas</th>
+        <th>Sesiones</th>
+      </tr>
+    </thead>
+    <tbody>
+       <% @last_year.each do |month| %>
+        <tr>
+        	<td><%= month["month"].capitalize%></td>
+        	<td><%= month["visits"]%></td>
+        	<td><%= month["sessions"]%></td>
+        </tr>
+      <% end %>
+      <tr>
+      	<th>Resumen</th>
+      	<th><%= @visits %></th>
+      	<th><%= @sessions %></th>
+      </tr>
+    </tbody>
+</table>
+<script>
+  ///Gŕafico de ventas por meses
+var months = Array();
+var visits = Array();
+var sessions = Array();
+<% @last_year.each do |month| %>
+  months.push("<%= month["month"] %>");
+  visits.push("<%= month["visits"] %>");
+  sessions.push("<%= month["sessions"] %>");
+<% end %>
+visits.unshift("Visitas");
+sessions.unshift("Sesiones");
+var chart = c3.generate({
+    bindto: '#visits-chart',
+    data: {
+      columns: [
+        visits,
+        sessions
+      ],
+      type: 'line'
+    },
+    axis: {
+        x: {
+            type: 'category',
+            categories: months
+        }
+    }
+}); 
+</script>

@@ -1,0 +1,19 @@
+<td>
+  <%= attribute.comparable_attribute.name %>
+</td>
+<td colspan="2">
+  <%= form_for attribute, 
+  url: admin_update_product_comparable_attribute_path(product, attribute), 
+  html: {class: 'form-inline'} do |f| %>
+  <div class="form-group">
+    <%= f.text_field :description, class: 'form-control', required: true %>
+  </div>
+  <div class="form-group">
+    <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
+    <button type="button" class="btn btn-default btn-sm no-loading cancel-button" data-value="<%= attribute.id %>">
+      <span class="icon icon-delete"></span>
+      Cancelar
+    </button>
+  </div>
+  <% end %>
+</td>

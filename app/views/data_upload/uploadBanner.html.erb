@@ -1,0 +1,84 @@
+<div class="row">
+	<h2>Subir nueva foto</h2>
+	<%= form_for(@banner,  url: 'upload_banner_image', html: { class: "",  multipart: true, id: "create-new-banner" }) do |f| %>
+	  <div class="input-field">
+	    <%= f.label "Texto Alternativo" %><br />
+	    <%= f.text_field :alt, class: "form-control", autofocus: true %>
+	  </div>
+	  <br>
+	  <div class="file-field input-field">
+	    <%= f.file_field :image %>
+	  </div>
+	  <br>
+	  <div class="actions">
+	    <%= f.submit "Subir", class: "btn btn-success" %>
+	  </div>
+	<% end %>
+</div>
+<div class="row">
+	<h2>Imágenes ya subidas</h2>
+	<% @banners.each do |image| %>
+			<div class="col col-xs-6 col-sm-4 col-md-3">
+				<div class="box image-box">
+					<div class="box-tools pull-right">
+						<%= form_tag("/dataUpload/delete_banner_image?banner_id="+ image.id.to_s, method: :post, id:"delete-form-"+image.id.to_s) do%>
+
+	                		<button id="delete-image-<%= image.id%>" type="button" class="btn btn-box-tool delete-image-btn" data-widget="remove"><i class="fa fa-times"></i></button>
+						
+						<% end %>
+	              	</div>
+	              	<br>
+					<span class="image-name">
+						<b><%= image.image_file_name.truncate(30) %></b>
+					</span>
+					<small>(subida en: <%= l(image.image_updated_at, format: '%d/%m/%Y a las %H:%M:%S')%>)</small><br>
+				  	<small>Alt: <%= image.alt%></small>
+					<div class="inner-box">
+				  		<a id="image-<%= image.id%>" rel="banner-images" href="<%= image.image.url(:large)%>">
+					  		<img src="<%= image.image.url(:medium)%>" alt="<%= image.alt%>" class="image-banner">
+				  		</a>
+					</div>
+				  	<div class="middle-banner">
+						<script>
+					  		$("#image-<%= image.id%>").fancybox();
+					  		$("#create-new-banner").submit(function(e){
+					  			e.preventDefault();
+					  			$(".loader-page-admin").removeClass("hidden");
+					  			this.submit();
+					  		});
+					  		$("#delete-image-<%= image.id%>").click(function(e){
+							    e.preventDefault();
+							    swal({
+							      title: '¿Esta seguro?',
+							      text: "Si elimina la imagen, no podrá recuperarla",
+							      type: 'warning',
+							      showCancelButton: true,
+							      confirmButtonColor: '#3085d6',
+							      cancelButtonColor: '#d33',
+							      confirmButtonText: 'Si',
+							      cancelButtonText: 'No, quiero matenerla ',
+							      confirmButtonClass: 'btn btn-success',
+							      cancelButtonClass: 'btn btn-danger',
+							      buttonsStyling: false,
+							      reverseButtons: true
+							      }).then((result) => {
+							        if (result.value) {
+							          $(".loader-page-admin").removeClass("hidden");
+							          $("#delete-form-<%= image.id%>").submit();
+							        } else if (result.dismiss === 'cancel') {
+							          swal(
+							            'Cancelado',
+							            'La imagen no ha sido eliminada.',
+							            'error'
+							          )
+							        }
+							      })
+					  		});
+					  		
+
+					  	</script>
+				  	</div>
+				</div>
+			</div>
+	<% end %>
+</div>

@@ -1,0 +1,6 @@
+<%
+unless @comparator.nil?
+	@items_comp = @comparator.variants.size
+end
+%>
+// $("#contador-comparator").html("<%= raw escape_javascript(render partial: 'spree/shared/contador_comparator', locals: { items_comp: @items_comp} ) %>")

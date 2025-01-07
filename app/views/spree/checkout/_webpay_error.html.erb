@@ -1,0 +1,35 @@
+<div id="webpay-error" class="row">
+  <div class="col-xs-12 col-md-6">
+    <div>
+      <%= image_tag 'miele-icon-advertencia.svg' %>
+    </div>
+    <h1>Hubo un error en el procesamiento del pago, por favor inténtelo de nuevo.</h1>
+    <p>
+      Para más información o si tienes alguna duda respecto a tu pedido, favor comunicarte al <span class="contact-info"><%= Spree.t(:phone_contact) %></span> o al correo <span class="contact-info"><%= Spree.t(:email_contact) %></span>
+    </p>
+    <div class="actions-container">
+      <%= link_to 'Reintentar', checkout_state_path(@order.checkout_steps.first), class: 'btn btn-primary' %>
+      <%= link_to 'Volver al inicio', root_path, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <div class="error-info">
+      <p>Número de orden de compra</p>
+      <p class="number-order">
+        <%= @order.number %>
+      </p>
+      <p>Las posibles causas de este rechazo son:</p>
+      <ul> 
+        <li>
+          Error en el ingreso de los datos de tu tarjeta de Crédito o Débito (fecha y/o código de seguridad).
+        </li>
+        <li>
+          Tu tarjeta de Crédito o Débito no cuenta con el cupo necesario para cancelar la compra.
+        </li>
+        <li>
+          Tarjeta aún no habilitada en el sistema financiero. 
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

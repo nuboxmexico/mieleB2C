@@ -1,0 +1,101 @@
+<div class="row">
+<% 
+unless @comparator.nil?
+	if @comparator.variants.size == 1
+		@i = 12
+	elsif @comparator.variants.size == 2
+		@i = 6
+	elsif @comparator.variants.size == 3
+		@i = 4
+	elsif @comparator.variants.size == 4
+		@i = 3
+	end
+	@comparator.variants.each do |item|%>	
+		<div class="col col-lg-<%= @i%> col-md-<%= @i%> col-sm-<%= @i%>">
+			<table class="table table-striped table-bordered table-condensed">
+				<thead>
+					<th>TNR: </th>
+					<th><%= item.sku%>
+					      <button title="Eliminar producto" type="submit" id="submit-btn<%= item.id%>" class="btn btn-sm pull-right"> <i class="fa fa-close"></i></button>
+			    	<script>
+			    		$("#submit-btn<%= item.id%>").on('click',function() {
+							$.ajax({
+							  type: "POST",
+							  url: "/comparator/del_product",
+							  data: "variant_id=<%=item.id%>",
+							  success: function(msg){
+							     alertify.success("Se ha eliminado el producto satisfactoriamente.");
+							  },
+							  error(xhr, status, error) {
+							     alertify.error("Ha ocurrido un error eliminando el producto.");
+							  }
+							});    
+			    		});
+					</script>
+					</th> 
+				</thead>
+				<tbody>
+					<tr style="height: 80px!important;">
+						<td class="item-image"><%= mini_image(item) %></td>
+						<td><%= item.name%></td>
+					</tr>
+					<tr>
+						<td>Peso</td>
+						<td><%= item.weight %></td>
+					</tr>
+					<tr>
+						<td>Altura</td>
+						<td><%= item.height %></td>
+					</tr>
+					<tr>
+						<td>Anchura</td>
+						<td><%= item.width %></td>
+					</tr>
+					
+					<% item.product.product_properties.each do |prop|%>
+						<tr>
+							<td><%= prop.property_name %></td>
+							<td><%= prop.value %></td>
+						</tr>
+					<% end%>
+					<tr>
+						<td colspan="2">
+							<%= form_for :order, url: populate_orders_path do |f| %>
+								  <%= hidden_field_tag "variant_id", item.id %>
+								  <div data-hook="product_price" class="col-md-11">
+			                <div id="product-price">
+			                  <% if item.can_supply? %>
+			                    <link itemprop="availability" href="https://schema.org/InStock" />
+			                  <% elsif item.product.variants.empty? %>
+			                    <br />
+			                    <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
+			                  <% end %>
+			                </div>
+			                <% if item.can_supply? %>
+			                  <div class="add-to-cart">
+			                    <br />
+			                    <div class="input-group">
+			                      <%= number_field_tag :quantity, 1, class: 'title form-control', min: 1 %>
+			                      <span class="input-group-btn">
+			                        <%= button_tag class: 'btn btn-success', id: 'add-to-cart-button', type: :submit do %>
+			                           + <i class="glyphicon glyphicon-shopping-cart"></i>
+			                        <% end %>
+			                      </span>
+			                    </div>
+			                  </div>
+			                <% end %>
+			            </div>
+							<% end %>
+						</td>	
+					</tr>
+				</tbody>
+				
+			</table>
+		</div>	
+	<% end %>
+<% end %>
+<% if (@comparator.try(:variants).try(:size) == nil ? -1 : @comparator.try(:variants).try(:size) ) <= 0 %>
+	<div class="alert alert-info">Actualmente no tiene productos en el comparador, <a href="/">Agregue alguno</a> </div>
+<% end %>
+
+</div>

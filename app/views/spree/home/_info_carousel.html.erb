@@ -1,0 +1,212 @@
+<!-- 
+<section id="scroll-down-section" class="scroll-down-class">
+  <div class="scroll-down">
+    <a href="#" id= "scrolldown-link"><span id="scroll-down-span"></span>Ver más</a>
+  </div>
+</section>
+ -->
+<section id="info-carousel" class="carousel slide carousel-main" data-ride="carousel" data-interval="8000">
+    <!-- Slider main container -->
+    <div class="swiper-container">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <%= render 'spree/home/info_carousel_banner', banners: @banners, banner_id: "banner-edit-1" %>
+            </div>
+            <div class="swiper-slide">
+              <%= render 'spree/home/info_carousel_banner', banners: @banners, banner_id: "banner-edit-2" %>
+            </div>
+            <div class="swiper-slide">
+              <%= render 'spree/home/info_carousel_banner', banners: @banners, banner_id: "banner-edit-3" %>
+            </div>
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</section>
+
+<section id="modal-image-change">
+  <!-- Modal -->
+  <div class="modal fade" id="modal-image" role="dialog" aria-labelledby="modal-image-label">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="modal-image-label">Cambiar: <span id="current_banner"></span></h4>
+        </div>
+        <div class="modal-body row">
+          <%= form_tag("/dataUpload/assign_image", method: :post, id:"assign-image-form") do %>
+            <span class="" id="categories-select">
+              <b>Seleccione categoria que quiera enlazar, deje en blanco si no desea cambiar:</b><br>
+              <%= select_tag "taxon", options_for_select(@taxons.pluck(:name,:id)), include_blank: true, class: 'form-control select2-control'%>
+              <hr>
+            </span>
+            <span id="title-text">
+              <b>Título de banner:</b><br>
+              <%= text_area_tag 'banner-title', "", style: "resize:vertical;", class: 'form-control'%>
+              <hr>
+            </span>
+            <div class="link-input">
+              <label>Link</label>
+              <%= url_field_tag :link, nil, class: 'form-control', id: 'slider-link-input' %>
+              <span id="slider-link-alert" class="text-danger hidden">
+                La URL indicada es inválida. Debe iniciar con http:// o https://
+              </span>
+            </div>
+            <div class="link-button-select">
+              <label>¿Añadir botón al banner?</label>
+              <div class="link-button-options">
+                <div class="button-option">
+                  <p class="">Sí</p>
+                  <input type="radio" name="add_button" value="Si" id="first-option-button">  
+                </div>
+                <div class="button-option">
+                  <p>No</p>
+                  <input type="radio" name="add_button" value="No" id="second-option-button">
+                </div>
+              </div>
+            </div>
+            <br>
+            <b>Mis imágenes 
+              <a href="/dataUpload/uploadBanner" style="float: right;" target="_blank" class="btn btn-primary"> 
+                <i class="fa fa-plus"></i> Subir nueva imagen
+              </a>
+            </b>
+            <br><br>
+            <input type="hidden" id="current_banner_input" name="element-id" value="">
+            <% @banners.each do |image| %>
+              <div class="col col-xs-6 col-sm-4 col-md-4">
+                <div class="box image-box">
+                  <span class="image-name">
+                    <input id="radio<%=image.id%>" type="radio" name="image-select" value="<%=image.id%>"> 
+                    <label for="radio<%=image.id%>">
+                      <b><%= image.image_file_name.truncate(20) %></b>
+                      <small>(subida en: <%= l(image.image_updated_at, format: '%d/%m/%Y a las %H:%M:%S')%>)</small>
+                    </label>
+                  </span>
+                  <br>
+                  <small>Alt: <%= image.alt%></small>
+                  <div class="inner-box">
+                      <a id="image-<%= image.id%>" rel="banner-images" href="<%= image.image.url(:large)%>">
+                        <img src="<%= image.image.url(:medium)%>" alt="<%= image.alt%>" class="image-banner">
+                      </a>
+                  </div>
+                  <div class="middle-banner">
+                  <script>
+                      $("#image-<%= image.id%>").fancybox();
+                    </script>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+        <% end %>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btn-image-change" >Cambiar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+    // Optional parameters
+    loop: true,
+
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  })
+  $(document).ready(function() {
+    $(".select2-control").select2();
+    $("#btn-image-change").click(function(){
+      const regex = /[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?/;
+      var valid_url = true;
+      if ($('#slider-link-input').val() != '') {
+        valid_url = regex.test($('#slider-link-input').val());
+      }
+      if (valid_url) {
+        $('#slider-link-alert').addClass('hidden');
+        $("#assign-image-form").submit();
+      }
+      else{
+        $('#slider-link-alert').removeClass('hidden');
+      }
+    });
+  });
+  function handleBannerEdit(e){
+    e.preventDefault();
+    $('#assign-image-form').trigger('reset');
+    var object_id = $(e.target).parent().attr('id');
+    var button_option = $(e.target).parent().data('display');
+    var parent_element = $(e.target).parent().parent();
+    if (object_id == null){
+        object_id = $(e.target).attr('id');
+        parent_element = $(e.target).parent();
+        button_option = $(e.target).data('display');
+    }
+    if(object_id.includes('category')){
+      $('#categories-select').removeClass('hidden');
+    }else{
+      $('#categories-select').addClass('hidden');   
+    }
+    $('#current_banner').html(object_id);
+    $('#current_banner_input').val(object_id);
+    $('#modal-image').modal('show');
+    
+    $('#banner-title').val(parent_element.find('h1').text());
+    $('#slider-link-input').val(parent_element.find('a')[0].href);
+    if (button_option == "Si") {
+      $('#first-option-button').prop('checked', true);
+    }
+    else {
+      $('#second-option-button').prop('checked', true);
+    } 
+  }
+
+/*  $(document).on('turbolinks:before-cache', function(e) {
+    $(".select2-control").select2('destroy');
+    if($('#modal-image').hasClass('in')){
+      location.reload();
+    }
+  });
+  $(function() {
+    var i = 0;
+    var offset = 180;
+    $('#scroll-down-section').on('click', function(e) {
+      e.preventDefault();
+      if(i==3){
+        i= 0;
+        offset = 180; 
+        $('#scrolldown-link').css('color', 'white');
+        $('#scroll-down-span').css('border-left', '5px solid #fff');
+        $('#scroll-down-span').css('border-bottom', '5px solid #fff');
+        $('html,body').animate({scrollTop: 0},'slow');
+      }else{
+        var ids = ["#info-categories","#products-home", "#home-footer"]
+        var aTag = $(ids[i]);
+        $('#scrolldown-link').css('color', 'black');
+        $('#scroll-down-span').css('border-left', '5px solid #000');
+        $('#scroll-down-span').css('border-bottom', '5px solid #000');
+        $('html,body').animate({scrollTop: aTag.offset().top-offset},'slow');
+        i+=1;
+        offset-=60;
+      }
+    });
+  });
+*/
+</script>

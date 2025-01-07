@@ -1,0 +1,27 @@
+<table class="index table">
+  
+  <thead>
+    <tr>
+      <th><%= "#{t('spree.date')}/Hora" %></th>
+      <th><%= Spree.t(:type) %></th>
+      <th><%= Spree.t(:commenter) %></th>
+      <th><%= Spree.t(:comment) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% commentable.comments.reverse.each_with_index do |comment, index| %>
+      <tr class="<%= cycle('odd', 'even')%>">
+        <td class='align-center'><%= pretty_time(comment.created_at) %></td>
+        <td class='align-center'><%= comment.comment_type.try(:name) || Spree.t(:none) %></td>
+        <td class='align-center'><%= comment.user.try(:email) %></td>
+        <td><%= comment.comment.html_safe %></td>
+        <td>
+        	<%= link_to '/admin/delete_comment/'+comment.id.to_s, method: :delete, class: 'btn btn-danger' do %>
+        	<i class="fa fa-trash"></i>
+        	<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

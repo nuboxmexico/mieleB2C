@@ -1,0 +1,29 @@
+<div class="row product-details">
+  <div class="col-xs-3 product-img">
+    <%= product_image(@product.master) %>
+  </div>
+  <div class="col-xs-9 cart-item-info">
+    <div class="item-sku">
+      <%= @product.master.sku %>
+    </div>
+    <div class="item-name">
+      <%= @product.master.name %>
+    </div>
+    <% if @product.offer_price_available? %>
+      <div class="item-price">
+        <%= Spree::Money.new(@product.price, no_cents: true) %>
+      </div>
+      <div class="strikethrough-price">
+        <%= Spree::Money.new(@product.price, no_cents: true) %>
+      </div>
+    <% else %>
+      <div class="item-price">
+        <%= Spree::Money.new(@product.price, no_cents: true) %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-xs-12 submit-container">
+    <%= form.submit 'Enviar', class: 'btn btn-tertiary', id: 'submit-quotation' %>
+  </div>
+</div>

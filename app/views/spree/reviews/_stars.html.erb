@@ -1,0 +1,24 @@
+<% if defined? edit_enabled
+    state = ''
+    name  = 'review[rating]'
+  else
+    state = 'disabled'
+    name  = defined?(review).nil? ? Time.now.tv_usec.to_s : "review_#{review}"
+  end %>
+<% if state == 'disabled' %>
+ <div class="centered">
+  <fieldset class="rating-dis">
+  <% for i in Spree::Reviews::Config.stars.downto(1) %>
+  <input type="radio" id="star<%= i %>" name="<%= name %>" value="<%= i %>" disabled
+     <%= 'checked' if i == stars %> /><label class = "full" for="star<%= i %>"></label>
+  <% end %>
+  </fieldset>
+</div>   
+<% else %>
+  <fieldset class="rating">
+  <% for i in Spree::Reviews::Config.stars.downto(1) %>
+  <input type="radio" id="star<%= i %>" name="<%= name %>" value="<%= i %>" <%= state %>
+     <%= 'checked' if i == stars %> /><label class = "full" for="star<%= i %>" <%= state %> ></label>
+  <% end %>
+  </fieldset>  
+<% end %>

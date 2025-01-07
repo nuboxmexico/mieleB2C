@@ -1,0 +1,32 @@
+<div>
+  <% @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots %>
+  <%= form_tag spree.products_path, method: :get, class: "form-inline" do %>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="">
+         <% cache(cache_key_for_taxons) do %>
+            <%= select_tag :taxon,
+                  options_for_select([[Spree.t(:all_departments), '']] +
+                                        @taxons.map {|t| [t.name, t.id]},
+                                        @taxon ? @taxon.id : params[:taxon]), 'aria-label' => 'Taxon', class: "form-control hidden-sm hidden-xs taxon-select" %>
+          <% end %>
+        </div>
+
+        <div class="on-focus clearfix">
+          <%= search_field_tag :keywords, params[:keywords], placeholder: Spree.t(:search), class: "form-control search-input", autocomplete: "off"%>
+      
+          <div class="tool-tip slideIn right">
+            <span>Ingrese al menos 3 letras</span>
+          </div>
+        </div>    
+        <div class="input-group-addon search-addon">
+          <%= button_tag(type: "submit", class: "search-btn") do %>
+            <i class="glyphicon glyphicon-search"></i>
+          <% end %>
+        </div>
+      </div>
+      <ul class="suggestions">
+      </ul>
+    </div>
+  <% end %>
+</div>

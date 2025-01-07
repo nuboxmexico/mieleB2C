@@ -1,0 +1,59 @@
+<div id="mySidenav" class="sidenav">
+  <div class="nav-cart-container">
+    <div class="cart-container text-right bot-close-button">
+      <a href="javascript:void(0)" class="close-cart-button pull-right" onclick="closeNav();">CERRAR &nbsp;&nbsp;X</a>
+    </div>
+    <div class="cart-container title-cart-bottom">
+      <p class="title-cart-side">Carrito de compras</p>
+    </div>
+    <div class="cart-container" id="checkout-summary">
+      <% if current_order and current_order.line_items.any? %>
+        <%= render partial: "spree/checkout/summary", 
+                   locals: {
+                     order: current_order,
+                     side: true
+                  } %>
+      <% else %>
+        <h4><b>Aún no hay productos en tu carro</b></h4>
+      <% end %>
+    </div>
+    <% if current_order and current_order.line_items.any?%>
+      <!-- <div class="btn-container">
+        <a href="/cart" class="btn btn-tertiary btn-block btn-lg" > Realizar pedido</a> 
+      </div> -->
+    <% end %>
+
+    <div class="btn-container cart-continue">
+      <% if current_order and current_order.line_items.any? %>
+        <%= link_to checkout_state_path(current_order.checkout_steps.first), 
+            class: 'btn btn-primary' do %>
+          Proceder al pago
+        <% end %>
+      <% end %>
+
+    </div>
+    <div class="btn-container">
+      <a href="#" class="close-side-nav-cart">
+        <i class="material-icons">chevron_left</i> Seguir comprando
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+var windowsize;
+$( document ).ready(function() {
+
+  windowsize = $(window).width();
+
+  $(window).resize(function(event) {
+    windowsize = $(window).width();
+  });
+
+  $('.close-side-nav-cart').click(function(e){
+    e.preventDefault();
+    closeNav();
+  });
+  /* Set the width of the side navigation to 0 */
+});
+</script>

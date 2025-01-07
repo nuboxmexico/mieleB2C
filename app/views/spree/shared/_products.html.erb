@@ -1,0 +1,74 @@
+<%
+  unless (defined? taxon).nil?
+    unless taxon.nil?
+      @type_v_temp = taxon.try(:name).split.join("_")
+    else
+      @type_v_temp = ""
+    end
+  else
+    @type_v_temp = ""
+  end
+%>
+
+<div data-hook="products_search_results_heading">
+  <% if products.empty? %>
+    <div data-hook="products_search_results_heading_no_results_found">
+      <%= Spree.t(:no_products_found) %>
+    </div>
+  <% elsif params.key?(:keywords) %>
+    <div data-hook="products_search_results_heading_results_found">
+      <h6 class="search-results-title">
+        <%= Spree.t(:search_results, keywords: h(params[:keywords])) %>
+      </h6>
+    </div>
+  <% end %>
+</div>
+
+<div class="row products-container">
+  <div class="col-xs-12 col-md-10 col-md-offset-1">
+    <div class="row">
+      <% @products.each do |product| %>
+        <div class="col-md-4 product-card-container">
+          <%= render partial: 'spree/shared/product', 
+                     locals: { product: product } %>
+          
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% if controller_name != "home"%>
+<%  if products.any? %>
+<div id="products" class="row" data-hook>
+  <% @type_v5 =  @type_v_temp + "all"%>
+  <% products.each do |product| %>
+  <%= render partial: 'spree/shared/product', locals: { product: product , type_v: @type_v5} %>
+  <% end %>
+  <% reset_cycle("classes") %>
+</div>
+<% end %>
+
+<% if products.respond_to?(:total_pages) %>
+<div class="center-paginate"  id="infinite-scrolling">
+  <%= will_paginate products, theme: 'twitter-bootstrap-3' %>
+</div>
+<%= render partial: "spree/products/preloader"%>
+<% end %>
+<% end %>
+<script>
+  $( document ).ready(function() {
+    $(window).scroll(scroll);
+  });
+  var scroll = function() {
+    var more_posts_url = $('.next_page').attr('href');
+    if (more_posts_url && ($(window).scrollTop() + $(window).height() == $(document).height())){
+      $('#catalog-preloader').removeClass("hidden");
+      $(window).off('scroll');
+      $.getScript(more_posts_url)
+      .done(function(script, textStatus){
+        $(window).scroll(scroll);
+      });
+    }
+  };
+</script>

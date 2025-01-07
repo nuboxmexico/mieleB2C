@@ -1,0 +1,19 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Ventas Clientes') do |sheet|
+  headers = ['Mes', 'Ordenes del mes', 'Ingresos del mes', 'Promedio de tickets']
+  sheet.add_row headers
+  
+  @last_year.each do |month|
+    total = month["orders"].sum(:total).to_i
+    quantity = month["orders"].size
+    sheet.add_row [month['month'].capitalize,
+                   quantity,
+                   "$ #{number_to_currency(month["orders"].sum(:total).to_i,precision: 0 ,unit: "", separator: "", delimiter: ".")}",
+                   "$ #{quantity.zero? ? 0 : number_to_currency((total / quantity).to_i, precision: 0, unit: "", separator: "", delimiter: ".")}"]
+  end
+  sheet.add_row ['Resumen', 
+                 @orders, 
+                 "$ #{number_to_currency(@total.to_i,precision: 0 ,unit: "", separator: "", delimiter: ".")}",
+                 "$ #{@orders.zero? ? 0 : number_to_currency((@total / @orders).to_i, precision: 0, unit: "", separator: "", delimiter: ".")}"]
+end

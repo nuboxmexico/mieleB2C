@@ -1,0 +1,138 @@
+@import "spree/frontend/variables";
+
+
+.circle-contain:hover .step-circle{
+  background-color: $brand-tertiary;
+}
+.circle-contain:hover span.step{
+  color: $brand-tertiary;
+}
+.step-circle{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  background-color: $brand-primary;
+  padding: 0;
+  text-align: center;
+  margin-right: auto; margin-left: auto;
+
+}
+.step-circle span.text{
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 8px;
+  z-index: 100;
+  text-align: center;
+  position: relative;
+  color: $white-color;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.step-circle span.text i{
+  margin-top: 10px;
+}
+.circle-contain span.step{
+  color: $brand-primary;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  bottom: 0;
+  margin-right: auto; margin-left: auto;
+  margin: 10px;
+  margin-left: -2px;
+  
+  -ms-transform: translateX(12%);
+  -webkit-transform: translateX(12%);
+  transform: translateX(12%);
+}
+.step-divider { 
+  width: auto; 
+  height: 100%; 
+  position: relative;
+  margin-top: 15%;
+}
+@media (max-width: 770px){
+  .step-divider { 
+    width: auto; 
+    height: 100%; 
+    position: relative;
+    margin-top: 25%;
+  }
+}
+@media (max-width: 768px){
+  .step-divider { 
+    width: 0; 
+    height: 0;
+  }
+}
+.circle-active div{
+  background-color: $brand-tertiary!important;
+}
+
+.circle-active .step{
+  color: $brand-tertiary!important;
+}
+.circle-disabled div{
+  background-color: $grey-color!important;
+}
+.circle-disabled a{
+  pointer-events: none!important;
+  cursor: default!important;
+  text-decoration: none!important;
+}
+.circle-active a{
+  text-decoration: none!important;
+}
+.circle-contain a{
+  text-decoration: none!important;
+}
+.circle-disabled .step{
+  color: $grey-color!important;
+}
+.step-divider:before { content: '';
+  position: absolute;
+  border-bottom: 2px $brand-primary solid;
+  height: 100%;
+  width: 100%;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.checkout-steps-div{
+  margin-top: 25px;
+}
+
+.checkout-address .inner .form-separator {
+  margin-left: 40px!important;
+}
+
+.space-mobile{
+  padding-left: 15px;
+  padding-right: 15px;
+  background: #fff;
+}
+
+@media(max-width: 992px){
+  .space-mobile{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media(min-width: 768px) and (max-width: 1355px){
+  .checkout-address .inner .form-separator {
+    margin-left: 20px!important;
+  }
+}
+
+@media(max-width: 768px){
+  .checkout-address .inner .form-separator {
+    margin-left: 0px!important;
+  }
+}

@@ -1,0 +1,17 @@
+<% 
+  unless @order 
+    @order = order
+  end
+%>
+
+<div class="col-xs-6 col-sm-6 col-sm-offset-2">
+  <p class="discount-label">
+    Descuento <%=inline_svg_tag 'descuento.svg' %>
+  </p>
+</div>
+<div class="col-xs-4 text-right" data-hook="item_total">
+  <p id="summary-discounts">
+      <%#= render "spree/orders/adjustment_row", label: label, adjustments: adjustments, type: Spree.t(:adjustment) %>
+      <%= Spree::Money.new(@order.total_adjustments, currency: @order.currency) %>
+  </p>
+</div>

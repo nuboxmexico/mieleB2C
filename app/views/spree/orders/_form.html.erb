@@ -1,0 +1,121 @@
+<%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+<style>
+  .borderless td, .borderless th {
+    border: none;
+}
+</style>
+<div class="">
+  <table class="table table-responsive borderless" id="cart-detail" data-hook>
+
+    <tbody id="line_items" data-hook>
+      <%= render partial: 'spree/orders/line_item', collection: order_form.object.line_items, locals: { order_form: order_form } %>
+    </tbody>
+    <div class="">
+        <div class="row line-item-cart">
+          <div class="col col-lg-2 col-md-2 col-sm-2">
+            <a href="#" id="empty-cart-btn" class="grey-link"> <i class="fa fa-trash"></i>&nbsp;&nbsp;<%= Spree.t(:empty_cart) %></a>
+          </div>
+          <div class="col col-lg-6 col-md-6 col-sm-6 ">
+          </div>
+          
+          <div class="col col-lg-3 col-md-3 col-sm-3">
+              <% if @order.adjustments.nonzero.exists? || @order.line_item_adjustments.nonzero.exists? || @order.shipment_adjustments.nonzero.exists? || @order.shipments.any? %>
+              <!--  <tr class="cart-subtotal">
+                  <td colspan="4" align='right'><h5><% Spree.t(:cart_subtotal, count: @order.line_items.sum(:quantity)) %></h5></td>
+                  <td colspan><h5><%= order_form.object.display_item_total %></h5></td>
+                  <td></td>
+                </tr> -->
+                <%= render "spree/orders/adjustments" %>
+              <% end %>
+              <div class="row lead">
+                <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <p class="lead"><b><%= Spree.t(:total) %>:</b> </p>
+                </div>
+                <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <p align="right"><span class="lead red-text" id= "total-cart"><%= order_form.object.display_total %></span></p>
+                </div>
+              </div>
+          </div>
+          <div class="col col-lg-1 col-md-1 col-sm-1 col-xs-1">
+          </div>
+        </div> 
+    </div>
+
+  </table>
+</div>
+<script>
+  $(function(){
+    $(document).ready(function() {
+      CalcularTotal();                       
+    });
+    $(document).change(function(){
+      CalcularTotal();
+    });
+    $("#empty-cart-btn").click(function(e){
+      e.preventDefault();
+      swal({
+          title: '¿Esta seguro que quiere vaciar el carro?',
+          text: "No podrá recuperarlo",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si',
+          cancelButtonText: 'No, quiero matenerlo ',
+          confirmButtonClass: 'btn btn-success',
+          cancelButtonClass: 'btn btn-danger',
+          buttonsStyling: false,
+          reverseButtons: true
+        }).then((result) => {
+          if (result.value) {
+            swal(
+              'Vaciado!',
+              'Los productos han vuelto a sus lugares',
+              'success'
+            )
+            $.ajax({
+              type: "PUT",
+              url: "/cart/empty",
+              success: function(msg){
+                 location.reload();
+              },
+              error(xhr, status, error) {
+                 location.reload();
+              }
+            });
+          } else if (result.dismiss === 'cancel') {
+            swal(
+              'Cancelado',
+              'Ha mantenido los productos de su carro',
+              'error'
+            )
+          }
+        })
+    });
+  });
+  function CalcularTotal(){
+    var total_cart = 0;
+    <% @order.line_items.each do |line_item| %>
+      var price = parseInt("<%=(line_item.price.to_i)%>");
+      var total_item = parseInt($("#quantity<%= line_item.variant.id %>").val()) * price;
+      total_cart = total_cart+ total_item;
+      $("#item-total<%=line_item.variant.id%>").text("$ "+total_item.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+    <% end %>
+    <% if @order.line_item_adjustments.exists? %>
+      <% @order.line_item_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
+        total_cart = total_cart+ parseInt("<%= adjustments.sum(&:amount) %>");
+      <% end %>
+    <% end %>
+    <% @order.all_adjustments.tax.eligible.group_by(&:label).each do |label, adjustments| %>
+      total_cart = total_cart+ parseInt("<%= adjustments.sum(&:amount) %>");
+    <% end %>
+    <% @order.shipments.each do |shipment| %>
+        total_cart = total_cart+ parseInt("<%= shipment.display_discounted_cost.money.fractional.to_i %>");
+    <% end %>
+    <% @order.adjustments.eligible.group_by(&:label).each do |label, adjustments| %>
+      total_cart = total_cart+ parseInt("<%= adjustments.sum(&:amount) %>");
+    <% end %>
+
+    $("#total-cart").text("$ "+total_cart.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+  };
+</script>

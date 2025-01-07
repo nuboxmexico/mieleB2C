@@ -1,0 +1,104 @@
+@import "spree/frontend/variables";
+
+/*  bhoechie tab */
+div.bhoechie-tab-container{
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 0 !important;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  margin-top: 20px;
+  margin-left: 50px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  -moz-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-clip: padding-box;
+  opacity: 0.97;
+  filter: alpha(opacity=97);
+}
+div.bhoechie-tab-menu{
+  padding-right: 0;
+  padding-left: 0;
+  padding-bottom: 0;
+}
+div.bhoechie-tab-menu div.list-group{
+  margin-bottom: 0;
+}
+div.bhoechie-tab-menu div.list-group .list-group-item{
+  margin-bottom: 0;
+  padding: 20px 15px;
+}
+div.bhoechie-tab-menu div.list-group>a{
+  margin-bottom: 0;
+}
+div.bhoechie-tab-menu div.list-group>a .glyphicon,
+div.bhoechie-tab-menu div.list-group>a .fa {
+  color: $brand-secondary;
+}
+div.bhoechie-tab-menu div.list-group>a:first-child{
+  border-top-right-radius: 0;
+  -moz-border-top-right-radius: 0;
+}
+div.bhoechie-tab-menu div.list-group>a:last-child{
+  border-bottom-right-radius: 0;
+  -moz-border-bottom-right-radius: 0;
+}
+div.bhoechie-tab-menu div.list-group>a.active,
+div.bhoechie-tab-menu div.list-group>a.active .glyphicon,
+div.bhoechie-tab-menu div.list-group>a.active .fa{
+  background-color: #DDDDDD;
+  background-image: #DDDDDD;
+  border-color: #DDDDDD;
+  color: #1F1F1F;
+  font-size: 14px;
+}
+
+div.bhoechie-tab-content{
+  /* border: 1px solid #eeeeee; */
+  padding-left: 20px;
+  padding-top: 10px;
+}
+.bhoechie-tab-content-body{
+  background-color: #fff;
+  padding: 20px;
+}
+
+div.bhoechie-tab div.bhoechie-tab-content:not(.active){
+  display: none;
+}
+.bhoechie-icon{
+  color: $brand-primary;
+}
+
+.bhoechie-tittle{
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #1F1F1F;
+  font-size: 21px;
+  padding-bottom: 30px;
+}
+
+.custom-panel-padding{
+  padding: 30px!important;
+}
+.account-my-orders .table-responsive-custom table{
+  padding-bottom: 0px;
+}
+.account-my-orders .table-responsive-custom table tr td, .account-my-orders .table-responsive-custom table tr th{
+  padding: 20px;
+}
+
+@media (max-width: 767px){
+  .sm-padding{
+    padding: 0px 35px!important;
+  }
+}
+
+@media (max-width: 1023px){
+  .account-my-orders .table-responsive-custom table tr th{
+    display: none!important;
+  }
+  .account-my-orders .table-responsive-custom table tr td{
+    display: block!important;
+  }
+}

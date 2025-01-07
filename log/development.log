@@ -1,0 +1,867 @@
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/taxon_decorator.rb:1)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/image_decorator.rb:1)
+
+
+Started GET "/" for 172.18.0.1 at 2025-01-07 02:30:10 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.8) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.8) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.8) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.8) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.8) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.8) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:20:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `call'
+  ahoy_matey (2.1.0) lib/ahoy/engine.rb:20:in `call_with_quiet_ahoy'
+  request_store (1.4.1) lib/request_store/middleware.rb:19:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.13) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.13) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.8) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.13) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.8) lib/rails/engine.rb:518:in `call'
+  railties (4.2.8) lib/rails/application.rb:165:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  rack (1.6.13) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.13) lib/rack/handler/webrick.rb:88:in `service'
+  /usr/local/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /usr/local/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /usr/local/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_source.erb (15.7ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (61.5ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (4.1ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (400.2ms)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/taxon_decorator.rb:1)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/image_decorator.rb:1)
+
+
+Started GET "/" for 172.18.0.1 at 2025-01-07 02:32:45 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.8) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.8) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.8) lib/active_support/callbacks.rb:88:in `__run_callbacks__'
+  activesupport (4.2.8) lib/active_support/callbacks.rb:778:in `_run_call_callbacks'
+  activesupport (4.2.8) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.8) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  web-console (2.3.0) lib/web_console/middleware.rb:20:in `block in call'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (2.3.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.8) lib/rails/rack/logger.rb:20:in `call'
+  ahoy_matey (2.1.0) lib/ahoy/engine.rb:20:in `call_with_quiet_ahoy'
+  request_store (1.4.1) lib/request_store/middleware.rb:19:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.13) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.13) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.8) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.8) lib/action_dispatch/middleware/static.rb:120:in `call'
+  rack (1.6.13) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.8) lib/rails/engine.rb:518:in `call'
+  railties (4.2.8) lib/rails/application.rb:165:in `call'
+  rack (1.6.13) lib/rack/lock.rb:17:in `call'
+  rack (1.6.13) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.13) lib/rack/handler/webrick.rb:88:in `service'
+  /usr/local/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+  /usr/local/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+  /usr/local/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.5ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (56.1ms)
+DEPRECATION WARNING: Passing a string to ActiveRecord::Base.establish_connection for a configuration lookup is deprecated, please pass a symbol (:"44.201.192.191") instead. (called from block in tsort_each at /usr/local/lib/ruby/2.6.0/tsort.rb:228)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/taxon_decorator.rb:1)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/image_decorator.rb:1)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/taxon_decorator.rb:1)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/image_decorator.rb:1)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/taxon_decorator.rb:1)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/image_decorator.rb:1)
+  [1m[36mSpree::Country Load (78.6ms)[0m  [1mSELECT  "spree_countries".* FROM "spree_countries" WHERE "spree_countries"."name" = $1 LIMIT 1[0m  [["name", "Chile"]]
+  [1m[35mSpree::Preference Load (82.7ms)[0m  SELECT  "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = $1  ORDER BY "spree_preferences"."id" ASC LIMIT 1  [["key", "spree/product_zoom_configuration/default_image_style"]]
+  [1m[36m (92.9ms)[0m  [1mBEGIN[0m
+  [1m[35mSpree::Preference Exists (83.3ms)[0m  SELECT  1 AS one FROM "spree_preferences" WHERE "spree_preferences"."key" = 'spree/product_zoom_configuration/default_image_style' LIMIT 1
+  [1m[36mSQL (85.9ms)[0m  [1mINSERT INTO "spree_preferences" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["key", "spree/product_zoom_configuration/default_image_style"], ["value", "--- :large\n"], ["created_at", "2025-01-07 02:48:39.949815"], ["updated_at", "2025-01-07 02:48:39.949815"]]
+  [1m[35m (75.5ms)[0m  COMMIT
+  [1m[36mSpree::Preference Load (77.0ms)[0m  [1mSELECT  "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = $1  ORDER BY "spree_preferences"."id" ASC LIMIT 1[0m  [["key", "spree/product_zoom_configuration/default_image_style"]]
+  [1m[35m (73.6ms)[0m  BEGIN
+  [1m[36mSpree::Preference Exists (105.9ms)[0m  [1mSELECT  1 AS one FROM "spree_preferences" WHERE ("spree_preferences"."key" = 'spree/product_zoom_configuration/default_image_style' AND "spree_preferences"."id" != 1) LIMIT 1[0m
+  [1m[35m (89.2ms)[0m  COMMIT
+  [1m[36mSpree::Preference Load (84.9ms)[0m  [1mSELECT  "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = $1 LIMIT 1[0m  [["key", "spree/auth_configuration/confirmable"]]
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/taxon_decorator.rb:1)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/image_decorator.rb:1)
+  [1m[35mSpree::Preference Load (78.5ms)[0m  SELECT  "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = $1 LIMIT 1  [["key", "spree/app_configuration/admin_path"]]
+
+
+Started GET "/" for 172.18.0.1 at 2025-01-07 02:48:49 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[36mActiveRecord::SchemaMigration Load (88.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Spree::HomeController#index as HTML
+  [1m[35mSpree::Preference Load (86.0ms)[0m  SELECT  "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = $1 LIMIT 1  [["key", "spree/frontend_configuration/locale"]]
+  [1m[36m (97.7ms)[0m  [1mSELECT  spree_products.id FROM "spree_orders" INNER JOIN "spree_line_items" ON "spree_line_items"."order_id" = "spree_orders"."id" INNER JOIN "spree_variants" ON "spree_variants"."id" = "spree_line_items"."variant_id" AND "spree_variants"."deleted_at" IS NULL INNER JOIN "spree_products" ON "spree_products"."id" = "spree_variants"."product_id" AND "spree_products"."deleted_at" IS NULL WHERE "spree_orders"."deleted_at" IS NULL AND (spree_orders.completed_at >= '2024-01-07 02:48:54.727543') GROUP BY spree_products.id  ORDER BY COUNT(spree_orders.id) DESC LIMIT 4[0m
+  [1m[35mSpree::Product Load (94.1ms)[0m  SELECT "spree_products".* FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL  ORDER BY "spree_products"."updated_at" DESC
+  [1m[36mComparator Exists (77.7ms)[0m  [1mSELECT  1 AS one FROM "comparators" WHERE "comparators"."comp_token" = $1 LIMIT 1[0m  [["comp_token", "x3dZuPJVH94fKvC2XYUpyg1736218135440"]]
+  [1m[35mComparator Load (82.5ms)[0m  SELECT  "comparators".* FROM "comparators" WHERE "comparators"."comp_token" = $1 LIMIT 1  [["comp_token", "IngzZFp1UEpWSDk0Zkt2QzJYWVVweWcxNzM2MjE4MTM1NDQwIg==--3746a7c78b3711faeb41547274bc8a6a5c433190"]]
+  [1m[36mTagManager Load (82.2ms)[0m  [1mSELECT  "tag_managers".* FROM "tag_managers"  ORDER BY "tag_managers"."id" ASC LIMIT 1[0m
+  [1m[35mStoreNotice Load (89.1ms)[0m  SELECT  "store_notices".* FROM "store_notices"  ORDER BY "store_notices"."id" ASC LIMIT 1
+  [1m[36mSpree::Order Exists (85.3ms)[0m  [1mSELECT  1 AS one FROM "spree_orders" WHERE "spree_orders"."deleted_at" IS NULL AND "spree_orders"."guest_token" = $1 LIMIT 1[0m  [["guest_token", "wgSvByI3T4cita0oTw0xYA1736218136589"]]
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <class:PromotionalBanner> at /usr/src/app/models/promotional_banner.rb:4)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <class:PromotionalBanner> at /usr/src/app/models/promotional_banner.rb:11)
+  [1m[35mPromotionalBanner Load (74.2ms)[0m  SELECT  "promotional_banners".* FROM "promotional_banners" WHERE "promotional_banners"."active" = $1 AND "promotional_banners"."location" = $2 LIMIT 1  [["active", "Activo"], ["location", 0]]
+  [1m[36mPromotionalBanner Load (82.1ms)[0m  [1mSELECT  "promotional_banners".* FROM "promotional_banners" WHERE "promotional_banners"."active" = $1 AND "promotional_banners"."location" = $2 LIMIT 1[0m  [["active", "Activo"], ["location", 1]]
+  [1m[35mPromotionalBanner Load (80.5ms)[0m  SELECT  "promotional_banners".* FROM "promotional_banners" WHERE "promotional_banners"."active" = $1 AND "promotional_banners"."location" = $2 LIMIT 1  [["active", "Activo"], ["location", 2]]
+  [1m[36mPromotionalBanner Load (87.0ms)[0m  [1mSELECT  "promotional_banners".* FROM "promotional_banners" WHERE "promotional_banners"."active" = $1 AND "promotional_banners"."location" = $2 LIMIT 1[0m  [["active", "Activo"], ["location", 3]]
+  [1m[35mSpree::Preference Load (75.7ms)[0m  SELECT  "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = $1 LIMIT 1  [["key", "spree/app_configuration/show_products_without_price"]]
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <class:BannerImage> at /usr/src/app/models/banner_image.rb:2)
+  [1m[36mSpree::Preference Load (111.4ms)[0m  [1mSELECT  "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = $1 LIMIT 1[0m  [["key", "spree/app_configuration/layout"]]
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_js_params' matched 1 times with 'body'
+[1;32mDeface: [WARNING][0m No :original defined for 'add_js_params', you should change its definition to include:
+ :original => 'b7cf0b45ce631d3954f9e43f807d6366874490ad' 
+  [1m[35mBannerImage Load (94.9ms)[0m  SELECT  "banner_images".* FROM "banner_images" WHERE "banner_images"."element_id" = $1 LIMIT 1  [["element_id", "banner-edit-1"]]
+  Rendered spree/home/_info_carousel_banner.html.erb (72017.8ms)
+  [1m[36mBannerImage Load (75.2ms)[0m  [1mSELECT  "banner_images".* FROM "banner_images" WHERE "banner_images"."element_id" = $1 LIMIT 1[0m  [["element_id", "banner-edit-2"]]
+  Rendered spree/home/_info_carousel_banner.html.erb (80.2ms)
+  [1m[35mBannerImage Load (84.2ms)[0m  SELECT  "banner_images".* FROM "banner_images" WHERE "banner_images"."element_id" = $1 LIMIT 1  [["element_id", "banner-edit-3"]]
+  Rendered spree/home/_info_carousel_banner.html.erb (87.5ms)
+  [1m[36m (98.3ms)[0m  [1mSELECT "spree_taxons"."name", "spree_taxons"."id" FROM "spree_taxons"[0m
+  [1m[35mBannerImage Load (100.3ms)[0m  SELECT "banner_images".* FROM "banner_images"
+  Rendered spree/home/_info_carousel.html.erb (72479.4ms)
+  [1m[36m (82.6ms)[0m  [1mSELECT COUNT(*) FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND "spree_products"."featured" = $1 AND (NOT (discontinue_on IS NOT NULL AND discontinue_on <= '2025-01-07 02:48:55.315146'))[0m  [["featured", "t"]]
+  Rendered spree/home/index.html.erb within spree/layouts/spree_application (72691.5ms)
+  [1m[35mSpree::Store Load (85.9ms)[0m  SELECT  "spree_stores".* FROM "spree_stores" WHERE (url like '%localhost%')  ORDER BY "spree_stores"."id" ASC LIMIT 1
+  [1m[36mSpree::Store Load (79.8ms)[0m  [1mSELECT  "spree_stores".* FROM "spree_stores" WHERE "spree_stores"."default" = $1  ORDER BY "spree_stores"."id" ASC LIMIT 1[0m  [["default", "t"]]
+  Rendered spree/shared/_head.html.erb (1125.3ms)
+  Rendered spree/shared/_search.html.erb (29.7ms)
+  [1m[35mSpree::Taxonomy Load (81.3ms)[0m  SELECT "spree_taxonomies".* FROM "spree_taxonomies"  ORDER BY spree_taxonomies.position, spree_taxonomies.created_at
+  [1m[36mMieleConfig Load (78.7ms)[0m  [1mSELECT  "miele_configs".* FROM "miele_configs"  ORDER BY "miele_configs"."id" DESC LIMIT 1[0m
+  Rendered spree/layouts/_mobile_categories.html.erb (471.2ms)
+  Rendered spree/shared/_header.html.erb (561.4ms)
+Completed 500 Internal Server Error in 80062ms (ActiveRecord: 3859.4ms)
+
+ActionView::Template::Error (undefined method `start_oportunities' for nil:NilClass):
+    58:         </li>
+    59:       <% end %>
+    60:       <li class="nav-item">
+    61:         <%= link_to cyberday, spree.oportunities_path, class: 'nav-link' %>
+    62:       </li>
+    63:       <li class="nav-item">
+    64:         <%= link_to 'Agendar cita virtual', main_app.new_virtual_support_path, class: 'nav-link' %>
+  app/helpers/application_helper.rb:125:in `cyberday'
+  app/views/spree/layouts/_mobile_categories.html.erb:61:in `_3776da65142f732ec478c9cdb32772ef'
+  app/views/spree/shared/_header.html.erb:20:in `_0123bf0e6c319c9741826ba46c1b15ee'
+  app/views/spree/layouts/spree_application.html.erb:82:in `_2a94e9d090544129d27a78e65a3f22a0'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_source.erb (12.5ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (5.3ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.0ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.2.8/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (59.7ms)
+
+
+Started GET "/" for 172.18.0.1 at 2025-01-07 02:54:04 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/taxon_decorator.rb:1)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <top (required)> at /usr/src/app/models/spree/image_decorator.rb:1)
+Processing by Spree::HomeController#index as HTML
+  [1m[35m (89.0ms)[0m  SELECT  spree_products.id FROM "spree_orders" INNER JOIN "spree_line_items" ON "spree_line_items"."order_id" = "spree_orders"."id" INNER JOIN "spree_variants" ON "spree_variants"."id" = "spree_line_items"."variant_id" AND "spree_variants"."deleted_at" IS NULL INNER JOIN "spree_products" ON "spree_products"."id" = "spree_variants"."product_id" AND "spree_products"."deleted_at" IS NULL WHERE "spree_orders"."deleted_at" IS NULL AND (spree_orders.completed_at >= '2024-01-07 02:54:11.056317') GROUP BY spree_products.id  ORDER BY COUNT(spree_orders.id) DESC LIMIT 4
+  [1m[36mSpree::Product Load (78.9ms)[0m  [1mSELECT "spree_products".* FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL  ORDER BY "spree_products"."updated_at" DESC[0m
+  [1m[35mComparator Exists (82.0ms)[0m  SELECT  1 AS one FROM "comparators" WHERE "comparators"."comp_token" = $1 LIMIT 1  [["comp_token", "TSsUmrizHlP4c8jBKeRPsg1736218451698"]]
+  [1m[36mComparator Load (86.6ms)[0m  [1mSELECT  "comparators".* FROM "comparators" WHERE "comparators"."comp_token" = $1 LIMIT 1[0m  [["comp_token", "IlRTc1Vtcml6SGxQNGM4akJLZVJQc2cxNzM2MjE4NDUxNjk4Ig==--2b28d1d4bc3887d29d7f38efec9bdb9ba2888efe"]]
+  [1m[35mTagManager Load (85.1ms)[0m  SELECT  "tag_managers".* FROM "tag_managers"  ORDER BY "tag_managers"."id" ASC LIMIT 1
+  [1m[36mStoreNotice Load (77.4ms)[0m  [1mSELECT  "store_notices".* FROM "store_notices"  ORDER BY "store_notices"."id" ASC LIMIT 1[0m
+  [1m[35mSpree::Order Exists (83.5ms)[0m  SELECT  1 AS one FROM "spree_orders" WHERE "spree_orders"."deleted_at" IS NULL AND "spree_orders"."guest_token" = $1 LIMIT 1  [["guest_token", "vWlDDwzPwmgLe9zM7jHuPQ1736218453198"]]
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <class:PromotionalBanner> at /usr/src/app/models/promotional_banner.rb:4)
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <class:PromotionalBanner> at /usr/src/app/models/promotional_banner.rb:11)
+  [1m[36mPromotionalBanner Load (86.2ms)[0m  [1mSELECT  "promotional_banners".* FROM "promotional_banners" WHERE "promotional_banners"."active" = $1 AND "promotional_banners"."location" = $2 LIMIT 1[0m  [["active", "Activo"], ["location", 0]]
+  [1m[35mPromotionalBanner Load (93.7ms)[0m  SELECT  "promotional_banners".* FROM "promotional_banners" WHERE "promotional_banners"."active" = $1 AND "promotional_banners"."location" = $2 LIMIT 1  [["active", "Activo"], ["location", 1]]
+  [1m[36mPromotionalBanner Load (85.8ms)[0m  [1mSELECT  "promotional_banners".* FROM "promotional_banners" WHERE "promotional_banners"."active" = $1 AND "promotional_banners"."location" = $2 LIMIT 1[0m  [["active", "Activo"], ["location", 2]]
+  [1m[35mPromotionalBanner Load (161.1ms)[0m  SELECT  "promotional_banners".* FROM "promotional_banners" WHERE "promotional_banners"."active" = $1 AND "promotional_banners"."location" = $2 LIMIT 1  [["active", "Activo"], ["location", 3]]
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <class:BannerImage> at /usr/src/app/models/banner_image.rb:2)
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_js_params' matched 1 times with 'body'
+[1;32mDeface: [WARNING][0m No :original defined for 'add_js_params', you should change its definition to include:
+ :original => 'b7cf0b45ce631d3954f9e43f807d6366874490ad' 
+  [1m[36mBannerImage Load (76.9ms)[0m  [1mSELECT  "banner_images".* FROM "banner_images" WHERE "banner_images"."element_id" = $1 LIMIT 1[0m  [["element_id", "banner-edit-1"]]
+  Rendered spree/home/_info_carousel_banner.html.erb (255.6ms)
+  [1m[35mBannerImage Load (99.4ms)[0m  SELECT  "banner_images".* FROM "banner_images" WHERE "banner_images"."element_id" = $1 LIMIT 1  [["element_id", "banner-edit-2"]]
+  Rendered spree/home/_info_carousel_banner.html.erb (102.5ms)
+  [1m[36mBannerImage Load (79.2ms)[0m  [1mSELECT  "banner_images".* FROM "banner_images" WHERE "banner_images"."element_id" = $1 LIMIT 1[0m  [["element_id", "banner-edit-3"]]
+  Rendered spree/home/_info_carousel_banner.html.erb (82.2ms)
+  [1m[35m (91.6ms)[0m  SELECT "spree_taxons"."name", "spree_taxons"."id" FROM "spree_taxons"
+  [1m[36mBannerImage Load (93.3ms)[0m  [1mSELECT "banner_images".* FROM "banner_images"[0m
+  Rendered spree/home/_info_carousel.html.erb (702.9ms)
+  [1m[35m (91.2ms)[0m  SELECT COUNT(*) FROM "spree_products" WHERE "spree_products"."deleted_at" IS NULL AND "spree_products"."featured" = $1 AND (NOT (discontinue_on IS NOT NULL AND discontinue_on <= '2025-01-07 02:54:11.542735'))  [["featured", "t"]]
+  Rendered spree/home/index.html.erb within spree/layouts/spree_application (926.7ms)
+  [1m[36mSpree::Store Load (85.5ms)[0m  [1mSELECT  "spree_stores".* FROM "spree_stores" WHERE (url like '%localhost%')  ORDER BY "spree_stores"."id" ASC LIMIT 1[0m
+  Rendered spree/shared/_head.html.erb (704.0ms)
+  Rendered spree/shared/_search.html.erb (8.6ms)
+  [1m[35mSpree::Taxonomy Load (85.9ms)[0m  SELECT "spree_taxonomies".* FROM "spree_taxonomies"  ORDER BY spree_taxonomies.position, spree_taxonomies.created_at
+  [1m[36mMieleConfig Load (85.9ms)[0m  [1mSELECT  "miele_configs".* FROM "miele_configs"  ORDER BY "miele_configs"."id" DESC LIMIT 1[0m
+  Rendered spree/layouts/_mobile_categories.html.erb (462.2ms)
+  Rendered spree/shared/_user_menu.html.erb (1.3ms)
+DEPRECATION WARNING: `inline_svg` is deprecated and will be removed from inline_svg 2.0 (use `inline_svg_tag` or `inline_svg_pack_tag` instead). (called from _6f5eba2cbf3995262ee88eca159bfc5c at /usr/src/app/views/spree/shared/_login_bar.html.erb:4)
+  Rendered spree/shared/_login_bar.html.erb (18.3ms)
+  [1m[35mSpree::Order Load (102.0ms)[0m  SELECT  "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."deleted_at" IS NULL AND "spree_orders"."completed_at" IS NULL AND "spree_orders"."currency" = $1 AND "spree_orders"."guest_token" = $2 AND "spree_orders"."store_id" = $3 LIMIT 1  [["currency", "CLP"], ["guest_token", "vWlDDwzPwmgLe9zM7jHuPQ1736218453198"], ["store_id", 1]]
+  Rendered spree/shared/_cart_nav.html.erb (439.7ms)
+  [1m[36mCACHE (0.1ms)[0m  [1mSELECT  "miele_configs".* FROM "miele_configs"  ORDER BY "miele_configs"."id" DESC LIMIT 1[0m
+DEPRECATION WARNING: [paperclip] [deprecation] AWS SDK v1 has been deprecated in paperclip 5. Please consider upgrading to AWS 2 before upgrading paperclip. (called from <class:VirtualSupport> at /usr/src/app/models/virtual_support.rb:2)
+  [1m[35mVirtualSupport Load (85.4ms)[0m  SELECT  "virtual_supports".* FROM "virtual_supports"  ORDER BY "virtual_supports"."id" ASC LIMIT 1
+  Rendered spree/shared/_search_mobile.html.erb (1.1ms)
+  Rendered spree/layouts/_desktop_categories.html.erb (1.3ms)
+  Rendered spree/shared/_header.html.erb (1426.0ms)
+  Rendered spree/layouts/_flash_messages.html.erb (1.2ms)
+  Rendered spree/shared/_loader.html.erb (0.4ms)
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."deleted_at" IS NULL AND "spree_orders"."completed_at" IS NULL AND "spree_orders"."currency" = $1 AND "spree_orders"."guest_token" = $2 AND "spree_orders"."store_id" = $3 LIMIT 1[0m  [["currency", "CLP"], ["guest_token", "vWlDDwzPwmgLe9zM7jHuPQ1736218453198"], ["store_id", 1]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."deleted_at" IS NULL AND "spree_orders"."completed_at" IS NULL AND "spree_orders"."currency" = $1 AND "spree_orders"."guest_token" = $2 AND "spree_orders"."store_id" = $3 LIMIT 1  [["currency", "CLP"], ["guest_token", "vWlDDwzPwmgLe9zM7jHuPQ1736218453198"], ["store_id", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."deleted_at" IS NULL AND "spree_orders"."completed_at" IS NULL AND "spree_orders"."currency" = $1 AND "spree_orders"."guest_token" = $2 AND "spree_orders"."store_id" = $3 LIMIT 1[0m  [["currency", "CLP"], ["guest_token", "vWlDDwzPwmgLe9zM7jHuPQ1736218453198"], ["store_id", 1]]
+  Rendered spree/shared/_cart_sidenav.html.erb (16.2ms)
+  Rendered spree/shared/_store_notice.html.erb (0.8ms)
+  Rendered spree/layouts/_chat.html.erb (0.5ms)
+  Rendered newsletter_subscribers/_public_form.html.erb (41.1ms)
+  Rendered spree/shared/_footer.html.erb (82.6ms)
+Completed 200 OK in 7093ms (Views: 2117.6ms | ActiveRecord: 4373.6ms)
+
+
+Started GET "/assets/alertify.min.self-e0bee56383a258dfb89b959d4d13828d6d55b263aa09415487563a57849eb4dc.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/loader.self-01f372110365a8d9d3daf613c6430a9fdc06729bc9fe7aa03febc5a6b21f6ef7.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/amazon-menu.self-e628c05084b73eeb0f1c9d51134892e32bcef7eb9f9f58eb748b1e57b1cf29d1.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/errors.self-c4403bddbccb8b9ea2fc7c7a242dcf3e8b4c5b1d745b52e32694e05d7be70d2f.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/sweetalert2.min.self-b70c8d3a5b2f5d4fec16d933e3baaa5f6d293545ec34ddaf09ecc6014459bb80.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/font-awesome.self-2a86d2017f4b74f22943750b3b50b9cb753581bab96cbdaaf2df53f4c04c995b.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/application-admin.self-5de4dd664a1212a3ff858b10ad04d1d35c5b1b0182be88e10262a40e891bb62a.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/box.self-9037c877722486dcb1a1b615f8cfa5292b7354aac4e9a25b0fa76c407c13ab14.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/c3.min.self-06a2c0983dbff0f382d62bde2f05eb4846afce26273c62f083855a6ed1f0129b.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/cart-sidenav.self-55fdd53efb2d841597f93fc6a4203441c1b5216580ba7757612f8d69a23f4a3c.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/checkout_steps.self-e5a35362591577c054c7ad7d9bbddaf9f4878b4e2538201f4a24109b8310627f.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/comparator.self-7c5dc811ed9f3cdb0466770c84daf6d409793db39f8f7579e940110424bd5009.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/contact.self-5514f334660de66620f7853bd88c7d7959cd668e9a439f8951dd7c1c9d476b5f.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/custom-admin-styles.self-e6e3528f22ff65b979585487c0f00cec6f1cd1796433325501837f00d38e525d.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/custom.self-eb8f5d6a0d9fc2a2fcbeacf55ea980075a343c3df6b1ce6448a364912e179095.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/filter-checkboxes.self-38592144574169f08e9ba9c2b4727aa959bf186ddd82e440be3ce1fa7d5ec430.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/material.min.self-65cf467a38751d617b31709031f1dfaaf5f4a972ff21a7c0f3dcc9e1f0d37fb6.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/miele.self-bc157b514c202f46921c67addfee7bcac5df072547980cb10253eaa5c565dcca.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:22 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/mobile_categories.self-46c4ad77e29d61fe80e367411819ada20a378f59e15e1550f8fb4a7f0e70fd6a.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:22 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/mobile_nav.self-7bf6460d497488da6a42e69b7528ba72f23223660c9ec3b1a23751306f1d3471.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:22 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/promotional_banners.self-d1606111b43be10ee94cc1e2532f56d17ccd3aedabf2b7adc09f4cd2ba0272bd.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:22 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/quotations.self-9d5a1e297f265ddf5a88a558c114b171bd0850ce33d72acfe7673626fa11cce7.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/ribbon.self-0903f7eddc9cce0414024762bf710063841a8e012daded5910313835ac2a2e91.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/scaffolds.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/select2.min.self-c493991dfa712d1fee861d41c18152e5f8663807484506a23ae97917f6fbbf7b.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/simple-scrollbar.self-15d04a8c7d2a8c115bec2b22f1555fec8aa6142515596f849590b1ae13a63abe.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/slick-theme.self-85b0696e12cdc3021855040da5799d522d84dc1340b2cb384ed38a5ff4e2277d.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:24 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/slick.self-f71f2b2753081412d84fa90d58bfbb3bf0e877c4b843fb9bb8a33f03558896f4.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:24 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/small_box.self-6599d9af245821480daf5c34a0b92a6a1a21d011057e3093a8dff2c080bebee5.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:24 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/backend/custom.self-30349dd82d6cb5bab0ac58fb03f9fb261c4a1f80a2bd30b29e3f5236077bff46.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:24 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/categories.self-420fc6544ec299b8e2ab9d95da09dde75b5ad0db9ce3881c971c48fd998f16fd.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:25 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/frontend_bootstrap.self-daf607e441e15998ae73c5fe8f48d6b619ec44dba02de58081e79d24ba1809a0.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:25 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend.self-9c2b109685ff2edeac031f52b304b2877802abf4bc502b2f5c0ffc3bd35cc325.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:25 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/_variables.self-7299bf95a76e59a5085932bc9196e9da08f557ccc1012d68bbf5288ee4b02109.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:25 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/stars.self-0d8f35143eb54a40bb5a84dfa723b5a576a9c3543a63c2f4288bd2817f34ee2f.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:26 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:26 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/store_notices_controller.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:26 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/suggestions.self-87e2c81d6a735a8e85c6128343e7a670c3b63f87f988ba048fb1db36bae3a12b.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:26 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/swiper.min.self-1aff88ce39201007f401016d37cb9a5536816ab1d09dff071c6fb392ef9040b2.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:26 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/taxon_nav.self-1da5b5f6b60ca6b2c0df530db689e3331966536e8447af1763cd686535585b75.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:27 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/tool-tip-custom.self-75c62d56107c2635ff1adfe950eae02536baa6c90b0275e8b722b056abe066f2.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:27 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/variant_radio_btn.self-5b88333bcf64cc0ac55de497ea52087fbd20b9b3ea94711296b3c4c1fe3493af.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:27 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/vertical_panel.self-0789d414abc1fd799a8887ef52d61865577f111023e77ca378e89e4ad2c930b2.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:27 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/virtual_support.self-e09a9472f9514c758768e3a15783197a2071d2279293a5ce2b4c94371b3ab8ef.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:28 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/application.self-fa1f7af738e3a3bf8dabc2b7bc3b20d282b8c102ac89478a4f798de48c63c653.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:28 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/all.self-9b4399500a29e3f676cb1227bf8d58ca9f9e29aae5fdc73aaf1ab8b4a33871e0.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:28 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/spree_reviews.self-c3268062b57f809dac616487ad6e22af8870cf555bf259b7a78170a159c64343.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:28 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/product_zoom.self-c7ad0e10905c504b0fe73d051dbeb5bdbfe95142523dd0ce424c6741eb5d39bc.css?body=1" for 172.18.0.1 at 2025-01-07 02:54:29 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:29 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:29 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/alertify.min.self-a158fa3694c8a44a863b04f14c9fc9818714660b22fc8eb7860973b4f80d945f.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:29 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/transition.self-6ad2488465135ab731a045a8ebbe3ea2fc501aed286042496eda1664fdd07ba9.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:30 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/alert.self-742145c5bb847aafdadc6e339be795628f8bc25f177e851f03a8c42278eb0312.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:30 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/button.self-126ac9bf0e7f2d8568f8da3a00fd5f0fac6eae0946331003370161fbf8d7975e.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:30 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/carousel.self-e47323f363ceb3dc0bdbce05e36e709ed428e339833a41140a85cb0af24b8127.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:30 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/collapse.self-2eb697f62b587bb786ff940d82dd4be88cdeeaf13ca128e3da3850c5fcaec301.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:30 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/dropdown.self-561cca1cbaf67474e01e9536f106bad541594860a6df997004591c1c1957a147.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:31 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/modal.self-3e78617ade5663314b7ee0ea10375a5b34d59ffbade44939e3f2a4e4ef2019b3.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:31 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/tab.self-5bf7078b682f8b131332eefa46b45fa5eff2eca745fc0d03e2991450888f7c28.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:31 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/affix.self-6d6f1a7fc5c8aabf3547fa1b794fab6268f54bc55ad815e55873c71f52513517.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:31 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/scrollspy.self-969f3c5f48cdf1e439c7fa1154c13b948715f5c689f87837c0b64521d3b46ef6.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:31 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/tooltip.self-05afb177e08f98997ccfc84fa08a215e4b27d48d5fe4d049080675e9dffd8199.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap/popover.self-0aa93860b59fe7393f1dd490f54b3cb994f9d6155adffce034d4e14ae361b041.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.payment.self-38d1c43bb5a79a62bce3ec642fe216db420582062f0990bb7ce095fe9698a834.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.validate/jquery.validate.min.self-ff387f76d0c68bc92a0a0a6167be0413ebd547db067eaf64a95d066e61655518.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jsuri.self-090126b483ac28538a8bd132dce89500493c079744010067a5e79b94f57c0122.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:33 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree.self-3537dd0d44b5a6a3e36dc3ddff0668075ec7688b84ef1d78f3d5df3b0880f28b.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:33 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/select2.min.self-3e2fd0b573854ba33474013756ca3e92cb4680e46450a9e60bb03b8d20ce5304.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:33 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/coupon_manager.self-00b9fde42da5242d693698339716f0eb035c00693cee35058a24837f9a91d448.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:34 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/cart.self-6d5bbd5e1b3628884b682750e567a6755b63a1981ac80ab7503aa3d3526c3799.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:34 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/checkout.self-d127b3baa6b2f6f6585dc009dcff30bfdc6c6c019fae9a6441c2ed2aab4a6b16.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:34 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/checkout/address.self-9008ab44fcb63cec1cc65d506ea330bf742313a70e106b7d3563730007877edc.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:34 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/checkout/payment.self-219cd5d8ca98eaa74659c049b5e5f372a24b612cd533e2824633dc812040e622.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:34 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/product.self-902ade95d9d72cfc1279fda1a85ea60bd8a48e839bde98c68cb544f4d30a657c.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:35 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend.self-5c210454b1facc1e317a759f6059324f793841eb23d1f549179b64d1584c55f8.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:35 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/i18n/es.self-274f2071cde0537b25015cdb9bb25b2a6fff6e37924e534326d640c7f69385ba.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:35 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.animateNumber.min.self-98ceef56c4e09dcf7b0dff1669c453b10a3559b585345e2909967af1f289f8ab.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:35 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/sweetalert2.min.self-fcf0d1ce61a609731ca5be9ae86baf7c9c998fb6270e8f71f8e61138a27416f7.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:36 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/ahoy.self-01ef77de70801670c1f7f2f12fea979d59ba70488a77db75270b57ec5b1a2f8e.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:36 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/inputmask.min.self-149736690a557e1300fe2340269252c8ddb0bd92dcbfb68c1b016f10b1e6bba6.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:36 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/react.self-76168b0b1fdca8b73f0a3f93dbff2d72dcdeaac1705def6c6f8ac9e7674c46cf.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:36 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/react_ujs.self-eb4e9994228856e343ab49d1aed6c23046bf4308ea6d46395e5c39170ab3e56f.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:36 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/products/_add_to_cart.self-333cf83491f27439aa0eec73bac5e09154e81a322b6e65e2d5b3389ab5c1b3a6.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:37 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/products/_all_products.self-0b43413bd1dc7f5e5c94b5940ba76bbb402b760304bde7a986446411230fb06b.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:37 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/products/_discount_badge.self-39a94f7ba040c53603e69b0179d3b0efa039c6e7c0a171111bf2e44894bc830f.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:37 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/products/_filters.self-9256e1423d3368d63168aef92f6af857cff308225bc0cbf9029f90e7cf03c349.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:37 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/products/_loader.self-8c1214f9ac9d31470a7aae34dd64821c18da76e6ab2e85b05e098beae70c6425.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:38 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/products/_product.self-83371318804df4961960701ffc988e5cd7a559db88e196bc02f576502a8bc1ed.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:38 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/products/_variant.self-5071bb3311838e4ad1d2372d4a7b91644db7964ae46bc828d53c4e4366469c0a.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:38 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_body.self-4b867721718c45650b5e8a17353f1f87130cc2af4b35c4cc097fc3c49e337f69.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:38 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_header.self-749d583ee87c9c142b99df157460ddc0edff04a9f22841254eb7c8ef5adc365a.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:38 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_main.self-15a68e13f9fea44683611faa5766b4eed9d5fe528a56ab5aac58845011178ce2.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:39 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_navigation.self-30239b3aa18f989335556f68cd0e9ab7e25d7affa993d042753938766b8d5393.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:39 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_search.self-90081afd52c0607e61b60e8dff38ae51e19d679de80372746412ab4c0e875ea0.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:39 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_taxon_child.self-4a85ba65c1f668022c4b64380b80cb27bdb18a9bd9dba34238c710cb46c01487.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:39 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_taxon_child_mobile.self-82ba57b95408baf3c4fc16ff4a009b2c61c467764297159b1eae3f824df797e1.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:39 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_taxon_nav.self-d4f0ef89e7b2dd92e237a3de239cf1eeadce0995314dd74b584b0bcb2a1ed3a1.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:40 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_taxon_nav_mobile.self-5d8a1596bca592473249103677d13330f10ed3b9058a360104248b6f5b9df562.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:40 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_taxon_parent.self-fedbc4dd6dbf09ae7e7f4d3c7ab85ea152951876f8ac14460d0ba48c7e5e1e02.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:40 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components/site/_taxon_parent_mobile.self-af30c282932f6b6f77f2486c5ac10dbfb19ad6cde44c8d7f0ae0d94a79a9fc44.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:40 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/components.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:41 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/ReactRouter.min.self-abe3ee10f821286c096c4dc434d28716ebbfb156cd8677aa04c80718b37792b5.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:41 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/react-numeric-input.min.self-f10e2ed6139e99fb814dae2697c1c1194abec5e82a080c03b0b4c4527869a627.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:41 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/prop-types.min.self-81ad5c24e086348642c733fd9d0604e57a89d89b7eab98069acc5736eef9dc8b.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:41 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/select2.min.self-5d0bac991df7a23c072e3ee1f5461b05c6ea95fc5d9fc473e0af2da186f6cbcd.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:42 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/rutvalidator.self-8c679b21795a6e1969b71fd03d0ed2d37360c42f551b161655d17d68d6bd9ee1.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:42 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/material.min.self-c568006c0fa21b11e0942cee60633e2184f6c3f230e33c3dda0aeb32e2fedffb.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:42 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/categories.self-0caefeb65b916356280c682f3fe2c0d0eca3453bc5a96ae06949bc03c65025cc.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:42 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/miele.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:43 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/checkout.self-a8a8f4fd8179d4904dfb05b2ed77eb9f18e41e044f42c40c17f15eb4e4454061.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:43 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/comparator.self-fc729893847c5b20bf72f4c54bede36e65dea32930296bbb976cc656aeeab99b.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:43 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/product.self-b7d3c866e6979c043772091925f02bbeddff95ea18468437bff5a0d6667ba2f7.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:43 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/mobile_categories.self-008634cddc46247a7a79ade9880d4c0497482b88eacf54e41152a41398494288.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:43 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/search.self-9ede0d17885e78457cc546c1fef431511631993345bff8380131deaa0f898bca.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:44 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/simple-scrollbar.min.self-8686516262e911f677efde8c2be2d570eeb88f662adf593e88ad82f688f8cf97.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:44 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/swiper.min.self-8b8f1ca234a2be9d5afa9eca61357729e09e7139c5f338e22dbe8d172b1d9f34.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:44 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/slick.min.self-6a603d1f975c0ed33da5825020c3d3c0890076716bf5648c8712d380dd24f70b.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:44 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/newsletter_popup.self-bc6b5befd02d6f798c6dfb117c953142fbfb404a19b5983808d5cfa0b8faebe6.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:45 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/application.self-957cdf9f2184291d3c66ce91b7cf9c92cd9a2e24f5f4b9d434e08ac36b2680be.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:45 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/account.self-eb0d6bf1911723664c271727fd1fdaafd245c861b66b77ef138956b5e1dcf731.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:45 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/spree_auth.self-75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:45 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/add_recently_viewed_products.self-4d5f052c331984f1453057f0f244ca1112d96ed9f466c37b5fa18c59e33da220.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:46 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/spree_recently_viewed.self-6a3cf5192354f71615ac51034b3e97c20eda99643fcaf5bbe6d41ad59bd12167.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:46 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.rating.self-d3bd4ffe34403905bbe83117f47013a30df37cedc96d9dea534c592af6108b72.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:46 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/spree_reviews.self-f45eb0c0c0facfda48905d54e919459f9f6f86f2dfe27c60638c93a0a4531f12.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:46 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.fancybox.self-2bc7e4c6ccd3a15b63f47639b64b08179384883089b6aa7ebecbccbe60dd2593.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:47 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.fancybox-buttons.self-fc0c4f2c13f31803b040b51a9c5a7217fff9f9409bb04417049049d29c49addc.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:47 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.fancybox-thumbs.self-196204b1ecbda6b62bf226452d9cff028b7ff53306476112aace35d65e727116.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:47 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/jquery.fancybox-media.self-74533021e73f14643354f56c8b5f7f05e4d66e613f7993760cdc8c53d7dadaec.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:47 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/fancybox.self-545c38b0922de19734fbffde62792c37c2aef6a3216cfa472449173165220f7d.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:47 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/product_zoom/zoom.self-f0adeede7853dd6f553f2a4cbd0a3cfc4678e6c9f0f2346e190ad7ce0ba152ae.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:48 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/product_zoom.self-6a3cf5192354f71615ac51034b3e97c20eda99643fcaf5bbe6d41ad59bd12167.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:48 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/spree/frontend/all.self-ff23dbec04592b0f351f5cd4dc3c49d5c6799965261e6b7ce9de6a19a633238b.js?body=1" for 172.18.0.1 at 2025-01-07 02:54:48 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/logo/logo-9eb19514f29bdcbdf94da5cf944c218d4d75e862bf639b7b3c5e8c3a8eb8bbd3.png" for 172.18.0.1 at 2025-01-07 02:54:48 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/carousel/head01-1643d510478fa8e51f4b3bf956c1c40ca83a1884fedfeb7f8ca1dfd09ca4be40.jpg" for 172.18.0.1 at 2025-01-07 02:54:49 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/medios-pago-4e316d01a81965089a8b35497695cff6dce5bc2e7cca3e9b7ca5c75309512661.svg" for 172.18.0.1 at 2025-01-07 02:54:49 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/assets/Logo_Immer_Besser-9c282d7056e25a61342cd5ca74610c5f8437bde82d60cf1ded3ab691d9321c48.png" for 172.18.0.1 at 2025-01-07 02:54:49 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/cart_link?locale=es-CL" for 172.18.0.1 at 2025-01-07 02:54:49 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Spree::StoreController#cart_link as */*
+  Parameters: {"locale"=>"es-CL"}
+  [1m[35mSpree::Preference Load (78.8ms)[0m  SELECT  "spree_preferences".* FROM "spree_preferences" WHERE "spree_preferences"."key" = $1 LIMIT 1  [["key", "spree_i18n/configuration/available_locales"]]
+  [1m[36mComparator Load (86.4ms)[0m  [1mSELECT  "comparators".* FROM "comparators" WHERE "comparators"."comp_token" = $1 LIMIT 1[0m  [["comp_token", "IlRTc1Vtcml6SGxQNGM4akJLZVJQc2cxNzM2MjE4NDUxNjk4Ig==--2b28d1d4bc3887d29d7f38efec9bdb9ba2888efe"]]
+  [1m[35mTagManager Load (90.8ms)[0m  SELECT  "tag_managers".* FROM "tag_managers"  ORDER BY "tag_managers"."id" ASC LIMIT 1
+  [1m[36mStoreNotice Load (78.9ms)[0m  [1mSELECT  "store_notices".* FROM "store_notices"  ORDER BY "store_notices"."id" ASC LIMIT 1[0m
+  [1m[35mSpree::Store Load (87.0ms)[0m  SELECT  "spree_stores".* FROM "spree_stores" WHERE (url like '%localhost%')  ORDER BY "spree_stores"."id" ASC LIMIT 1
+  [1m[36mSpree::Order Load (78.0ms)[0m  [1mSELECT  "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."deleted_at" IS NULL AND "spree_orders"."completed_at" IS NULL AND "spree_orders"."currency" = $1 AND "spree_orders"."guest_token" = $2 AND "spree_orders"."store_id" = $3 LIMIT 1[0m  [["currency", "CLP"], ["guest_token", "vWlDDwzPwmgLe9zM7jHuPQ1736218453198"], ["store_id", 1]]
+  Rendered spree/shared/_link_to_cart_custom.html.erb (357.6ms)
+Completed 200 OK in 1275ms (Views: 416.8ms | ActiveRecord: 825.3ms)
+
+
+Started GET "/assets/fontawesome-webfont-2adefcbc041e7d18fcf2d417879dc5a09997aa64d675b7a3c4b6ce33da13f3fe.woff2" for 172.18.0.1 at 2025-01-07 02:54:51 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/cart_link?locale=es-CL" for 172.18.0.1 at 2025-01-07 02:54:52 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Spree::StoreController#cart_link as */*
+  Parameters: {"locale"=>"es-CL"}
+  [1m[35mComparator Load (82.0ms)[0m  SELECT  "comparators".* FROM "comparators" WHERE "comparators"."comp_token" = $1 LIMIT 1  [["comp_token", "IlRTc1Vtcml6SGxQNGM4akJLZVJQc2cxNzM2MjE4NDUxNjk4Ig==--2b28d1d4bc3887d29d7f38efec9bdb9ba2888efe"]]
+  [1m[36mTagManager Load (74.6ms)[0m  [1mSELECT  "tag_managers".* FROM "tag_managers"  ORDER BY "tag_managers"."id" ASC LIMIT 1[0m
+  [1m[35mStoreNotice Load (85.3ms)[0m  SELECT  "store_notices".* FROM "store_notices"  ORDER BY "store_notices"."id" ASC LIMIT 1
+  [1m[36mSpree::Store Load (79.3ms)[0m  [1mSELECT  "spree_stores".* FROM "spree_stores" WHERE (url like '%localhost%')  ORDER BY "spree_stores"."id" ASC LIMIT 1[0m
+  [1m[35mSpree::Order Load (87.6ms)[0m  SELECT  "spree_orders".* FROM "spree_orders" WHERE "spree_orders"."deleted_at" IS NULL AND "spree_orders"."completed_at" IS NULL AND "spree_orders"."currency" = $1 AND "spree_orders"."guest_token" = $2 AND "spree_orders"."store_id" = $3 LIMIT 1  [["currency", "CLP"], ["guest_token", "vWlDDwzPwmgLe9zM7jHuPQ1736218453198"], ["store_id", 1]]
+  Rendered spree/shared/_link_to_cart_custom.html.erb (187.9ms)
+Completed 200 OK in 633ms (Views: 211.0ms | ActiveRecord: 408.7ms)
+
+
+Started GET "/assets/favicon-f05abb4c3069ef87182d432370ec4c07f48af0c5d35276374a7b6f5956b9e726.ico" for 172.18.0.1 at 2025-01-07 02:54:53 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+
+
+Started GET "/newsletter/popup" for 172.18.0.1 at 2025-01-07 02:54:54 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Spree::HomeController#newsletter_popup as */*
+  [1m[36mComparator Load (74.8ms)[0m  [1mSELECT  "comparators".* FROM "comparators" WHERE "comparators"."comp_token" = $1 LIMIT 1[0m  [["comp_token", "IlRTc1Vtcml6SGxQNGM4akJLZVJQc2cxNzM2MjE4NDUxNjk4Ig==--2b28d1d4bc3887d29d7f38efec9bdb9ba2888efe"]]
+  [1m[35mTagManager Load (78.3ms)[0m  SELECT  "tag_managers".* FROM "tag_managers"  ORDER BY "tag_managers"."id" ASC LIMIT 1
+  [1m[36mStoreNotice Load (88.6ms)[0m  [1mSELECT  "store_notices".* FROM "store_notices"  ORDER BY "store_notices"."id" ASC LIMIT 1[0m
+  [1m[35mSpree::Store Load (80.4ms)[0m  SELECT  "spree_stores".* FROM "spree_stores" WHERE (url like '%localhost%')  ORDER BY "spree_stores"."id" ASC LIMIT 1
+[1;32mDeface:[0m 1 overrides found for 'spree/layouts/spree_application'
+[1;32mDeface:[0m 'add_js_params' matched 1 times with 'body'
+[1;32mDeface: [WARNING][0m No :original defined for 'add_js_params', you should change its definition to include:
+ :original => 'b7cf0b45ce631d3954f9e43f807d6366874490ad' 
+  Rendered spree/home/newsletter_popup.js.erb (0.7ms)
+Completed 200 OK in 820ms (Views: 485.4ms | ActiveRecord: 322.1ms)

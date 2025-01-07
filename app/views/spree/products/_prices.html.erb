@@ -1,0 +1,17 @@
+<% if @product.offer_price_available? and @offer_price %>
+  <div id="product-price" data-hook="product_price">
+    <span class="strikethrough-price" id="normal-price">
+      <%= display_price(@product) %>
+    </span>
+    <span itemprop="price" id="offer-price">
+      <%= Spree::Money.new(@offer_price) %>
+    </span>
+  </div>
+<% else %>
+  <div id="product-price" data-hook="product_price">
+    <span itemprop="price" id="normal-price">
+      <%= display_price(@product) %>
+    </span>
+  </div>
+<% end %>
+<span itemprop="priceCurrency" content="<%= @product.currency %>"></span>

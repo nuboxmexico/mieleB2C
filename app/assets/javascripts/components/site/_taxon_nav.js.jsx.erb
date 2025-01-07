@@ -1,0 +1,48 @@
+class TaxonNav extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      taxonomies: []
+    };
+  }
+  componentDidMount() {
+    $.getJSON('/products.json?utf8=✓&taxonomies="true"', (response) => { this.setState({ taxonomies: response }) });
+    $("#categories-wrapper").click(function(){
+      if($("#categories-nav-a").is(':visible')){
+        $("#categories-nav-a").hide("fast");
+        $("#nav-burger-cat").removeClass("is-open");
+      }else{
+        $("#categories-nav-a").show("fast");
+        $("#nav-burger-cat").addClass("is-open");
+      }
+    }); 
+  }  
+  render() {
+    const items = [];
+    if(this.state.taxonomies){
+      this.state.taxonomies.forEach((taxon) => {
+        items.push(
+          <TaxonParent 
+            key={taxon.id}
+              taxon={taxon}
+              taxon_name={this.props.taxon_name}
+              taxon_id={this.props.taxon_id}
+              onhandleTaxonChange={this.props.onhandleTaxonChange}
+          />     
+        );
+      });
+    }
+    return ReactDOM.createPortal(
+      <React.Fragment>
+        <a href="#" id="categories-wrapper" className="hidden-xs hidden-sm">
+          <span className="categories-text">Productos <i className="fa fa-caret-down"></i></span>
+        </a>   
+        <nav id="categories-nav-a" className="amenu triangle-border top">
+          <ul className="main-menu">
+             {items}
+          </ul>
+        </nav>
+      </React.Fragment>
+      ,document.getElementById('categories-nav'))
+  }
+}

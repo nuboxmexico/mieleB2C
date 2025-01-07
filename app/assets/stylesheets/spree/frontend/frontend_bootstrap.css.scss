@@ -1,0 +1,178 @@
+@import "bootstrap-sprockets";
+@import "variables";
+@import "bootstrap";
+
+
+
+@media(max-width: 400px){
+  .btn-xs{
+    padding: 10px 15px!important;
+  }
+}
+
+
+#main-home-content{
+  margin-top: 124px;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out; 
+}
+@media (max-width: 767px){
+  #main-home-content{
+    margin-top: 75px;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out; 
+  }
+}
+
+#nav-burger{
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out; 
+}
+#cart_container{
+  margin-top: 30px;
+}
+.fix-home-padding{
+  margin-top: 111px!important;
+}
+.fix-nav-burger{
+  top: 22px!important;
+}
+#spree-header {
+
+  #header {
+    background-color: $brand-secondary;
+    padding: 0;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out; 
+  }
+
+  #logo {
+    margin-bottom: 10px;
+  }
+
+  .nav li a {
+    color: $white-color;
+    text-transform: uppercase;
+    font-weight: bold;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    &:hover, &:focus, &:active {
+      background-color: $brand-secondary-dark;
+      color: $white-color; 
+    }
+  }
+
+  .user-mobile{
+    height: auto;
+  }
+
+  .navbar {
+    border: 0;
+    margin-bottom: 0;
+  }
+}
+
+#spree-footer {
+  background: $gray-dark;
+  padding-top: $padding-base-horizontal;
+  margin-top: $line-height-computed;
+  color: white;
+}
+
+// -- Spree Layout Custom Rules -------------------------
+
+.alert-notice { @extend .alert-success; }
+.alert-error, .alert-registration_error { @extend .alert-danger; }
+.alert-alert { @extend .alert-info; }
+
+.product-body {
+  height: 140px;
+}
+
+.progress-steps {
+  margin-top: $line-height-computed;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+// Center cart line items
+table {
+  &.table > tbody > tr {
+    &.line-item td, &.stock-item td {
+      vertical-align: middle;
+    }
+  }
+
+  &#line-items {
+    > tbody, > tfoot {
+      > tr > td {
+        vertical-align: middle;
+
+        &.order-qty {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+// Footer links
+#footer-left a {
+  color: lighten($brand-primary, 20);
+
+  &:hover {
+    color: lighten($brand-primary, 10);
+  }
+}
+
+// Updated credit-card image
+#credit-card-image {
+  margin-top: -10px;
+}
+
+.existing-credit-card-list td {
+  padding: 5px;
+}
+.react-menu{
+}
+
+.navbar-collapse {
+  text-align: center;
+  border-top-width: 0px;
+  padding-top: 0px!important;
+  margin-top: 0px!important;
+}
+
+.btn-primary:hover {
+  background-color: $brand-primary-light;
+}
+
+.no-sides{
+  padding-right: 15px;
+  padding-left: 15px;
+  z-index: 125;
+}
+
+@media(max-width: 768px){
+  .no-sides{
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}

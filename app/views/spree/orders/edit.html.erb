@@ -1,0 +1,58 @@
+<% @body_id = 'cart' %>
+<div data-hook="cart_container">
+  <div class="container-fluid container-fluid-custom">
+    <div class="row" data-hook="checkout_header">
+      <div class="col-sm-3">
+        <h1><i class="primary-color-text fa fa-shopping-cart"></i> CARRO DE COMPRAS</h1>
+      </div>
+    </div>
+  </div>
+  <% if @order.line_items.empty? %>
+    <div class="container-fluid container-fluid-custom" align="center">
+      <div data-hook="empty_cart">
+        <div class="alert alert-info"><%= Spree.t(:your_cart_is_empty) %></div>
+        <p>
+          <%= link_to products_path do %>
+           <i class="fa fa-chevron-left" aria-hidden="true"> <%= Spree.t(:continue_shopping) %></i>
+          <% end %>
+        </p>
+      </div> 
+      <%= render partial: 'repeat_form'%>   
+    </div>
+    
+  <% else %>
+    <div class="container-fluid container-fluid-custom">
+      <%= render partial: 'promotion_form', locals: { order: @order, special_class: 'ticket-discount-only-cart' } %>
+    </div>
+    <div class="container-fluid container-fluid-custom" data-hook="outside_cart_form">
+      <%= form_for @order, url: update_cart_path, html: { id: 'update-cart' } do |order_form| %>
+        <div data-hook="inside_cart_form">
+
+          <div data-hook="cart_items" class="table-responsive">
+            <%= render partial: 'form', locals: { order_form: order_form } %>
+          </div>
+
+          <div class="links navbar-form" data-hook="cart_buttons" align="center">
+            <div class="form-group">
+              <%= button_tag class: 'btn btn-default btn-lg btn-tertiary', id: 'checkout-link', name: 'checkout' do %>
+                <%= Spree.t(:checkout) %>
+              <% end %>
+              <br><br>
+            </div>
+            <p>
+              <%= link_to products_path, class: "link-back" do %>
+               <i class="fa fa-chevron-left black-color-text" aria-hidden="true"></i> Volver a productos
+              <% end %>
+            </p>
+            <%= render partial: 'repeat_form'%> 
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  Spree.current_order_id = "<%= @order.number %>"
+  Spree.current_order_token = "<%= @order.guest_token %>"
+</script>

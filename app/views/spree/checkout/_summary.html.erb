@@ -1,0 +1,121 @@
+<%= render partial: 'spree/shared/items_little', locals: { order: order } %>
+
+<div class="row order-summary" data-hook="order_summary">
+  <div class="col-xs-6 col-sm-6 col-sm-offset-2">
+    <p>Subtotal</p>
+  </div>
+  <div class="col-xs-4 text-right" data-hook="item_total">
+    <p id="order-total">
+      <%= Spree::Money.new(order.item_total, currency: order.currency, no_cents: true) %>
+    </p>
+  </div>
+  <% if order.passed_checkout_step?("delivery") and order.shipments.any? %>
+    <div class="col-xs-6 col-sm-6 col-sm-offset-2">
+      <p>Despacho</p>
+    </div>
+    <div class="col-xs-4 text-right" data-hook="shipping_total">
+      <p>
+        <%= Spree::Money.new(order.shipments.to_a.sum(&:cost), currency: order.currency).to_html %> 
+      </p>
+      </div>
+    <div class="col-xs-6 col-sm-6 col-sm-offset-2">
+      <p>Instalación</p>
+    </div>
+    <div class="col-xs-4 text-right">
+      <p>
+        <%= Spree::Money.new(@installation_value) %>
+      </p>
+    </div>
+    <% #if item.product.specific_attribute.category == "MDA" || item.instalation == true %>
+      <!-- <p >
+        <p class="summary-disclaimer">Los productos instalados por Miele tendrán una <strong>garantía de 2 años.</strong> </p>
+      </p> -->
+    <% #else %>
+      <!-- <p class="summary-disclaimer">
+        <p class="summary-disclaimer">Los productos instalados por terceros tendrán una <strong>garantía de 3 meses.</strong> </p>
+      </p> -->
+    <% #end %>
+    
+  <% end %>
+  <div id="promotional-code-container" class="hidden">
+    <% if order.total_adjustments > 0 %>
+      <%= render 'spree/checkout/summary_discounts', order: order %>
+    <% else %>
+      <div class="col-xs-10 col-sm-offset-2">
+        <%= link_to show_apply_coupon_form_path, remote: true do %>
+          Ingresar código de descuento <%=inline_svg_tag 'descuento.svg' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row order-total" data-hook="order_total">
+  <div class="col-xs-6 col-sm-6 col-sm-offset-2">
+    <p>Total</p>
+  </div>
+  <div class="col-xs-4 text-right" data-hook="item_total">
+    <p id='summary-order-total' class="">
+      <% if (order.passed_checkout_step?("delivery") and order.shipments.any?) or 
+            order.promotions.present? %>
+        <%= order.display_total.to_html %>
+      <% else %>
+        <%= Spree::Money.new(order.item_total, currency: order.currency).to_html %>
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<script>
+  // Mostrar el div para aplicar un codigo de descuento solamante en la parte del checkout
+  const current_pathname_url = window.location.pathname;
+  if (current_pathname_url == "/checkout/payment"){
+    $('#promotional-code-container').removeClass("hidden");
+  }else{
+    $('#promotional-code-container').addClass("hidden");
+  }
+
+  $('.line-item-installation-checkbox').change(function(){
+    $('.loader-page').fadeIn();
+    var line_item_id = $(this).data('line-item-id');
+    $.ajax({
+      type: "PATCH",
+      url: '/orders/update_item/installation',
+      data: {
+        id: line_item_id
+      }
+    });
+  });
+
+  $('.cart-stepper').click(function(){
+    $('.loader-page').fadeIn();
+    var step = $(this).data('step');
+    var item = $(this).data('item');
+    $.ajax({
+      type: "PATCH",
+      url: '/orders/update_item/quantity',
+      data: {
+        step: step,
+        id: item
+      }
+    });
+  });
+
+  $('.remove-item').click(function(){
+    var item = $(this).data('item');
+    swal({
+      title: '¿Quieres sacar este producto del carro?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si',
+      cancelButtonText: 'Cancelar',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+    }).then(function(confirm){
+      if (confirm.value) {
+        $('.loader-page').fadeIn();
+        $.post('/orders/remove_item', {id: item});
+      }
+  });
+  });
+</script>

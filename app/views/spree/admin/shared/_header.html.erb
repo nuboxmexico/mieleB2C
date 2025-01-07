@@ -1,0 +1,67 @@
+<header class="header logged-in">
+  <%= stylesheet_link_tag 'spree/backend/custom.css' %>
+  <%= stylesheet_link_tag 'alertify.min.css' %>
+  <%= stylesheet_link_tag 'application-admin.css' %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+  <%= javascript_include_tag 'alertify.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'jquery.animateNumber.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'd3.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'c3.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'sweetalert2.min.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application-admin.js', 'data-turbolinks-track' => true %>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+  <nav class="navbar navbar-inverse navbar-fixed-top nav-shadow navbar-admin" role="navigation">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="navbar-header col-xs-6 col-sm-3 col-md-2">
+
+            <%= link_to(
+            image_tag('logo/logo.png', alt: 'Logo Miele', id: 'logo', class: "logo-admin"),
+              spree.admin_path,
+              class: "logo navbar-brand"
+            ) %>
+          
+            <span class="navbar-toggle hidden-xs" id="sidebar-toggle">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </span>
+        </div>
+
+        <div class="col-xs-6 col-sm-9 col-md-10" > 
+          <div class="navbar-right">
+            <% if spree_current_user %>
+              <li class="dropdown user-menu">
+                <a href="#" class="dropdown-toggle btn left-space-mobile" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-user"></i> <%=spree_current_user.email%><span class="caret"></span></a>
+                <ul class="dropdown-menu nav nav-pills nav-stacked">
+                  <% if spree_current_user.has_spree_role?('admin') %>
+                    <li class="sidebar-menu-item"><%= link_to edit_admin_user_path(spree_current_user.id), class: "" do %>
+                      <i class="fa fa-user-circle"> </i> <%= Spree.t(:my_account) %>
+                    <% end %>
+                  </li>
+                  <% end %>
+                    <li class="sidebar-menu-item"><%= link_to spree.root_path, class: "", target: "_blank" do %>
+                      <i class="fa fa-home"></i> <%= Spree.t(:go_site)%> 
+                    <% end %>
+                  </li>
+                  <% if spree_current_user.has_spree_role?('admin') %>
+                  <li class="sidebar-menu-item"><%= link_to admin_configurations_path, class: "" do %>
+                      <i class="fa fa-wrench"></i> <%= Spree.t(:configurations) %> 
+                    <% end %>
+                  </li>
+                  <% end %>
+                  <li role="separator" class="divider"></li>
+                  <li class="sidebar-menu-item"><%= link_to spree.logout_path, class: "" do %>
+                        <i class="fa fa-sign-out"></i> <%= Spree.t(:logout) %> 
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<%= render partial: 'spree/layouts/flash_messages' %>

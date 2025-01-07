@@ -1,0 +1,5 @@
+<script>
+  $(document).ready(function(){
+    Spree.fetch_recently_viewed_products('<%= @product.try(:id) %>');
+  });
+</script>

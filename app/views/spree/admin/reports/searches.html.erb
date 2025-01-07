@@ -1,0 +1,75 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:reports), spree.admin_reports_url %> /
+  Informe de palabras más buscadas por clientes
+<% end %>
+
+<br>
+
+<div class="well">
+    <div class="box-tools pull-right">
+      <button id="btn-collapse" class="btn btn-box-tool" ><i class="fa fa-minus"></i></button>
+    </div>
+    <script>
+      $("#btn-collapse").on('click',function() {
+        $("#collapse").toggle();
+      });
+    </script>    <div class="collapse-in" id="collapse">
+  <br>
+  <%= search_form_for @search, url: spree.searches_admin_reports_path  do |s| %>
+    <div class="form-group date-range-filter">
+      <%= label_tag nil, Spree.t(:date_range) %>
+      <div class="date-range-filter row">
+        <div class="col-md-6 input-date">
+          <%= s.text_field :completed_at_gt, class: 'datepicker datepicker-from form-control', value: datepicker_field_value(params[:q][:completed_at_gt]), required: true %>
+        </div>
+        <div class="col-md-6 input-date">
+          <%= s.text_field :completed_at_lt, class: 'datepicker datepicker-to form-control', value: datepicker_field_value(params[:q][:completed_at_lt]), required: true%>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= button Spree.t(:search), 'search' %>
+      <%= link_to(admin_download_searches_url(format: 'xlsx', gt: params[:q][:completed_at_gt], lt: params[:q][:completed_at_lt]), onclick: '$(".loader-page").remove();', id: "download-btn") do %>
+        <div class="btn btn-success" id="download-button"><i class="fa fa-download"></i> Descargar</div>
+      <% end %>
+    </div>
+  <% end %>
+    </div>
+</div>
+
+<% if @searches.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Palabra</th>
+      	<th>N° Búsquedas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @searches.each do |search| %>
+        <tr>
+       		<td><%= search.name %></td>
+        	<td><%= search.search_count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    No se han realizado búsquedas aún.
+  </div>
+<% end %>
+
+<%= paginate @searches %>
+
+<script>
+   if ($("#date-from").val() == "" && $("#date-from").val() == "") {
+     $("#download-btn").css('pointer-events', 'none');
+     $("#download-button").attr('disabled', true);
+   }
+   $(".input-date").click(function() {
+     $("#download-button").attr('disabled', true);
+     $("#download-btn").css('pointer-events', 'none');
+   });
+</script>

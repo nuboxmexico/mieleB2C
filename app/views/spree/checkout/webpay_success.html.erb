@@ -1,0 +1,255 @@
+<% if @order.viewed != true %>
+  <script>
+    <%= render partial: 'spree/shared/google_purchase_new', locals: { order: @order } %>  
+  </script>
+
+  <% @order.update_attributes(viewed: true) %>
+<% end %>
+
+<div id="webpay-success" class="row container-fluid row-no-margin">
+  <div class="header">
+    <% if @order.webpay_nullify %>
+    <div class="alert alert-danger">Este pedido ha sido anulado</div>
+    <% else %>
+    <div class="text-center">
+      <h1>Tu pedido ha sido procesado exitosamente.</h1>
+      <h2>¡Gracias por tu compra!</h2>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="customer-data">
+        <div class="row">
+          <div class="col-xs-6">
+            <p>
+              <%= @order.email %>
+            </p>
+            <% if @order.user %>
+            <p class="user-name">
+              <%= @order.user.name %> <%= @order.user.last_name %>
+            </p>
+            <p>
+              <%= @order.user.rut %>
+            </p>
+            <% else %>
+            <p class="user-name">
+              <%= @order.ship_address.firstname %> <%= @order.ship_address.lastname %>
+            </p>
+            <p>
+              <%= @order.ship_address.rut %>
+            </p>
+            <% end %>
+            <p>
+              <%= @order.ship_address.phone %>
+            </p>
+          </div>
+          <div class="col-xs-6">
+            <p>Número pedido</p>
+            <p class="number-order">
+              <%= @order.number %>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <p class="data-label">
+              Método de pago
+            </p>
+            <p>
+              <%= @order.payments.last.try(:payment_method).try(:name) %>
+            </p>
+            <p>
+             ID <%= @order.tbk_transaction_id %>
+           </p>
+           <% if @order.webpay_data.present? %>
+           <% data = @order.webpay_data.gsub('[','').gsub(']','').gsub('"','').split(',') %>
+           <p>
+             Tipo de Pago: <%= 'Webpay Plus Débito' if data[8].to_s.strip == 'VD' %><%= 'Webpay Plus Crédito' if data[8].to_s.strip != 'VD' %> 
+           </p>
+           <p>
+             Tipo de Cuotas: 
+             <%= 'Sin Cuotas' if data[8].to_s.strip == 'VD' %>
+             <%= 'Sin Cuotas' if data[8].to_s.strip == 'VN' %>
+             <%= 'Cuotas normales' if data[8].to_s.strip == 'VC' %>
+             <%= 'Sin interés' if data[8].to_s.strip == 'SI' %>
+             <%= 'Sin interés' if data[8].to_s.strip == 'S2' %>
+             <%= 'Sin interés' if data[8].to_s.strip == 'NC' %>
+           </p>
+           <p>
+             Cantidad de Cuotas: <%= data[9] %>
+           </p>
+           <% end %>
+         </div>
+         <div class="col-xs-6">
+          <p class="data-label">
+            Método de envío
+          </p>
+          <p>
+            <%= @order.shipments[0].selected_shipping_rate.name %>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+          <p class="data-label">
+            Dirección de envío
+          </p>
+          <p class="ship-address">
+            <%= @order.ship_address.full_address %>
+          </p>
+          <p>
+            <%= @order.ship_address.comuna.name %>
+          </p>
+          <p>
+            <%= @order.ship_address.state.name %>
+          </p>
+        </div>
+        <div class="col-xs-6">
+          <p class="data-label">
+            Dirección de facturación
+          </p>
+          <p class="bill-address">
+            <%= @order.bill_address.full_address %>
+          </p>
+          <p>
+            <%= @order.bill_address.comuna.name %>
+          </p>
+          <p>
+            <%= @order.bill_address.state.name %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <div class="cart-data">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>Detalle del pedido</h3>
+          <div class="line-items">
+            <% @order.line_items.each do |item| %>
+            <div class="row checkout-item">
+              <div class="col-xs-2 col-sm-2 image">
+                <%= mini_image(item.variant) %>
+              </div>
+              <div class="col-xs-7 col-sm-6 description">
+                <p class="sku">
+                  <%= item.product.sku %>
+                </p>
+                <p class="name">
+                  <%= item.name %>
+                </p>
+                <!-- 
+                <% if item.instalation == true %>
+                  <p class="summary-disclaimer">
+                    <p>Los productos instalados por Miele tendrán una <strong>garantía de 2 años.</strong> </p>
+                  </p>
+                <% elsif item.product.specific_attribute.instalation == "yes" &&  item.instalation == false %>
+                  <p class="summary-disclaimer">
+                    <p>Los productos instalados por terceros tendrán una <strong>garantía de 3 meses.</strong> </p>
+                  </p>
+                <% end %>
+                 -->
+                <div class="quantity-xs">
+                  <%= item.quantity %> un.
+                </div>
+              </div>
+              <div class="hidden-xs col-sm-1 quantity">
+                <%= item.quantity %> un.
+              </div>
+              <div class="col-xs-3 price">
+                <%= Spree::Money.new(item.total, currency: @order.currency, no_cents: true).to_s %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="amount-resume">
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-2 amounts">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="amounts-label">Subtotal</td>
+                  <td class="amounts-value">
+                    <%= Spree::Money.new(@order.item_total, currency: 'USD', no_cents: true) %>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="amounts-label">Despacho</td>
+                  <td class="amounts-value">
+                    <%= Spree::Money.new(@order.shipment_total, currency: 'USD', no_cents: true) %>
+                  </td>
+                </tr>
+                 <tr>
+                  <td class="amounts-label">Instalación</td>
+                  <td class="amounts-value">
+                    <%= Spree::Money.new((@order.instalation_value && @order.instalation_value.to_d || 0)) %>
+                  </td>
+                </tr>
+                <tr class="bottom-padding">
+                 
+                </tr>
+                <% if @order.adjustments.eligible.any? %>
+                <tr>
+                  <td class="amounts-label">Descuentos aplicados</td>
+                  <td class="amounts-value">
+                    <%= Spree::Money.new(@order.adjustments.eligible.sum(:amount), currency: @order.currency, no_cents: true) %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-2 amounts no-border">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="amounts-label">Total pedido</td>
+                  <td class="amounts-value">
+                    <%= Spree::Money.new(@order.payment_total, currency: 'USD', no_cents: true) %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="row checkout-help-info">
+  <div class="col-xs-12">
+    <p>
+      Para más información o si tienes alguna duda respecto a tu pedido, favor comunicarte al <span class="contact-info"><%= Spree.t(:phone_contact) %></span> o al correo <span class="contact-info"><%= Spree.t(:email_contact) %></span>
+    </p>
+    <div class="actions-container flex-center">
+      <%= link_to root_path, class: 'btn btn-primary' do %>
+      <span class="hidden-xs">Volver</span>
+      <span class="hidden-sm hidden-md hidden-lg">Ir</span> 
+      al inicio
+      <% end %>
+      <!-- 
+        <%= form_tag '/webpay/nullify_order' do |f| %>
+          <%= hidden_field_tag "order_id", @order.id %>
+          <button type="submit" class="btn btn-secondary">Anular</button>
+        <% end %>
+      -->
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  window.onload = function(){
+    var max = Math.max($('.customer-data').parent().height(), 
+    $('.cart-data').parent().height());
+    $('.customer-data').height(max);
+    $('.cart-data').height(max);
+  }
+</script>

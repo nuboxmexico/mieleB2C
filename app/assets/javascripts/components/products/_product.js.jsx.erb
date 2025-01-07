@@ -1,0 +1,90 @@
+class Product extends React.Component {
+	constructor(props) {
+    	super(props);
+    	this.state = {
+    		product_id: this.props.item.id,
+    		product_loader: "hidden",
+    		loader_product_id: this.props.item.id
+    	};
+    	this.handleChange = this.handleChange.bind(this);
+    	this.handleLoaderChange = this.handleLoaderChange.bind(this);
+    }
+  	handleChange(event) {
+    	this.setState({product_id: event.target.product_id});
+  	}
+  	handleLoaderChange(product_id){
+  		this.setState({loader_product_id: product_id});
+  	}
+		handleNoImage(item){
+			var src = null
+			if (item.images.length===0){
+				src = '../../../assets/noimage/large.png'
+			}
+			else {
+				src = item.images[0].large_url
+			}
+			return src;
+
+		}
+	render() {
+		var price = this.props.item.price
+		var offer_price = this.props.item.master.prices[0].offer_price
+		const items = [];
+		var src = this.handleNoImage(this.props.item.master)
+		if (offer_price != null){
+		  if (offer_price > 0){
+		    discount = 100 - (offer_price*100/price)
+		  }else{
+		    discount = 0
+		  }
+		}
+		else {
+		  discount = 0
+		}
+		if(discount > 0){
+			items.push(
+		        <span key={this.props.item.id + "price"} className="offer-price-product">{parseInt(offer_price).formatMoney(0, "$ ",".")} </span>
+            );
+			items.push(
+		        <span key={this.props.item.id + "offer"} className="grey strikethrough hidden-xs" itemProp="price">{parseInt(price).formatMoney(0, "$ ",".")}</span>
+	        );
+		}
+		else {
+  		items.push(
+  			<div key={this.props.item.id + "price"} class="product-price" itemprop="price">
+			    {parseInt(price).formatMoney(0, "$ ",".")}
+			  </div>
+        );
+		}
+		const add_to_cart = []
+		if (this.props.item.can_supply){
+			add_to_cart.push(
+				<AddToCart
+					key={this.props.item.id}
+					item={this.props.item}
+				/>
+			);
+		}
+		else{
+			add_to_cart.push(
+				<div className="add-to-cart" key={this.props.item.id} >
+					<div className="center-block out-of-stock"><i className="fa fa-exclamation-triangle" aria-hidden="true"></i> &nbsp; Fuera de Stock </div>
+				</div>
+			);
+		}
+		return (
+			<div class="col-md-4 product-card-container">	
+				<article id={"product_"+this.props.item.id} 
+				         class="product-card" 
+				         data-hook="products_list_item">
+	        <img itemProp="image" alt={this.props.item.name} src={src} />
+				  <div class="product-name" itemprop="name" title={this.props.item.name}>
+				    {this.props.item.name}
+				  </div>
+				  {items}
+				  {add_to_cart}
+				</article>
+			</div>
+		)
+	}
+}

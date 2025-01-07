@@ -1,0 +1,90 @@
+wb = xlsx_package.workbook
+title = wb.styles.add_style(b: true, sz:12, buser: {style: :thin, color: "00000000", edges: [:top, :left, :right, :bottom]})
+wb.add_worksheet(name: "Ordenes") do |sheet|
+  headers = [
+    "", "", "", "","", "","","","","","", "", "", "","","","","","","","","","",
+    "","", "Boleta","","Factura","","","",""
+  ]
+  sheet.add_row headers, style: title
+  headers = [
+    "Número orden", 
+    "Fecha de compra", 
+    "Fecha pago", 
+    "Hora de compra",
+    "Email", 
+    "Nombre cliente",
+    "Rut cliente",
+    "Teléfono cliente",
+    "Dirección",
+    "Comuna", 
+    "Región", 
+    "Método pago", 
+    "ID Transacción TBK",
+    "TNR",
+    "Valor Neto unitario TNR",
+    "IVA unitario TNR",
+    "Cantidad TNR",
+    "Valor total Neto TNR",
+    "Valor total IVA TNR",
+    "Subtotal",
+    "Valor Neto Despacho",
+    "Valor IVA Despacho",
+    "Descuentos",
+    "Total final",
+    "SO",
+    "RUT Cliente",
+    "Nombre cliente",
+    "RUT Empresa",
+    "Razón Social",
+    "Dirección de facturación",
+    "Giro comercial",
+    "E-mail"
+  ]
+  sheet.add_row headers, style: title
+  
+  if params[:q][:created_at_gt].blank?
+    start_date = DateTime.now.prev_month(4)
+    end_date = DateTime.now
+    @orders = @orders.where(created_at:start_date..end_date)
+  end
+  
+  @orders.each do |order|
+    order.line_items.each do |line_item|
+      row = [
+        order.try(:number), 
+        order.completed_at.strftime("%d/%m/%Y"), 
+        order.payments.last.try(:updated_at).try(:strftime, "%d/%m/%Y"), 
+        order.completed_at.strftime("%H:%M"),
+        order.try(:email),
+        order.user ? order.user.full_name : order.ship_address.user_full_name,
+        order.user ? order.user.rut : order.ship_address.rut, 
+        order.ship_address.phone, 
+        order.ship_address.address1,
+        order.ship_address.try(:comuna).try(:name), 
+        order.ship_address.try(:state).try(:name), 
+        order.payments.last.try(:payment_method).try(:name), 
+        order.tbk_transaction_id,
+        line_item.variant.sku,
+        (line_item.price / 1.19).round,
+        (line_item.price - (line_item.price / 1.19)).round,
+        line_item.quantity,
+        ((line_item.price / 1.19) * line_item.quantity).round,
+        ((line_item.price - (line_item.price / 1.19)) * line_item.quantity).round,
+        order.item_total,
+        (order.shipment_total / 1.19).round,
+        (order.shipment_total - (order.shipment_total / 1.19)).round,
+        (order.total - (order.shipment_total + order.item_total)).round,
+        order.total,
+        nil,
+        order.is_invoice? ? nil : order.ship_address.rut,
+        order.is_invoice? ? nil : order.ship_address.user_full_name,
+        order.is_invoice? ? order.bill_address.rut : nil,
+        order.is_invoice? ? order.bill_address.firstname : nil,
+        order.is_invoice? ? order.bill_address.address1 : nil,
+        nil,
+        nil
+      ]
+      sheet.add_row row
+    end
+  end       
+end

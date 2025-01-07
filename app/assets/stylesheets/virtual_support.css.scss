@@ -1,0 +1,112 @@
+@import "spree/frontend/variables";
+
+.virtual-support-container {
+  min-height: 80vh;
+  // display: flex;
+  // flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+
+  p {
+    font-size: 21px;
+    line-height: 29px;
+    color: $brand-primary-white;
+    max-width: 70%;
+    text-align: center;
+  }
+
+  a {
+    margin-top: 40px;
+    font-size: 16px;
+    padding: 20px 35px !important;
+  }
+
+  .vs-info-container {
+    padding-top: 15%;
+    padding-left: 5%;
+    text-align: left;
+  }
+
+  .vs-main-title {
+    font-size: 45px;
+    line-height: 29px;
+    color: $brand-primary-white;
+    max-width: 70%;
+    text-align: left !important;
+  }
+
+  .vs-subtitle {
+    font-size: 21px;
+    line-height: 29px;
+    color: $brand-primary-white;
+    max-width: 50%;
+    margin-top: 20px;
+  }
+
+  vs-buttn {
+
+  }
+
+  .vs-subdescription {
+    font-size: 21px;
+    line-height: 29px;
+    color: $brand-primary-white;
+    max-width: 50%;
+    margin-top: 30px;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 475px) {
+
+    p {
+      font-size: 21px;
+      line-height: 29px;
+      color: $brand-primary-white;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    a {
+      margin-top: 40px;
+      font-size: 16px;
+      padding: 20px 35px !important;
+    }
+
+    .vs-info-container {
+      padding-top: 15%;
+      padding-left: 5%;
+      text-align: left;
+    }
+
+    .vs-main-title {
+      font-size: 25px;
+      line-height: 29px;
+      color: $brand-primary-white;
+      max-width: 100%;
+      text-align: left !important;
+    }
+
+    .vs-subtitle {
+      font-size: 15px;
+      line-height: 29px;
+      color: $brand-primary-white;
+      max-width: 100%;
+      margin-top: 20px;
+    }
+
+    vs-buttn {
+
+    }
+
+    .vs-subdescription {
+      font-size: 15px;
+      line-height: 29px;
+      color: $brand-primary-white;
+      max-width: 100%;
+      margin-top: 30px;
+      padding-bottom: 20px;
+    }
+
+  }
+
+}

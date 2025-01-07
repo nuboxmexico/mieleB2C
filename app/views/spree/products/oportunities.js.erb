@@ -1,0 +1,8 @@
+<% if @products and @products.any? %>
+  <% @products.each do |product| %>
+    $('#products-in-offer-container').append("<%= j render partial: 'product_in_offer', locals: { product: product } %>");
+  <% end %>
+  $('#porducts-in-offer-quantity').append("Mostrando <%= pluralize(@products.count, 'producto') %>")
+<% else %>
+  $('#products-in-offer-container').append("<%= Spree.t(:no_products_found) %>");
+<% end %>  

@@ -1,0 +1,27 @@
+<nav class="navbar navbar-right-head col-md-10 col-sm-10 col-xs-9" id="top-nav-bar">
+	<ul id="nav-bar" class="nav" data-hook>
+		<div class="row">
+			<div class="col col-lg-9 col-md-9 hidden-sm hidden-xs" align="center">
+				<li id="search-bar" data-hook>
+					<%= render partial: 'spree/shared/search' %>
+				</li>
+			</div>
+			<div class="col col-lg-1 col-md-1 hidden-sm hidden-xs">
+				<li>
+					<%= render partial: 'spree/shared/user_menu' %>
+				</li>
+			</div>
+			<div class="hidden-md hidden-lg col-sm-10 col-xs-10">
+				<li class="pull-cart" data-hook>
+					<%= render partial: 'spree/shared/login_bar' %>
+				</li>
+			</div>
+			<div class="col col-lg-2 col-md-2 col-sm-2 col-xs-2" id="cart-nav">
+				<div>
+					<%= render partial: 'spree/shared/cart_nav' %>
+				</div>
+			</div>
+		</div>
+	</ul>
+</nav>
+	

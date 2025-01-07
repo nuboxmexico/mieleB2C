@@ -1,0 +1,38 @@
+<% content_for :page_title do %>
+  Banners de categorías
+<% end %>
+
+<% if @taxons.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Categoría</th>
+        <th>Banner</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @taxonomies.each do |taxonomy| %>
+        <%= category_banner_row(taxonomy.root) %>
+        <% if taxonomy.root %>
+          <% taxonomy.root.children.each do |taxon_1| %>
+            <%= category_banner_row(taxon_1) %>
+            <% taxon_1.children.each do |taxon_2| %>
+              <%= category_banner_row(taxon_2) %>
+              <% taxon_2.children.each do |taxon_3| %>
+                <%= category_banner_row(taxon_3) %>
+                <% taxon_3.children.each do |taxon_4| %>
+                  <%= category_banner_row(taxon__4) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>      
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info">
+    No hay categorías registradas
+  </div>
+<% end %>

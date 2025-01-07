@@ -1,0 +1,283 @@
+<% content_for :head_custom do %>
+  <% if @product %>
+    <link rel="canonical" href="<%= product_url(@product) %>" />
+    <meta property="og:type" content="product" />
+    <meta property="og:url" content="<%= product_url(@product) %>" />
+    <div>
+      <meta name="title" content="<%= @product.meta_title %>">
+      <meta property="og:title" content="<%= @product.meta_title %>">
+    </div>
+  <% end %>
+<% end %>
+<% @body_id = 'product-details' %>
+<% cache cache_key_for_product do %>
+  <div data-hook="product_show" id="product_show" class="row">
+    <div class="back-to-category">
+      <%= link_to seo_url(depthest_taxon) do %>
+      <i class="material-icons">chevron_left</i> Volver a <%= depthest_taxon.name %>
+      <% end if depthest_taxon %>
+    </div>
+
+    <div class="col-md-6 col-sm-5 no-padding" data-hook="product_left_part">
+      <div data-hook="product_left_part_wrap">
+        <div id="product-images" class="row" data-hook="product_images">
+          <div class="col-xs-3">
+            <div id="thumbnails" ss-container data-hook>
+              <%= render partial: 'spree/products/thumbnails' %>
+            </div>
+          </div>
+          <div class="col-xs-9">
+            <div id="main-image"  class='zoom' align="center" data-hook>
+              <% if defined?(image) && image %> 
+                <%= link_to image_tag(image.attachment.url(:product), :itemprop => "image"), image.attachment.url(:original), :class => 'fancybox zoom-image' %>
+              <% else %>
+                <% if @product.images.empty? %>
+                  <%= product_image(@product, :itemprop => "large") %>
+                <% else %>
+                  <%= link_to large_image(@product, :itemprop => "image", :class => 'zoom-click main-thunb-img'), @product.images.first.attachment.url(Spree::ProductZoom::Config.default_image_style), :class => 'zoom-image large-image zoom-click', :rel => 'gallery' %>
+                  <br />
+
+                  <div id="gallery" style="display:none;">
+                    <% @product.images.each do |img| %>
+                      <%= link_to image_tag(img.attachment.url(:product)), img.attachment.url(:original), :class => 'fancybox', :rel => 'gallery' %>
+                    <% end %>
+                    <% if @product.has_variants? %>
+                      <% @product.variant_images.each do |i| %>
+                        <% next if @product.images.include?(i) %>
+                        <%= link_to image_tag(i.attachment.url(:product)), i.attachment.url(Spree::ProductZoom::Config.default_image_style), :class => 'fancybox', :rel => 'gallery' %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   <div class="hidden">
+    </div>
+    <div class="col-md-4 col-md-offset-1 col-sm-7" data-hook="product_right_part">
+      <div data-hook="product_right_part_wrap">
+        <div id="product-description" data-hook="product_description">
+          <h1 class="product-title product_tittle_show" itemprop="name">
+            <%= @product.name %>
+          </h1>
+          <h4 class="sku-show">
+            TNR <%= @product.master.sku %>
+          </h4> 
+
+          <div id="prices-container">
+            <i class="fa fa-spinner fa-spin"></i>
+          </div>
+
+          <div class="product-description">
+            <h4>Descripción</h4>
+            <div class="product_description_show" 
+            itemprop="description" 
+            data-hook="description">
+            <%= product_description(@product) %>
+          </div>
+        </div>
+
+        <%= show_mandatory_alert %>
+
+        <%= show_instalation_alert %>
+
+        <%= show_disclaimer_alert %>
+
+        <% if @product.to_quote? %>
+          <div class="product-quotation-container">
+            <%= link_to 'Cotizar', main_app.quotation_new_path(@product), 
+            class: 'btn btn-tertiary', id: 'quotation-request' %>
+            <% if @product.specific_attribute.built_in and @product.current_stock == 0 %>
+              <div class="built-in-explanation">
+                Entrega posterior a 60 días
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div id="cart-form" class="actions-container" data-hook="cart_form">
+            <i class="fa fa-spinner fa-spin"></i>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+  <% relations_num = @product.relations.size %>
+  <% max_slide_capacity = browser.device.mobile? ? 1 : browser.device.tablet? ? 2 : 4 %>
+  <% num_carousel_slides =  relations_num.fdiv(max_slide_capacity).ceil %>
+  <% if !relations_num.zero? %>
+    <div class="col-xs-12 related-products-carousel-container">
+      <p class="related-products-carousel-title">
+        Productos Relacionados 
+      </p>
+      <div id="carousel-related-products" class="carousel slide custom-carousel-container" data-ride="carousel" data-interval="5000">
+        <ol class="carousel-indicators custom-carousel-indicators">
+          <li data-target="#carousel-related-products" data-slide-to="0" class="active"></li>
+          <% (num_carousel_slides - 1).times do |slide_index|%>
+            <li data-target="#carousel-related-products" data-slide-to="<%= slide_index + 1 %>"></li>
+          <% end %>
+        </ol>
+        <div class="carousel-inner custom-carousel-inner" role="listbox">
+          <% index = 0 %>
+          <% (num_carousel_slides).times do |slide_index|%>
+            <div class="item <%= "active" if slide_index == 0 %>">
+              <div class="carousel-item-container"> 
+                <% slide_products_num = relations_num >= max_slide_capacity ? max_slide_capacity : relations_num %>
+              <% slide_products_num.times do |count| %>
+                <% product  = @product.relations[index].related_to %>
+                <div class="col-sm-6 col-md-4 product-card-container">
+                  <%= render partial: 'spree/shared/product', locals: { product: product } %>
+                </div>
+                <% index += 1 %>
+              <% end %>
+              <% relations_num -= slide_products_num %> 
+              </div> 
+            </div>
+          <% end %>
+        </div>
+        <a class="left carousel-control" href="#carousel-related-products" role="button" data-slide="prev">
+          <span class="icon-prev" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-related-products" role="button" data-slide="next">
+          <span class="icon-next" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  <% end %>  
+  <% if (@product.long_description and @product.long_description != '') or 
+    @product.try(:specific_attribute).try(:show?) %>
+    <div class="col-xs-12 miele-details">
+      <h2>Todas las ventajas de un producto Miele</h2>
+    </div>
+    <% if @product.long_description and @product.long_description != '' %>
+      <div class="col-xs-12 col-md-6">
+        <section class="long-description">
+          <div class="container">
+            <h2 class="product-info">Información del producto</h2>
+          </div>
+          <%= @product.long_description.html_safe %>
+        </section>
+      </div>
+    <% end %>
+    <div class="col-xs-12 col-md-6 no-padding">
+      <%= render 'specific_attributes' if @product %>
+    </div>
+  <% end %> 
+<% end %>
+
+<div style="display: none;">
+<%= render partial: 'spree/shared/zoomjs' %>
+<%= render partial: 'spree/shared/variant_images'%>
+</div>
+<div id="fb-root"></div>
+<script>
+  $(document).ready(function() {      
+    zoom_image();
+    $('#cart-form').empty().append("<%= j render partial: 'cart_form' %>");
+    // fetchCurrentStock(['<%= @product.master.sku %>'])
+    //   .done(function(data){
+    //     $('#cart-form').empty().append("<%= j render partial: 'cart_form' %>");
+    //   })
+    //   .fail(function(){
+    //     $('#cart-form').empty().append("No se ha podido obtener el stock del producto");
+    //   });
+
+    $.get('<%= list_product_prices_path(@product, format: :js) %>')
+      .fail(function(){
+        $('#prices-container').text('Ocurrió un error al obtener el precio');
+      });
+  });
+  $(window).resize(function() {
+    zoom_image();
+  });
+  function zoom_image() {
+    var isMobile = window.matchMedia("only screen and (max-width: 620px)");
+
+    var first_image = ($('#main-image img')).attr('src').replace('product/', 'large/');
+    ($('#main-image')).data('selectedThumb', first_image);
+    ($('#main-image img')).attr('src', first_image);
+    if (isMobile.matches) {
+      $('#main-image').trigger('zoom.destroy');
+    }else{
+      $('#main-image').zoom({
+        touch: true, 
+        magnify: 1.5  
+      });
+    }
+  }
+  $(document).ready(function(){
+    $('.fb-like').each(function(el, k) {
+      var $this = $(this);
+      $this.attr('data-width', $this.width());
+    });
+    <% if Rails.env.production? %>
+    FB.XFBML.parse();
+    <% end %>
+
+  });
+  var loop;
+  $(window).bind('resize', function(){
+    // run only once the resizing finished
+    clearInterval(loop);
+    loop = setTimeout(function() {
+      $('.fb-like').each(function(el, k) {
+        var $this = $(this);
+        $this.attr('data-width', $this.width());
+      });
+      <% if Rails.env.production? %>
+      FB.XFBML.parse();
+      <% end %>
+    }, 100);
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "<%= @product.name %>",
+  "description": "<%= @product.description.to_s if @product.description %>",
+  "sku": "<%= @product.sku.to_s %>",
+  "brand": {
+    "@type": "Brand",
+    "name": "MIELE"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "<%= spree.product_url(@product) %>",
+    "priceCurrency": "CLP",
+    "price": "<%= @product.price %>",
+    <% if @product.offer_price_available?%>
+    "lowPrice":"<%= @product.master.prices[0].offer_price %>",
+    <%end%>
+    <% if !@product.master.prices[0].offer_price_end.nil?%>
+    "priceValidUntil": "<%=@product.master.prices[0].offer_price_end.strftime("%Y-%m-%d")%>",
+    <% end %>
+    "itemCondition": "https://schema.org/NewCondition",
+    <% if @product.current_stock == 0 %>
+    "availability": "https://schema.org/InStock"
+    <%else%>
+    "availability": "https://schema.org/OutOfStock"
+    <%end%>
+  },
+  "image": [
+    <% if @product.images.first.nil?%>
+      ""
+    <%else%>
+      <% @product.images.each do |image| %>
+        <% if image == @product.images.last %>
+          "<%= absolute_image_url(image.attachment.url(:large))%>"
+        <% else %>
+          "<%= absolute_image_url(image.attachment.url(:large))%>",
+        <% end %>
+      <% end %>
+    <%end%>
+  ]
+}
+</script>

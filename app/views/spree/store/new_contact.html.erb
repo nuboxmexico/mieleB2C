@@ -1,0 +1,69 @@
+<div class="container-fluid container-fluid-custom contact-form">
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="top-form">
+				<%= form_tag '/contact', method: :post do |f| %>
+				<div class="row">
+					<div class="col col-xs-12">
+						<h1 class="contact-title">Hablemos</h1>
+						<p class="contact-p">Ponte en contacto con nosotros y nos comunicaremos contigo a la brevedad</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="no-left col-md-6 col-xs-12 col-sm-6">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom ">
+							<input name="message[name]" id="message_name" type="text" class="mdl-textfield__input required">
+					      <%= label_tag "Tu nombre", nil, class: 'mdl-textfield__label', for: "message_name" %>
+					    </div>
+					</div>
+					<div class="no-left col-md-6 col-xs-12 col-sm-6 bot-mobile">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom ">
+							<input name="message[email]" id="message_email" type="email" class="mdl-textfield__input required">
+					     	<%= label_tag "Tu email", nil,  class: 'mdl-textfield__label', for: "message_email" %>
+					    </div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="no-left col-md-12 col-xs-12 col-sm-12">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width">
+							<input name="message[subject]" id="message_subject" type="text" class="mdl-textfield__input required">
+					     	<%= label_tag "Asunto", nil, class: 'mdl-textfield__label', for: "message_subject" %>
+					    </div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="no-left col-md-12 col-xs-12 col-sm-12">
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom  mdl-full-width">
+							<textarea rows="2" cols="50" name="message[body]" id="message_body" type="text" class="mdl-textfield__input required"></textarea>
+					     	<%= label_tag "Escribe aqui", nil, class: 'mdl-textfield__label', for: "message_body" %>
+					    </div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<%= recaptcha_tags %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<br>
+						<button type="submit" class="btn btn-primary btn-contact">Enviar</button>
+					</div>
+				</div>
+				<%end%>
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<h1 class="contact-title">Visita nuestras sucursales</h1>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3331.0482921720695!2d-70.59925998480209!3d-33.395904280789644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662cf3564f4a413%3A0xce5462ec87d58c3f!2sMiele%20Experience%20Center%20Chile%20%2F%20Vitacura!5e0!3m2!1ses!2scl!4v1589222778475!5m2!1ses!2scl" width="100%" height="500" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+		</div>
+	</div>
+</div>
+<script>
+	jQuery(window).load(function(){
+	//embed RSS feed 
+		$(".contact-form").find(".mdl-textfield__input").prop('required', true);
+		$(".contact-form").find(".mdl-textfield-custom").removeClass('is-invalid');
+	});
+	
+</script>

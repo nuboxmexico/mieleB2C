@@ -1,0 +1,11 @@
+<h3>
+  <%= t :data_upload_comparable_attributes %>
+</h3>
+<%= form_tag 'import_comparable_attributes', multipart: true do %>
+  <div class="file-field input-field">
+    <span>Cargar Archivo XLSX</span>
+    <input type="file" name="file" required="true" id="comparable_attributes_file">
+  </div>
+
+  <%= submit_tag 'Cargar atributos comparables', class: 'btn btn-sm btn-success' %>
+<% end %>

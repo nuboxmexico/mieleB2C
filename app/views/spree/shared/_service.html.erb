@@ -1,0 +1,30 @@
+<div class="service-box col-lg-3 col-md-4 col-sm-4 col-xs-5 text-center service-container" <%= 'id=previsit-service-wrapper' if @service_sku_collection.include?(service.master.sku) %>>
+	<%= mini_image(service) %>
+	<p class="service-name"><%= service.name %></p>
+	<% if !service.try(:disclaimer).blank? %>
+		<p class="service-disclaimer"><%= service.disclaimer %></p>
+	<% end %>
+	<%= link_to 'Más info', main_app.about_store_path(service.name.try(:downcase).tr('áéíóú', 'aeiou').try(:gsub, ' ', '-')), target: '_blank' %>
+	<p class="service-price"><%=number_to_currency(service.price)%></p>
+	<div id="cart-service-<%= service.id.to_s %>">
+		<% if current_order.line_items.find_by(variant: service) %>
+		<button type="button" class="btn btn-service" id="added-service<%= service.id.to_s %>" disabled>
+			<span>EN EL CARRO</span>
+		</button>
+		<% else %>
+		<button type="button" 
+						class="btn btn-service add-to-cart-service-<%= service.id.to_s %>"
+						id="service<%= service.id.to_s %>"
+						<%= "disabled" if @service_sku_collection.include?(service.master.sku) && (!spree_user_signed_in? || current_spree_user.ship_address.try(:state_id) != region_metropolitana_state.id) %>>
+			<span>AGREGAR</span>
+		</button>
+		<% end %>
+	</div>
+</div>
+
+<script>
+	$(".add-to-cart-service-<%= service.id.to_s %>").click(function(){
+		$('.loader-page').fadeIn();
+		$.post('/orders/populate_service.js', {'variant_id': <%= service.id.to_s %>, 'quantity': 1});
+	});
+</script>

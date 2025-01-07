@@ -1,0 +1,22 @@
+<div class="row promotional-banners">
+  <div class="col-xs-12 col-sm-4 banner-section">
+    <div class="banner-container">
+      <%= render 'home_banner', banner: @promotional_banners[0] if !@promotional_banners[0].nil? %>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-8 banner-section">
+    <div class="banner-container">
+      <%= render 'home_banner', banner: @promotional_banners[1] if !@promotional_banners[1].nil? %>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-8 banner-section">
+    <div class="banner-container">
+      <%= render 'home_banner', banner: @promotional_banners[2] if !@promotional_banners[2].nil? %>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-4 banner-section">
+    <div class="banner-container">
+      <%= render 'home_banner', banner: @promotional_banners[3] if !@promotional_banners[3].nil? %>
+    </div>
+  </div>
+</div>

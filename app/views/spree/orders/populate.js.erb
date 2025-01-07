@@ -1,0 +1,12 @@
+$("#add-to-cart-button").empty().append('Añadir al carro');
+<% if @error %>
+  alertify.error("<%= @error %>");
+  $(".loader-page").fadeOut("slow");
+<% else %>
+  Spree.fetch_cart();
+  $('#ajax-sidebar').empty().html("<%= j render partial: 'spree/shared/cart_sidenav' %>");
+  openNav('cart');
+  $(".loader-page").fadeOut("slow");
+<% end %>
+
+ componentHandler.upgradeDom();

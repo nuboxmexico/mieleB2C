@@ -1,0 +1,92 @@
+<% if !@taxonomies.nil? %>
+<%
+id_t = ""
+class_t = ""
+if ( (controller_name == 'products' || controller_name == 'taxons') && (action_name != 'show' || controller_name == 'taxons'))
+  id_t = 'categories-nav' 
+  class_t  = 'hidden'
+end
+%>
+<div id="<%= id_t %>" ></div>
+<nav class="<%= class_t %> nav taxon-nav navbar-me">
+    <div class="">
+      <div class="row row-nullify hidden" id="br-cat">
+            <div class="col col-xs-1 col-sm-1 hidden-lg hidden-md">
+              </div>
+              <div class="col col-xs-3 col-sm-3 col-md-4">
+                <li class="logo-cat" id="logo-cat" >
+                </li>
+              </div>
+              <div class="col col-xs-6 col-sm-4">
+                <li class="search-bar-cat" id="search-bar-fixed">
+
+                </li>
+              </div>
+              <div class="col col-xs-2 col-sm-4">
+                <li class="pull-right cart-cat" id="cart-cat" >
+                </li>
+              </div>
+      </div>
+    </div> 
+    <ul  class="contain-tax drop-menu container-head">
+    <% if !@taxonomies.nil? %>
+        <% @taxonomies.each do |taxonomy| %>
+          	<% temp_taxon = Spree::Taxon.find_by(name: taxonomy.name) %>
+          	<li class="hidden-xs hidden-sm"><a class="drop" href="<%= seo_url(temp_taxon) %>"><%=taxonomy.name%></a>
+  		        <ul class="dropdown-cat">
+  		          	<div class="row">
+                    <br><br>
+                      <% taxonomy.root.children.each do |taxon| %>
+                       <div class="col col-md-2">
+                           <b><%= link_to(taxon.name, seo_url(taxon)) %></b>
+                            <% if taxon.children.size > 0 %>
+                                <ul>
+                            <% end %>
+                            <% i = 0%>
+                            <% taxon.children.each do |tax|  %>
+                              <% if i < 5 %>
+                                <li><%= link_to(tax.name, seo_url(tax)) %></li>
+                              <% end %>
+                              <% i+= 1%> 
+                            <% end %>
+                            <% if i >= 5 %>
+                                <li><a href="<%= seo_url(taxon) %>"><i class="fa fa-plus"></i> Ver Todos: <%= taxon.name %></a></li>
+                            <% end %>
+                            <% if taxon.children.size > 0 %></ul><% end %>
+
+                       </div>
+                      <% end%>
+                  </div>
+                  <a class="pull-right" href="<%= seo_url(temp_taxon) %>"><i class="fa fa-plus"></i> Ver Todos</a>     
+  		        </ul>
+          	</li>
+        <% end %>
+    <% end%>
+      <li class="pull-right cart-cat" id="cart-cat" >
+
+      </li>
+    </ul>
+  </nav>
+<% end%>
+
+<script>
+$(window).scroll(function() {
+    if($(this).scrollTop()>5) {
+        $( ".navbar-me" ).addClass("fixed-me");
+        $('#cart-cat').append( $('#cart-nav>div')); 
+        $('#logo-cat').append( $('#logo>a')); 
+        $('#search-bar-fixed').append( $('#search-bar>div')); 
+        $( "#br-cat" ).removeClass("hidden");
+        //$('#user_menu_mobile').removeClass("hidden");
+        $('#main_nav_bar_container').addClass("hidden");
+    } else {
+        $('#cart-nav').append( $('#cart-cat>div')); 
+        $('#logo').append( $('#logo-cat>a'));
+        $('#search-bar').append( $('#search-bar-fixed>div')); 
+        $( "#br-cat" ).addClass("hidden");  
+        $( ".navbar-me" ).removeClass("fixed-me");
+        //$('#user_menu_mobile').addClass("hidden");
+        $('#main_nav_bar_container').removeClass("hidden");
+    }
+});
+</script>

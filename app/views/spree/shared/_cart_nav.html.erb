@@ -1,0 +1,18 @@
+<li id="link-to-cart" class="sign-in pull-cart" data-hook>
+	<noscript>
+		<%= link_to_cart_custom %>
+	</noscript>
+	&nbsp;
+  <script>
+    Spree.fetch_cart();
+    $('#link-to-cart').click(function(e){
+      var nav_widht = document.querySelector('#mySidenav').style.width;
+      if (nav_widht == 0 || nav_widht == '0px') {
+        openNav('cart', e);
+      }
+      else {
+        closeNav();
+      }
+    });
+  </script>
+</li>

@@ -1,0 +1,2 @@
+class MercadoPagoSpreeController < ApplicationController
+end

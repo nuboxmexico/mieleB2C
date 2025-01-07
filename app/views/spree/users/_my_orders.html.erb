@@ -1,0 +1,62 @@
+<div id="my_orders" data-hook="account_my_orders" class="account-my-orders">
+  <div class="table-responsive-custom">
+    <% if orders.present? %>
+      <table class="table table-striped order-summary white-back">
+        <thead class="active">
+        <tr>
+          <th class="order-number"><%= "N° de pedido" %></th>
+          <th class="order-date"><%= Spree.t(:date) %></th>
+          <th class="order-total"><%= Spree.t(:total) %></th>
+          <th class="order-status"><%= Spree.t(:status) %></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% orders.each do |order| %>
+          <tr>
+            <td class="order-number">
+              <b class="hidden-md hidden-lg">
+                <%= "N° de pedido" %>: 
+              </b> 
+              <%= order.number %>
+            </td>
+            <td class="order-date">
+              <b class="hidden-md hidden-lg">
+                <%= Spree.t(:date) %>: 
+              </b>
+              <%= l order.completed_at.to_date %>
+            </td>
+            <td class="order-total">
+              <b class="hidden-md hidden-lg">
+                <%= Spree.t(:total) %>: 
+              </b><%= order.display_total %>
+            </td>
+            <td class="order-status">
+              <b class="hidden-md hidden-lg">
+                <%= Spree.t(:status) %>: 
+              </b>
+              <%= Spree.t("miele_states.#{order.miele_state}").try(:titleize) %>
+            </td>
+            <td>
+              <%= (order.document_type == 'ticket' ? 'Boleta' : 'Factura') %>
+            </td>
+            <td class="order-number">
+              <%= link_to order_url(order) do %> 
+                <i class="fa fa-file-text"></i> Ver perdido
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate orders, :param_name => 'page', renderer: BootstrapPagination::Rails, :previous_label => t("previous_page"), :next_label => t("next_page") %>
+    <% else %>
+      <div class="alert alert-info"><%= Spree.t(:you_have_no_orders_yet) %></div>
+    <% end %>
+    <br />
+  </div>
+</div>
+<script>
+  $('.pagination a').attr('data-remote', 'true');
+</script>

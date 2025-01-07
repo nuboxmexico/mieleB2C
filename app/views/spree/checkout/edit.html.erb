@@ -1,0 +1,53 @@
+<% content_for :google_analytics do %>
+<%= render partial: 'spree/shared/google_checkout.js', locals: { order: @order, step_number: (@order.checkout_steps.index(@order.state) + 1) } %>
+<% end %>
+
+<div id="checkout" data-hook>
+  <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+  <div class="row" data-hook="checkout_content">
+    <div class="checkout-data <%= if @order.state != 'confirm' then 'col-md-7' else 'col-md-12' end %> col-xs-12"
+     data-hook="checkout_form_wrapper">
+     <%= form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form| %>
+
+     <% if @order.state == 'address' %>
+     <div class="checkout-step">
+      <h1>Envío</h1>
+      <% if @services and @services.size > 0 %>
+      <p>Selecciona opcionales</p>
+      <div class="row" id="services-checkout">
+        <%= render partial: "spree/shared/service",locals: { region_metropolitana_state: @region_metropolitana_state } , collection: @services.order(name: :asc) %>
+      </div>
+      <% end %>
+      <p>Selecciona tu método de envío</p>
+    </div>
+
+    <%= render partial: 'delivery_light', locals: { form: form } %>
+    <% end %>
+
+    <%= form.hidden_field :state_lock_version %>
+    <%= render @order.state, form: form %>
+    <% end %>
+  </div>
+  <% if @order.state != 'confirm' %>
+  <div class="col-md-5 col-xs-12 no-padding">
+    <div id="checkout-summary" data-hook="checkout_summary_box" class="space-mobile">
+      <% unless @order.address? %>
+      <%#= render partial: 'spree/orders/promotion_form', locals: { order: @order, special_class: '' } %>
+      <% end %>
+      <%= render partial: 'summary', locals: { order: @order } %>
+    </div>
+    <div class="center checkout-continue">
+      <%= render partial: 'continue_btn', locals: { position: "down" } %>
+    </div>
+  </div>
+  <% end %>
+</div>
+</div>
+<script>
+  Spree.current_order_id = "<%= @order.number %>"
+  Spree.current_order_token = "<%= @order.guest_token %>"
+</script>
+
+<% if I18n.locale != :en %>
+<%= javascript_include_tag 'jquery.validate/localization/messages_' + I18n.locale.to_s.downcase.gsub('-', '') %>
+<% end %>

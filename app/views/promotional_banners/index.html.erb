@@ -1,0 +1,52 @@
+<% content_for :page_title do %>
+  Banners promocionales
+<% end %>
+
+<% if PromotionalBanner.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>URL Asociada</th>
+        <th>Imagen</th>
+        <th>Imagen para móviles</th>
+        <th>Ubicación</th>
+        <th>Estado</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @promotional_banners.each do |banner| %>
+        <tr>
+          <td><%= banner.title %></td>
+          <td><%= link_to banner.link, banner.link.to_s %></td>
+          <td><%= image_tag banner.image.url(:thumb) %></td>
+          <td><%= image_tag banner.mobile_image.url(:thumb) %></td>
+          <td class="banner-localtion"><%= banner.location %>
+            <div class="popover-custom" data-toggle="popover" data-html="true" data-placement="left" title="<%= banner.location%>" data-content='<img class="img-responsive" src="<%= banner.location_help_url %>" alt="<%= banner.location %>">'></div>
+          </td>
+          <th><%= banner.active %></th>
+          <th>
+            <%= link_to main_app.edit_promotional_banner_path(banner), class: 'btn btn-primary edit-banner' do %>
+              <i class="fa fa-pencil"></i> Editar
+            <% end %>
+          </th>
+        </tr>
+      <% end %>      
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info">
+    No hay banners promocionables
+  </div>
+<% end %>
+
+<script>
+  $(function () {
+    $('.popover-custom').popover('show');
+    $('.popover-custom').popover('hide');
+  });
+  $(".banner-localtion").hover(function(){
+    $(this).find('.popover-custom').popover('toggle');
+  });
+</script>

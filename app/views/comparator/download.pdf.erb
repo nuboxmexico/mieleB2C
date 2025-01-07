@@ -1,0 +1,579 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <style type="text/css"> 
+      .comparator-container {
+        display: flex;
+        justify-content: center;
+      }
+      .comparator-container .product {
+        /*max-width: 30%;*/
+        min-width: 20%;
+        text-align: center;
+      }
+      .comparator-container .product .info {
+        margin: 30px;
+        background-color: #FFF;
+        padding: 30px 0;
+      }
+      .comparator-container .product .info img {
+        width: 70%;
+      }
+      .comparator-container .product .info h2 {
+        font-size: 16px;
+        font-weight: normal;
+        color: #333;
+        margin: 20px 0;
+      }
+      .comparator-container .product .info .price {
+        font-size: 21px;
+        font-weight: bold;
+        color: #333;
+        line-height: 25px;
+        margin-bottom: 30px;
+      }
+      .comparator-container .product .attributes {
+        color: #262626;
+        letter-spacing: 0;
+        margin-top: 60px;
+        border-right: 2px solid #FFF;
+      }
+      .comparator-container .product .attributes h3 {
+        font-size: 14px;
+        line-height: 17px;
+      }
+      .comparator-container .product .attributes p {
+        font-size: 28px;
+        line-height: 34px;
+        margin-bottom: 60px;
+      }
+      .comparator-container .product:last-child .attributes {
+        border-right: none;
+      }
+
+      #comparator-resume {
+        position: fixed;
+        top: 60px !important;
+        width: 100%;
+        display: none;
+        justify-content: center;
+      }
+      #comparator-resume .product {
+        background-color: #1F1F1F;
+        color: #F6F6F6;
+        width: 30%;
+        text-align: center;
+        border-right: 2px solid rgba(246, 246, 246, 0.5);
+      }
+      #comparator-resume .product .info {
+        margin: 0 30px;
+        padding: 30px 0;
+      }
+      #comparator-resume .product .info p {
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: bold;
+      }
+      #comparator-resume .product .info .btn {
+        padding: 10px 15px !important;
+      }
+      #comparator-resume .product:last-child {
+        border-right: none;
+      }
+    </style>
+    <style type="text/css">
+      body {
+        background-color: #ECECEC !important;
+      }
+
+      .stock-contents {
+        border-bottom: 1px solid #DDD;
+        margin-bottom: 10px;
+      }
+
+      .cart-stepper {
+        cursor: pointer;
+      }
+
+      .remove-item {
+        margin-top: 1.5rem;
+        cursor: pointer;
+      }
+
+      .products-container {
+        background-color: #ECECEC;
+        padding: 20px 0;
+      }
+
+      .btn {
+        border-radius: 0 !important;
+        padding: 15px 25px !important;
+        text-transform: uppercase;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        border: none !important;
+        height: auto !important;
+        font-family: "Helvetica Neue" !important;
+        line-height: 1 !important;
+      }
+
+      .btn:hover, .btn:active, .btn:focus {
+        border: none !important;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary[disabled], .btn-primary[disabled]:hover {
+        color: #707070 !important;
+        background-color: #DDD !important;
+      }
+
+      .product-card-container {
+        padding: 0 25px !important;
+      }
+
+      @media (max-width: 425px) {
+        .product-card-container {
+          padding: 0 15px !important;
+        }
+      }
+      .product-card {
+        background-color: #FFF;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .product-card img {
+        width: 180px;
+        margin-bottom: 27px;
+        transition: all 1s;
+      }
+
+      .product-card img:hover {
+        width: 207px;
+        margin-bottom: 0;
+      }
+
+      .product-card .product-name {
+        font-weight: lighter;
+        font-size: 16px;
+        color: #1F1F1F;
+        min-height: 5rem;
+      }
+      .product-card .product-price {
+        font-weight: normal;
+        font-size: 21px;
+        color: #1F1F1F;
+        padding: 15px 0;
+      }
+
+      .taxon-container {
+        padding: 0 50px;
+        background-color: #ECECEC;
+      }
+
+      @media (max-width: 475px) {
+        .taxon-container {
+          padding: 0;
+        }
+      }
+      .taxon-header {
+        margin-top: 40px;
+        margin-bottom: 25px;
+      }
+
+      .taxon-name {
+        font-weight: normal;
+        font-size: 28px;
+        color: #1F1F1F;
+        margin-bottom: 0;
+        text-transform: capitalize;
+      }
+
+      .taxon-tree {
+        list-style-type: none;
+        padding-left: 0;
+        margin-top: 5px;
+      }
+
+      .taxon-tree li {
+        display: inline-block;
+        font-weight: lighter;
+        font-size: 14px;
+        color: #707070;
+        padding-right: 10px;
+        line-height: 0;
+        text-transform: capitalize;
+      }
+      .taxon-tree li:after {
+        content: " > ";
+        padding-left: 10px;
+      }
+      .taxon-tree li:last-child {
+        color: #8C0014;
+      }
+      .taxon-tree li:last-child:after {
+        content: "";
+        padding-left: 10px;
+      }
+
+      .total-products {
+        font-weight: lighter;
+        font-size: 14px;
+        color: #707070;
+        line-height: 0;
+        text-align: right;
+        margin-top: 15px;
+        padding-right: 25px;
+      }
+
+      #product-images div {
+        display: inline-block;
+      }
+
+      .thumbnails {
+        list-style-type: none;
+      }
+
+      .thumbnails li {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: solid 1px #DDD;
+        width: 100px;
+      }
+      .thumbnails li a img {
+        width: 100%;
+      }
+
+      .back-to-category {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        padding-left: 50px;
+      }
+
+      .back-to-category a {
+        font-weight: lighter;
+        font-size: 16px;
+        color: #707070;
+        display: flex;
+        align-items: center;
+      }
+
+      .back-to-category a:hover {
+        text-decoration: none;
+        color: #707070 -light;
+      }
+
+      #checkout {
+        margin-top: 150px;
+      }
+
+      .checkout-continue {
+        height: 100vh;
+        margin-right: -15px;
+        padding-right: 15px;
+        background-color: #FFF;
+      }
+
+      .checkout-data {
+        padding-left: 50px !important;
+      }
+
+      @media (max-width: 450px) {
+        .checkout-data {
+          padding-left: 30px !important;
+        }
+      }
+      .checkout-step h1 {
+        font-weight: normal;
+        font-size: 28px;
+        color: #1F1F1F;
+        margin-bottom: 10px;
+        margin-top: 0;
+      }
+      .checkout-step p {
+        font-weight: 300;
+        font-size: 18px;
+        color: #1F1F1F;
+      }
+
+      .checkout-shipping .option {
+        background-color: #FFF;
+        padding: 20px;
+        margin-top: 15px;
+        margin-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .checkout-shipping .option div {
+        display: inline-block;
+      }
+      .checkout-shipping .option p {
+        margin: 0;
+        line-height: 1.3;
+        padding-left: 20px;
+      }
+      .checkout-shipping .unselected {
+        color: #707070;
+      }
+      .checkout-shipping .unselected:hover {
+        color: #1F1F1F;
+      }
+      .checkout-shipping .selected {
+        color: #1F1F1F;
+        border-bottom: solid 2px #8C0014;
+      }
+
+      .checkout-address {
+        margin-top: 40px;
+      }
+      .checkout-address p {
+        font-weight: 300;
+        font-size: 18px;
+        color: #1F1F1F;
+      }
+      .checkout-address .inner {
+        display: inline;
+      }
+      .checkout-address .inner .form-separator {
+        margin-left: 40px;
+      }
+
+      .form-radio-separator {
+        margin-left: 40px;
+      }
+
+      #shipping-address-container, #billing-address-container {
+        display: none;
+      }
+
+      .checkout-payment .resume {
+        background-color: #FFF;
+        padding: 30px;
+        font-size: 16px;
+        margin-bottom: 50px;
+      }
+      .checkout-payment .resume p {
+        font-weight: 300;
+        color: #707070;
+      }
+      .checkout-payment .resume h4 {
+        font-weight: normal;
+        color: #1F1F1F;
+      }
+
+      #payment {
+        margin-bottom: 30px;
+      }
+      #payment .methods .option {
+        background-color: #FFF;
+        padding: 20px;
+        margin-top: 15px;
+        margin-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      #payment .methods .option div {
+        display: inline-block;
+      }
+      #payment .methods .option p {
+        margin: 0;
+        line-height: 1.3;
+        padding-left: 20px;
+      }
+      #payment .methods .unselected {
+        color: #707070;
+      }
+      #payment .methods .unselected:hover {
+        color: #1F1F1F;
+      }
+      #payment .methods .selected {
+        color: #1F1F1F;
+        border-bottom: solid 2px #8C0014;
+      }
+      #payment .methods img {
+        width: 100%;
+      }
+
+      .user-form-box {
+        padding-top: 50px !important;
+      }
+      .user-form-box .user-form-container {
+        background-color: #FFF;
+        padding: 30px;
+        text-align: center;
+      }
+      .user-form-box h1 {
+        padding: 0;
+        font-size: 24px;
+        color: #1F1F1F;
+      }
+      .user-form-box .welcome-message {
+        font-weight: 300;
+        font-size: 18px;
+        color: #1F1F1F;
+        margin: 0;
+      }
+      .user-form-box .signup-option, .user-form-box .password-forgot-instructions {
+        font-weight: 300;
+        font-size: 16px;
+        color: #1F1F1F;
+      }
+      .user-form-box .mdl-textfield {
+        width: 100%;
+      }
+      .user-form-box .action-container {
+        padding: 20px 0;
+      }
+      .user-form-box .help-block {
+        margin-top: -20px;
+      }
+
+      .long-description {
+        padding: 50px;
+      }
+      .long-description article {
+        display: flex;
+        margin: 30px 0;
+        justify-content: space-between;
+      }
+      .long-description article img {
+        max-height: 100px;
+        margin-right: 15px;
+      }
+      .long-description article h5 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1F1F1F;
+        margin-top: 0;
+      }
+      @media (min-width: 576px) {
+        .long-description article:nth-of-type(odd) {
+          flex-flow: row-reverse;
+        }
+      }
+
+      .section-header {
+        width: 100%;
+        margin-top: 40px;
+        padding: 0 60px;
+      }
+      .section-header .options {
+        display: inline-block;
+      }
+      .section-header .title {
+        display: inline-block;
+      }
+      .section-header .title h1 {
+        font-size: 28px;
+        line-height: 34px;
+        font-weight: bold;
+        color: #1F1F1F;
+        margin: 0;
+      }
+      .section-header .title .back-to-category {
+        padding-left: 0;
+        margin: 0;
+        margin-top: 10px;
+      }
+
+      @media (min-width: 768px) and (max-width: 788px) {
+        .section-header {
+          margin-top: 85px;
+        }
+      }
+    </style>
+    <style type="text/css">
+      .comparator-container {
+        width: 100%;
+        display: block;
+        margin-left: 10px;
+      }
+      .comparator-container .product {
+        float: left;
+        width: <%= "#{25 + 10 * (3 -@comparator.variants.size)}%" %>;
+        margin: 0 20px;
+      }
+      .comparator-container .product .info {
+        margin: 0;
+      }
+
+      .comparator-container .product .attributes {
+        margin-top: -5px;
+      }
+
+      html, body, #content, .comparator-container {
+        background-color: #FFF;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #content {
+        border: none;
+      }
+
+      nav {
+        background-color: #1F1F1F;
+        height: 80px;
+        text-align: center;
+      }
+
+      nav img {
+        max-height: 60px;
+      }
+
+      .section-header {
+        width: auto;
+        margin-top: 20px;
+        padding: 0;
+      }
+      .section-header .title h1 {
+        width: 100%;
+        margin-left: 25px;
+      }
+    </style>
+  </head>
+  <body onload='number_pages'>
+    <div id="content">
+      <% @pages.times do |page| %>
+        <div style="page-break-before: always;">
+          <%= render 'pdf_header' %>
+          <div class="comparator-container">
+            <% @comparator.variants.each do |variant| %>
+              <div class="product">
+                <div class="attributes">
+                  <% if variant.product.comparable_attrs_comparison.any? %>
+                    <% counter = 0 %>
+                    <% variant.product.comparable_attrs_comparison.each do |name, description| %>
+                      <% if counter >= (page * @attributes_per_page) and 
+                            counter < ((page + 1) * @attributes_per_page) %>
+                        <h3><%= name %></h3>
+                        <p><%= description %></p>
+                      <% end %>
+                      <% counter += 1 %>
+                    <% end %>
+                  <% else %>
+                    <% @attributes_names.each_with_index do |name, counter| %>
+                      <% if counter >= (page * @attributes_per_page) and 
+                            counter < ((page + 1) * @attributes_per_page) %>
+                        <h3><%= name %></h3>
+                        <p>-</p>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

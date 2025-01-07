@@ -1,0 +1,94 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Productos') do |sheet|
+  headers = [
+    'TNR',
+    'Business Unit',
+    'Familia',
+    'Subfamilia',
+    'Específico',
+    'Nombre',
+    'Descripción',
+    'Precio',
+    'Precio oferta',
+    'Precio oferta desde',
+    'Precio oferta hasta',
+    'Mandatorio',
+    'Canal',
+    'Retirable',
+    'Despachable',
+    'Tipo',
+    'Built-in',
+    'Instalación',
+    'Outlet',
+    'Peso (kg)',
+    'Alto mm',
+    'Largo mm',
+    'Ancho mm',
+    'Descripción larga (html)',
+    'Especificaciones',
+    'Características',
+    'Especificaciones técnicas',
+    'Funciones',
+    'Especialidades de bebidas',
+    'Diseño de los cestos',
+    'Programa de lavado',
+    'Programa de secado',
+    'Cuidado y mantenimiento',
+    'Eficiencia y sostenibilidad',
+    'Seguridad',
+    'Accesorios y suministros',
+    'Descontinuar desde'
+  ]
+  sheet.add_row headers
+  
+  @variants.each do |variant|
+    taxons = variant.product.taxons
+    price = variant.prices.first
+    unless (specific_attribute = variant.product.specific_attribute)
+      specific_attribute = SpecificAttribute.new
+    end
+    
+    sheet.add_row [
+      variant.sku,
+      taxons.find_by(depth: 0).try(:name),
+      taxons.find_by(depth: 1).try(:name),
+      taxons.find_by(depth: 2).try(:name),
+      taxons.find_by(depth: 3).try(:name),
+      variant.name,
+      variant.description,
+      price.amount.to_i,
+      price.offer_price.to_i,
+      price.offer_price_start,
+      price.offer_price_end,
+      specific_attribute.mandatory ? 'Si' : 'No',
+      specific_attribute.channel,
+      specific_attribute.can_retire ? 'Si' : 'No',
+      specific_attribute.can_ship ? 'Si' : 'No',
+      specific_attribute.category,
+      specific_attribute.built_in ? 'Si' : 'No',
+      specific_attribute.instalation ? 'Si' : 'No',
+      specific_attribute.outlet ? 'Si' : 'No',
+      variant.weight.to_f,
+      variant.height.to_f,
+      variant.width.to_f,
+      variant.depth.to_f,
+      variant.product.long_description,
+      specific_attribute.specs,
+      specific_attribute.features,
+      specific_attribute.technical_specs,
+      specific_attribute.product_functions,
+      specific_attribute.drink,
+      specific_attribute.basket_design,
+      specific_attribute.wash_program,
+      specific_attribute.dry_program,
+      specific_attribute.care,
+      specific_attribute.sustain,
+      specific_attribute.security,
+      specific_attribute.accessories,
+      variant.product.discontinue_on
+    ], 
+    types:
+    [:string]
+  end
+end

@@ -1,0 +1,19 @@
+<div class="virtual-support-container" style="<%= background_image %>">
+	<div class="vs-info-container">
+	  <strong><div class="vs-main-title">
+	    <%= @virtual_support.description %>
+	  </div></strong>
+
+	  <div class="vs-subtitle">
+	    <%= @virtual_support.subtitle %>
+	  </div>
+	  
+	  <% if VirtualSupport.show? %>
+	    <%= link_to 'Agenda tu cita aquí', @virtual_support.url, class: 'btn btn-primary vs-buttn', target: '_blank' %>
+	  <% end %>
+
+	  <div class="vs-subdescription">
+	    <%= @virtual_support.subdescription %>
+	  </div>
+	</div>
+</div>

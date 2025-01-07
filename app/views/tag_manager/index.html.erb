@@ -1,0 +1,30 @@
+<h2>Google Tag Manager</h2>
+<%= form_tag '/tag_manager/update', method: :post do %>
+  <% if @tag_manager.errors.any? %>
+    <div id="error_explanation">
+      <h2>El tag no ha podido ser guardado</h2>
+      <ul>
+      <% @tag_manager.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col col-sm-8">
+      <div class="form-group">
+        <%= label_tag :tag_manager_id %><br>
+        <%= text_field_tag :tag_manager_id, @tag_manager.tag_manager_id, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col col-sm-4">
+      <div class="form-group">
+        <%= label_tag "Activo" %><br>
+        <%= check_box_tag :active, @tag_manager.active ? 1 : 0, @tag_manager.active%>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Guardar", class: 'btn btn-success'%>
+  </div>
+<% end %>

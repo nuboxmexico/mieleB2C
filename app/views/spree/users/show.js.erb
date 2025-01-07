@@ -1,0 +1,3 @@
+jQuery('#my_orders').html('<%= escape_javascript(render partial: "my_orders", :locals => { :orders => @orders }) %>');
+$('.pagination a').attr('data-remote', 'true');
+

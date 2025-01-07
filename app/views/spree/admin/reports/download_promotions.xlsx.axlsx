@@ -1,0 +1,15 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Uso de cupones de descuentos') do |sheet|
+  headers = ['Nombre', 'Código', 'Límite de uso', 'Cantidad de uso', 'Ganancias']
+  sheet.add_row headers
+  
+  @promotions.each do |promotion|
+    promotion_limit = promotion.usage_limit.nil? ? "∞" : promotion.usage_limit
+    sheet.add_row [promotion.name,
+                   promotion.code,
+                   promotion_limit,
+                   promotion.credits_count,
+                   "$ #{number_to_currency(promotion.orders.sum(:total).to_i,precision: 0 ,unit: "", separator: "", delimiter: ".")}"]
+  end
+end

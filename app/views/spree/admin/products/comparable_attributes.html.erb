@@ -1,0 +1,54 @@
+<% content_for :page_actions do %>
+<% if can?(:create, Spree::Product) %>
+<%= button_link_to Spree.t(:new_product), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_product' } %>
+<% end %>
+<%= render partial: 'spree/admin/shared/help', locals: {title_help: t(:admin_help_products_edit_title), body_help: t(:admin_help_products_edit_body)} %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/product_tabs', locals: {current: :comparable_attributes} %>
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @product } %>
+
+<h3>Atributos comparables</h3>
+
+<% if @product.comparable_attrs.size > 0 %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Atributo</th>
+      <th>Valor</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @product.comparable_attrs.each do |attribute| %>
+    <tr id="value-<%= attribute.id %>" class="edit-attribute" data-id="<%= attribute.id %>">
+      <td><%= attribute.comparable_attribute.name %></td>
+      <td><%= attribute.description %></td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm edit-comparable-attribute no-loading" data-value="<%= attribute.id %>">
+          <span class="icon icon-edit"></span>
+        </button>
+      </td>
+    </tr>
+    <tr id="edit-<%= attribute.id %>" class="hidden">
+      <%= render partial: "edit_comparable_attribute_form", locals: {product: @product, attribute: attribute} %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<div class="alert alert-info no-objects-found">
+  Este producto no tiene atributos comparables
+</div>
+<% end %>
+
+<script>
+  $(".edit-comparable-attribute").click(function(){
+    $("#value-"+$(this).data("value")).addClass("hidden");
+    $("#edit-"+$(this).data("value")).removeClass("hidden");
+  });
+  $(".cancel-button").click(function(){
+    $("#edit-"+$(this).data("value")).addClass("hidden");
+    $("#value-"+$(this).data("value")).removeClass("hidden");
+  });
+</script>

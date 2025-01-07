@@ -1,0 +1,15 @@
+ /*
+ *= require_tree .
+ *= require alertify.min
+ *= require font-awesome
+ *= require box
+ *= require small_box
+ *= require c3.min
+ *= require custom-admin-styles
+ *= require_self
+ */
+
+.load-data-card {
+  padding: 0 15px 15px 15px;
+  width: 100%;
+}

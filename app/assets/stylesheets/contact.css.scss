@@ -1,0 +1,22 @@
+@import "spree/frontend/variables";
+
+.contact-form{
+	margin-top: 40px;
+	margin-bottom: 40px;
+	
+}
+.mdl-full-width{
+	width: 100%!important;
+}
+
+
+.mdl-full-width label, .mdl-textfield-custom label{
+	font-weight: bold!important;
+}
+.contact-title{
+	font-size: 24px;
+}
+
+.contact-p{
+	font-size: 16px;
+}

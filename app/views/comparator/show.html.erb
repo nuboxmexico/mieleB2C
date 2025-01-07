@@ -1,0 +1,106 @@
+<div class="section-header">
+  <div class="title">
+    <h1>Comparador</h1>
+    <div class="back-to-category">
+      <%= link_to (request.env["HTTP_REFERER"] || root_path) do %>
+      <i class="material-icons">chevron_left</i> Volver
+      <% end %>
+    </div>
+  </div>
+  <div class="option pull-right hidden-xs">
+    <%= link_to '/comparator/download.pdf', class: 'btn btn-tertiary' do %>
+    <i class="fa fa-download"></i> Descargar comparación
+    <% end %>
+  </div>
+  <div class="option only-xs top-space">
+    <%= link_to '/comparator/download.pdf', class: '' do %>
+    <i class="fa fa-download"></i> Descargar comparación
+    <% end %>
+  </div>
+</div>
+
+<%= render 'comparator/loader_comparator' %>
+<div class="comparator-wraper hidden-xs">
+  <div class="comparator-container" id="comparator_details">
+    <%= render 'products_resume', variants: @comparator.variants %>
+    <% @comparator.variants.each do |variant| %>
+    <div class="product">
+      <div class="info">
+        <% if variant.images.first %>
+        <%= image_tag(variant.images.first.attachment.url(:product)) %>
+        <% else %>
+        <%= image_tag('noimage/no_image.png') %>
+        <% end %>
+        <h2><%= variant.name %></h2>
+        <p class="price">
+          <%= number_to_currency variant.price %>
+        </p>
+        <%= link_to variant.product, class: 'btn btn-tertiary' do %>
+        Ver detalles
+        <% end %>
+      </div>
+      <div class="attributes">
+        <% if variant.product.comparable_attrs_comparison.any? %>
+        <% variant.product.comparable_attrs_comparison.each do |name, description| %>
+        <h3><%= name %></h3>
+        <% if description and description != '' %>
+        <p><%= description %></p>
+        <% else %>
+        <p>-</p>
+        <% end %>
+        <% end %>
+        <% else %>
+        <% @attributes_names.each do |name| %>
+        <h3><%= name %></h3>
+        <p>-</p>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="multiple-items row hidden-lg hidden-sm hidden-md">
+  <% @comparator.variants.each do |variant| %>
+  <div class="pad-mobile-comparator">
+    <div class="product-box text-center">
+      <p class="text-center">
+        <%= small_image(variant, itemprop: "image") %>
+      </p>
+      <p class="product-name-comp"><%= variant.name %></p>
+      <p class="comp-price"><%= number_to_currency variant.price %></p>
+      <% if variant.can_supply? %>
+      <%= link_to variant.product, class: 'btn btn-xs btn-tertiary' do %>
+      Ver detalles
+      <% end %>
+      <% end %>
+    </div>
+    <% if variant.product.comparable_attrs_comparison.any? %>
+    <% variant.product.comparable_attrs_comparison.each do |name, description| %>
+    <div class="separator-pad text-center">
+      <p class="pt-14-11"><%= name %></p>
+      <p class="pt24"><%= description ? description : '-' %></p>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function(){
+    if ($(document).width() <= 768){
+      $('.loader-comparator').fadeIn();
+      $('.loader-comparator').delay(2000).fadeOut("slow");
+    }
+  })
+  $('.multiple-items').slick({
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    dots: true,
+    arrows: true,
+    nextArrow: '<button class="slick-next slick-arrow" aria-label="Next" type="button" style="display: block;"><i class="fa fa-angle-right"></i></button>',
+    prevArrow: '<button class="slick-prev slick-arrow" aria-label="Previous" type="button" style="display: block;"><i class="fa fa-angle-left"></i></button>' 
+  }); 
+</script>

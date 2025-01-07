@@ -1,0 +1,11 @@
+<% if @attribute %>
+  $('#attribute-<%= @attribute_name %> td').last().remove();
+  $('#attribute-<%= @attribute_name %> td').last().remove();
+  $('#attribute-<%= @attribute_name %>').append('<td colspan="2"></td>');
+  $('#attribute-<%= @attribute_name %>')
+    .after('<%= j render partial: "edit_specific_attribute_form", locals: {attribute_name: @attribute_name} %>');
+  tinymce.init({
+    selector: '.edit-specific-attribute-input'
+  });
+<% end %>
+$('.loader-page').fadeOut('slow');

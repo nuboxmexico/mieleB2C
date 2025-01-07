@@ -1,0 +1,25 @@
+<nav id="header"  class="navbar navbar-fixed-top">
+  <%= wicked_pdf_image_tag('logo/logo.png', alt: 'Logo', class: 'customer-logo')%>
+</nav>
+<div class="section-header">
+  <div class="title">
+    <h1>Comparación de productos</h1>
+  </div>
+</div>
+<div class="comparator-container">
+  <% @comparator.variants.each do |variant| %>
+    <div class="product">
+      <div class="info">
+        <%# if variant.images.first %>
+          <%#= wicked_pdf_image_tag(variant.images.first.attachment.url(:product)) %>
+        <%# else %>
+        <%# end %>
+        <%= wicked_pdf_image_tag('noimage/no_image.png') %>
+        <h2><%= variant.name %></h2>
+        <p class="price">
+          <%= number_to_currency variant.price %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>

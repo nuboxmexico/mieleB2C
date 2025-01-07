@@ -1,0 +1,248 @@
+<style type="text/css">
+  h1, h2, h3, h4, h5, h6, 
+  .h1, .h2, .h3, .h4, .h5, .h6, 
+  div, span, p, li, a, th, td, label, input, option, select, .btn {
+    font-family: acumin-pro, sans-serif !important;
+  }
+  body {
+    font-family: acumin-pro, sans-serif !important;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  h1, h2 {
+    font-size: 18px;
+    line-height: 22px;
+    color: #1F1F1F;
+    margin: 0;
+  }
+  h3 {
+    font-size: 18px;
+    line-height: 22px;
+    color: #1F1F1F;
+    font-weight: normal;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .customer-data {
+    width: 100%;
+
+    padding-bottom: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 14px!important;
+    line-height: 21px!important;
+  }
+  .customer-data p, .customer-data td{
+    font-size: 14px!important;
+    line-height: 21px!important;
+  }
+
+  .customer-data .user-name, 
+  .customer-data .ship-address, 
+  .customer-data .bill-address {
+    text-transform: capitalize;
+  }
+
+  .number-order {
+    color: #8C0014;
+    font-size: 21px;
+    line-height: 25px;
+  }
+
+  .customer-data p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .customer-data tr td:last-child {
+    padding-left: 20px;
+  }
+
+hr{
+  height: 1px;
+  background-color: #BBB;
+}
+  .customer-data td {
+    padding-bottom: 20px;
+     vertical-align: top;
+  }
+
+  .customer-data .data-label {
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+  }
+
+  .currency-value {
+    text-align: right;
+  }
+
+  .contact-container {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .contact-info {
+    text-decoration: none;
+    color: #8C0014;
+  }
+
+  .cart-data {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .cart-data tr td {
+
+    font-size: 14px;
+    line-height: 25px;
+  }
+
+  .description .sku {
+    font-size: 12px;
+    line-height: 14px;
+    color: #707070;
+    margin: 0;
+  }
+
+  .description .name {
+    font-size: 14px;
+    line-height: 17px;
+    color: #1F1F1F;
+    margin: 0;
+  }
+
+  .cart-data tr .currency-value {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .cart-data .bottom-padding td {
+    padding-bottom: 20px;
+  }
+
+  .cart-data .top-border td {
+    padding-top: 20px;
+    border-top: 1px solid #BBB;
+  }
+
+  .cart-data .top-border td:first-child {
+    border-top: none;
+  }
+
+  .actions-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .actions-container .btn {
+    font-size: 13px;
+  }
+  .text-sub{
+    font-size: 14px;
+  }
+  .mail-header{
+    padding: 0px 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .quotation-data{
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .text-products{
+    font-size: 16px;
+  }
+</style>
+<div class="mail-header">
+  <div>
+    <% if to_back_office %>
+      <h1>Se ha recibido una nueva cotización.</h1>
+    <% else %>
+      <h1>Tu cotización ha sido registrada con éxito.</h1>
+      <p class="text-sub">Nuestro equipo de ventas se pondrá en contacto a la brevedad</p>
+    <% end %>
+  </div>
+</div>
+<table class="customer-data">
+  <tbody>
+    <tr>
+      <td>
+        <p class="data-label">
+          Información del cliente
+        </p>
+        <p class="user-name">
+          <span>Nombre: </span>
+          <%= @quotation.address.firstname %> <%= @quotation.address.lastname %>
+        </p>
+        <p>
+          <span>RUT:</span>
+          <%= @user.try(:rut) %>
+        </p>
+        <p>
+          <span>Teléfono: </span>
+          <%= @quotation.address.phone %>
+        </p> 
+        <p>
+          <span>Correo electrónico: </span>
+          <%= @user.try(:email) %>
+        </p> 
+      </td>
+      <td>
+        <p class="data-label">
+          Dirección de envío
+        </p>
+        <p class="ship-address">
+          <span>Dirección:</span>
+          <%= @quotation.address.address1 %>
+        </p>
+        <p>
+          <span>Comuna: </span>
+          <%= @quotation.address.comuna.try(:name) %>
+        </p>
+        <p>
+          <span>Región: </span>
+          <%= @quotation.address.state.try(:name) %>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="quotation-data">
+
+        <hr>
+  <p class="text-products">Producto cotizado</p>
+
+  <table class="cart-data">
+    <tbody>
+      <tr class="bottom-padding">
+        <td>
+          <% if !@quotation.product.images.any? %>
+            <%= image_tag attachments['noimage/mini.png'].url %>
+          <% else %>
+            <%= image_tag attachments[@quotation.product.images.try(:first).try(:attachment_file_name).try(:to_s)].url %>
+          <% end %>
+        </td>
+        <td class="description">
+          <p class="sku">
+            <%= @quotation.product.sku %>
+          </p>
+          <p class="name">
+            <%= @quotation.product.name %>
+          </p>
+        </td>
+        <td class="currency-value">
+          <%= Spree::Money.new(@quotation.product.price).to_s %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="contact-container">
+    Para más información o si tienes alguna duda respecto a tu pedido, favor comunicarte al <%= link_to Spree.t(:phone_contact), "tel:#{Spree.t(:phone_contact)}", class: 'contact-info' %> o al correo <%= link_to Spree.t(:email_contact), "mailto:#{Spree.t(:email_contact)}", class: 'contact-info' %>
+  </p>
+  
+</div>

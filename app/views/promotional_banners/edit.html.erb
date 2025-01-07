@@ -1,0 +1,5 @@
+<% content_for :page_title do %>
+  Editar Banner
+<% end %>
+
+<%= render 'form', url_path: "/promotional_banners/#{@promotional_banner.id}", method_type: :put  %>

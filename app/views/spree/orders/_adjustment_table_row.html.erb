@@ -1,0 +1,5 @@
+<% if adjustments.sum(&:amount) != 0 %>
+  	<td></td>
+	  <td colspan="2" class="col-total"><strong>Descuento: </strong></td>
+    <td align="left"><strong><span  class="text-primary"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></span></strong></td>
+<% end %>

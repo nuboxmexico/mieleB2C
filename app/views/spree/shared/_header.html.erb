@@ -1,0 +1,132 @@
+<% if !@taxonomies.nil? %>
+  <%
+  id_t = ""
+  class_t = ""
+  if ( (controller_name == 'products' || controller_name == 'taxons') && (action_name != 'show' || controller_name == 'taxons'))
+    id_t = 'categories-nav' 
+    class_t  = 'hidden'
+  end
+  %>
+<% end %>
+<div id="spree-header" class="react-menu">
+  <header class="" data-hook>
+    <nav id="header"  class="navbar navbar-fixed-top container-fluid-custom">
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="hidden-xs">
+            <%= render 'spree/shared/search' %>
+          </div>
+          <div class="hide-mobile-categories">
+            <%= render partial: 'spree/layouts/mobile_categories' %>
+          </div>
+        </div>
+        <div class="col-xs-4 no-sides">
+          <div id="logo" class="text-center" data-hook>
+            <a href="<%= spree.root_path%>">
+              <%= image_tag('logo/logo.png', alt: 'Logo', class: 'customer-logo')%>
+            </a> 
+          </div>
+        </div>
+        <div class="col-xs-4 no-padding">
+          <ul class="nav navbar-nav navbar-right">
+            <%= render partial: 'spree/shared/user_menu' %>
+            <%= render partial: 'spree/shared/login_bar' %>
+            <% unless params[:controller] == 'spree/checkout' %>
+              <%= render partial: 'spree/shared/cart_nav' %>
+            <% end %>
+            <%#= render partial: 'spree/layouts/cart_sidenav' %>
+          </ul>
+        </div>
+      </div>
+      <% if @taxonomies %>
+        <div class="row hidden-xs" id="header-categories-container">
+          <ul class="header-categories">
+            <% @taxonomies.each do |taxonomy| %>
+              <li class="header-category" 
+                  data-category="<%= taxonomy.name.downcase.gsub(' ', '-') %>">
+                <%= link_to seo_url(taxonomy.root) do %> 
+                  <%=  taxonomy.name %>
+                <%end%>
+              </li>
+            <% end %>
+            <li id="oportunities-section" class="header-category">
+              <%= link_to cyberday, spree.oportunities_path %>
+            </li>
+            <% if VirtualSupport.show? %>
+              <li id="virtual-support-section" class="header-category">
+                <%= link_to 'Agendar cita virtual', main_app.new_virtual_support_path %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= render 'spree/shared/search_mobile' %>
+    </nav>
+  </header>
+  <% if @taxonomies %>
+    <%= render 'spree/layouts/desktop_categories' %>
+  <% end %>
+  <section id="categories-react-mobile"></section>
+</div>
+<script>
+  var animation_duration = 400;
+  <% if @taxonomies.nil? %>
+    $(document).ready(function(){
+       if($(".header-categories").length < 1){
+          $( "#main-home-content" ).addClass("fix-home-padding");
+      }
+    });
+  <% end %>
+  $(window).scroll(function() {
+    if($(this).scrollTop()>5) {
+      $( "#main-home-content" ).addClass("fix-home-padding");
+      $( "#nav-burger" ).addClass("fix-nav-burger");
+      if (!$('#sub-categories').is(':hover')) {
+        $('#header-categories-container').slideUp({
+          progress: function(){
+                      //$('#mySidenav').css('top', $('#header').outerHeight());
+                    }
+        });
+      }
+
+    } else {
+      <% if !@taxonomies.nil? %>
+        $( "#main-home-content" ).removeClass("fix-home-padding");
+      <% end %>
+      $( "#nav-burger" ).removeClass("fix-nav-burger");
+      $('#header-categories-container').slideDown({
+        progress: function(){
+                    //$('#mySidenav').css('top', $('#header').outerHeight());
+                  }
+      });
+    }
+  });
+
+  $('#header').hover(
+    function(){
+      $('#header-categories-container').slideDown({
+        progress: function(){
+                    //$('#mySidenav').css('top', $('#header').outerHeight());
+                  }
+      });
+    },
+    function(){
+      if ($(window).scrollTop()>5 && !$('#sub-categories').is(':hover')) {
+        $('#header-categories-container').slideUp({
+          progress: function() {
+                      //$('#mySidenav').css('top', $('#header').outerHeight());
+                    }
+        });
+      }
+    }
+  );
+
+  $('.sub-category-container').hover(
+    function(){
+      $('#header-categories-container').show(0);
+    },
+    function(){
+
+    }
+  );
+</script>

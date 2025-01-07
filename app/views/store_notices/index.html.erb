@@ -1,0 +1,36 @@
+<% content_for :page_title do %>
+  Anuncios
+  <div class="pull-right">
+    <%= link_to main_app.new_store_notice_path, class: 'btn btn-success' do %>
+      Nuevo anuncio
+    <% end if StoreNotice.count == 0 %>
+  </div>
+<% end %>
+<% if StoreNotice.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Anuncio</th>
+        <th>Link</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @store_notices.each do |notice| %>
+        <tr>
+          <td><%= notice.content %></td>
+          <td><%= link_to notice.link, notice.link %></td>
+          <td>
+            <%= link_to main_app.store_notice_path(notice), method: :delete, class: 'btn btn-danger btn-sm remove-notice' do %>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>      
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info">
+    No hay anuncios activos
+  </div>
+<% end %>

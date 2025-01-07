@@ -1,0 +1,71 @@
+<div class="container-fluid">
+	<div class="row">
+		<h3 class="red-text my-account"><%= featured_category.name%></h3>
+    <br>
+    <div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 bhoechie-tab-menu">
+          <div class="list-group">
+          	
+            <a href="#" class="list-group-item active text-center link<%= featured_category.id%>">
+              <h4 class="fa fa-star"></h4><br/> <span class="hidden-xs"> Principales productos
+              </span>
+            </a>
+          	<% if featured_category.children.any?%>
+          		<% featured_category.children.limit(5).each do |child|%>
+		            <a href="#" class="list-group-item text-center link<%= featured_category.id%>">
+		              <h4 class="fa fa-tag"></h4><br/> <span class="hidden-xs"> <%= child.name %>
+		              </span>
+		            </a>
+            	<% end %>
+            <% end %>
+            <a href="<%= seo_url(featured_category) %>" class="list-group-item text-center">
+            	<h4 class="fa fa-plus"></h4><br/> <span class="hidden-xs"> Ver Todos
+      			</span>
+          	</a>
+          	
+         </div>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 bhoechie-tab">
+            <!-- flight section -->
+            <div class="bhoechie-tab-content tab-content-<%= featured_category.id%> active">
+                <p class="bhoechie-tittle"> <i class="fa fa-star bhoechie-icon" ></i> Principales productos
+                </p>
+                <hr>
+                <% @type_feat = "featured_category"%>
+    			<% featured_category.products.limit(4).each do |product| %>
+				   <%= render partial: 'spree/shared/product', locals: { product: product , type_v: @type_feat} %>
+    			<% end %>
+            </div>
+			<% if featured_category.children.any?%>
+          		<% featured_category.children.limit(5).each do |child|%>
+		            <!-- child section -->
+		            <div class="bhoechie-tab-content tab-content-<%= featured_category.id%>">
+		                <p class="bhoechie-tittle"> <i class="fa fa-tag bhoechie-icon" ></i> <%= child.name %>
+		                </p>
+		                <hr>
+		                <% @type_feat = "featured_category_child"%>
+		    			<% child.products.limit(4).each do |product| %>
+						   <%= render partial: 'spree/shared/product', locals: { product: product , type_v: @type_feat} %>
+		    			<% end %>
+		            </div>
+            	<% end %>
+            <% end %>
+        </div>
+    </div>
+	</div>
+</div>
+<br>
+<script>
+
+  $(document).ready(function() {
+    $("div.bhoechie-tab-menu>div.list-group>a.link<%= featured_category.id%>").click(function(e) {
+        e.preventDefault();
+        $(this).siblings('a.active').removeClass("active");
+        $(this).addClass("active");
+        var index = $(this).index();
+        $("div.bhoechie-tab>div.tab-content-<%= featured_category.id%>").removeClass("active");
+        $("div.bhoechie-tab>div.tab-content-<%= featured_category.id%>").eq(index).addClass("active");
+    });
+});
+</script>
+

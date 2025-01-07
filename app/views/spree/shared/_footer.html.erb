@@ -1,0 +1,104 @@
+<footer class="footer" id="home-footer">
+	<div class="info-footer">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-3 footer-data">
+				<h3>Contact Center</h3>
+				<div class="contact-info">
+					<div>
+						<span class="material-icons">phone</span> 
+						<%= link_to Spree.t(:phone_contact), "tel:#{Spree.t(:phone_contact)}" %>
+					</div>
+				<h3>Compra online</h3>
+					<div>
+						<span class="material-icons">mail_outline</span> 
+						<%= link_to Spree.t(:email_contact), "mailto:#{Spree.t(:email_contact)}" %>
+					</div>
+				<h3>Servicio técnico e instalaciones</h3>
+					<div>
+						<span class="material-icons">mail_outline</span> 
+						<a href="mailto:info@miele.cl">info@miele.cl</a>
+					</div>
+				
+				<h3>Síguenos en las redes</h3>
+					<div class="social-icons">
+						<!-- 
+						<a class="fb-link" href="https://www.facebook.com/mielechile" target="_blank"><i class="fa fa-facebook fa-2x" aria-hidden="true"></i></a>
+						 -->
+						<a href="https://instagram.com/miele_com/" target="_blank"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+						<!-- 
+						<a class="linkedin-link" href="https://www.linkedin.com/company/miele-electrodom%C3%A9sticos-ltd-/" target="_blank"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+						<a class="youtube-link" href="https://www.youtube.com/channel/UCW5b9ALHsMwZte1G_fSfb8A" target="_blank"><i class="fa fa-youtube fa-2x" aria-hidden="true"></i></a>
+						 -->
+						 <a href="https://instagram.com/miele_com/" style="padding-left: 10px";>mielechile</a>
+						 <a href="https://instagram.com/miele_com/" style="padding-left: 10px";>mielechile</a>
+					</div>
+					</div>
+		
+			
+				<br>
+				<!-- <ul>
+					<li>Horario de Atención:</li>
+					<li><%= Spree.t(:opening_hours) %></li>
+				</ul> -->
+			</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 footer-data">
+				<h3>Servicio al cliente</h3>
+				<ul>
+					<li>
+						<%= link_to 'Métodos y costos de envío', main_app.about_store_path('metodos-y-costos-de-envio') %>
+					</li>
+					<li>
+						<%= link_to 'Aviso Legal', main_app.about_store_path('aviso-legal') %>
+					</li>
+					<li>
+						<%= link_to 'Términos y Condiciones', main_app.about_store_path('terminos-y-condiciones') %>
+					</li>
+					<li>
+						<%= link_to 'Contáctanos', spree.contact_path %>
+					</li>
+					
+					<li>
+						<%= link_to 'Políticas de Privacidad', main_app.about_store_path('privacy-policy') %>
+					</li>
+					<li>
+						<%= image_tag('medios-pago.svg', :alt => "webpay logo", :class => "webpay-footer") %>
+					</li>
+					<li>
+						<p class="text-muted">&copy; <%= Date.today.year %> Miele. Todos los derechos reservados.</p>
+					</li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-3 footer-data">
+				<h3>Nuestra empresa</h3>
+				<ul>
+					<li>
+						<%= link_to 'Sobre Miele', main_app.about_store_path('sobre-miele') %>
+					</li>
+					<li>
+						<%= link_to 'Noticias y Eventos', main_app.about_store_path('noticias-y-eventos') %>
+					</li>
+					<!-- <li>
+						<%= link_to 'Garantía y Paquetes de Servicio', main_app.about_store_path('garantia-y-paquetes-de-servicio') %>
+					</li> -->
+					<li>
+						<%= link_to 'Miele Experience Center', main_app.about_store_path('miele-experience-center') %>
+					</li>
+					<li>
+						<div>
+							<div class="">
+								<%= render 'newsletter_subscribers/public_form' %>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		
+				
+			<div>
+				<%= image_tag('Logo_Immer_Besser.png', :alt => "Logo Immer Besser", :class => "logo-immer") %>
+			</div>
+			
+			
+		</div>
+	</div>
+</footer>

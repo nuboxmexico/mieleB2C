@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @province.name %>
+</p>
+
+<p>
+  <strong>Spree state:</strong>
+  <%= @province.spree_state %>
+</p>
+
+<%= link_to 'Edit', edit_province_path(@province) %> |
+<%= link_to 'Back', provinces_path %>

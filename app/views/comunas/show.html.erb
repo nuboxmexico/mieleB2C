@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @comuna.name %>
+</p>
+
+<p>
+  <strong>Province:</strong>
+  <%= @comuna.province %>
+</p>
+
+<%= link_to 'Edit', edit_comuna_path(@comuna) %> |
+<%= link_to 'Back', comunas_path %>

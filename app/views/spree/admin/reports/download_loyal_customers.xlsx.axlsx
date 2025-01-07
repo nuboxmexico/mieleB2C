@@ -1,0 +1,14 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Fidelidad de clientes') do |sheet|
+  headers = ['Email', 'Primera_orden', 'Última orden', 'Ordenes a la fecha', 'Valor promedio de orden']
+  sheet.add_row headers
+  
+  @buyers.each do |buyer|
+    sheet.add_row [buyer['email'],
+                   buyer['first_order'].strftime("%d/%m/%Y a las %H:%M:%S"),
+                   buyer['last_order'].strftime("%d/%m/%Y a las %H:%M:%S"),
+                   buyer['count'],
+                   "$ #{number_to_currency( buyer['total'].to_i, precision: 0 ,unit: "", separator: "", delimiter: ".")}"]
+  end
+end

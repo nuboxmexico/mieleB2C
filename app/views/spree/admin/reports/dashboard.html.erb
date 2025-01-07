@@ -1,0 +1,596 @@
+<!-- Cajas informativas -->
+<div class="row">
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-aqua">
+		    <div class="inner">
+		        <h3>
+		            <span id="new_orders_n">0</span>
+		        </h3>
+						<script>
+						$('#new_orders_n').animateNumber({ number: "<%= @new_orders %>" },
+						  2000);
+						</script>
+		        <p>
+		            Órdenes este mes
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-shopping-bag "></i>
+		    </div>
+		    <a href="/es/admin/orders" class="small-box-footer">
+		        Ver más <i class="fa fa-arrow-circle-right"></i>
+		    </a>
+		</div>
+	</div>
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-green">
+		    <div class="inner">
+		        <h3>
+		            <span id="new_users_n">0</span>
+		        </h3>
+						<script>
+						$('#new_users_n').animateNumber({ number: "<%= @new_users %>" },
+						  2000);
+						</script>
+		        <p>
+		            Nuevos clientes
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-user-plus"></i>
+		    </div>
+		    <a href="/admin/new_users" class="small-box-footer">
+		        Ver más <i class="fa fa-arrow-circle-right"></i>
+		    </a>
+		</div>
+	</div>
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-olive">
+		    <div class="inner">
+		        <h3>
+		            <span id="all_users_n">0</span>
+		        </h3>
+						<script>
+						$('#all_users_n').animateNumber({ number: "<%= @all_users %>" },
+						  2000);
+						</script>
+		        <p>
+		            Total clientes
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-users"></i>
+		    </div>
+		    <a href="/es/admin/users" class="small-box-footer">
+		        Ver más <i class="fa fa-arrow-circle-right"></i>
+		    </a>
+		</div>
+	</div>
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-yellow">
+		    <div class="inner">
+		        <h3>
+		            $ <span id="mont_total_n">0</span> <%= @letter_m %>
+		        </h3>
+						<script>
+						$('#mont_total_n').animateNumber({number: "<%= @mont_total %>" },
+						  2000);
+						</script>
+		        <p>
+		            Ventas del Mes
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-dollar"></i>
+		    </div>
+		    <a href="/es/admin/reports/sales_total" class="small-box-footer">
+		        Ver más <i class="fa fa-arrow-circle-right"></i>
+		    </a>
+		</div>
+	</div>
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-red">
+		    <div class="inner">
+		        <h3>
+		            $ <span id="total_n">0</span> <%= @letter_t %>
+		        </h3>
+						<script>
+						$('#total_n').animateNumber({number: "<%= @total %>" },
+						  2000);
+						</script>
+		        <p>
+		            Ventas Totales
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-money"></i>
+		    </div>
+		    <a href="/es/admin/reports/sales_total?q[completed_at_gt]=<%= Spree::Order.where.not(completed_at: nil).order('completed_at asc').try(:first).try(:completed_at).try(:strftime, "%d/%m/%Y") %>&q[completed_at_lt]=<%=Date.today.strftime("%d/%m/%Y")%>" class="small-box-footer">
+		        Ver más <i class="fa fa-arrow-circle-right"></i>
+		    </a>
+		</div>
+	</div>
+
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-orange">
+		    <div class="inner">
+		        <h3>
+		            <span id="visitors">0</span>
+		        </h3>
+						<script>
+						$('#visitors').animateNumber({number: "<%= @visitors %>" },
+						  2000);
+						</script>
+		        <p>
+		            Visitantes
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-user-secret"></i>
+		    </div>
+		    <a href="/es/admin/reports/visits_over_time" class="small-box-footer">
+		        Ver más <i class="fa fa-arrow-circle-right"></i>
+		    </a>
+		</div>
+	</div>
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-purple">
+		    <div class="inner">
+		        <h3>
+		            <span id="returners">0</span>
+		        </h3>
+						<script>
+						$('#returners').animateNumber({number: "<%= @returners %>" },
+						  2000);
+						</script>
+		        <p>
+		            Sesiones
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-user-circle-o"></i>
+		    </div>
+		    <a href="/es/admin/reports/visits_over_time" class="small-box-footer">
+		        Ver más <i class="fa fa-arrow-circle-right"></i>
+		    </a>
+		</div>
+	</div>
+
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-maroon">
+		    <div class="inner">
+		        <h3>
+		            <span id="abandoned">0</span> %
+		        </h3>
+						<script>
+						$('#abandoned').animateNumber({number: "<%= @abandoned %>" },
+						  2000);
+						</script>
+		        <p>
+		            Carritos abandonados
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-times" aria-hidden="true"></i>
+		    </div>
+		    <a href="/admin/orders?q%5Bcompleted_at_not_null%5D=0" class="small-box-footer">
+		        Ver más <i class="fa fa-arrow-circle-right"></i>
+		    </a>
+		</div>
+	</div>
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-fuchsia">
+		    <div class="inner">
+		        <h3>
+		            $ <span id="avg_ticket">0</span> <%= @letter_avg %>
+		        </h3>
+						<script>
+						$('#avg_ticket').animateNumber({number: "<%= @avg_ticket %>" },
+						  2000);
+						</script>
+		        <p>
+		            Ticket promedio
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-check-circle" aria-hidden="true"></i>
+		    </div>
+		    <a href="/admin/orders" class="small-box-footer">
+		        Ver más <i class="fa fa-arrow-circle-right"></i>
+		    </a>
+		</div>
+	</div>
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-lime" data-toggle="tooltip" data-placement="top" title="Cantidad de visitas de usuarios registrados vs compras realizadas.">
+		    <div class="inner">
+		        <h3>
+		            <span id="conversion">0</span> %
+		        </h3>
+						<script>
+						$('#conversion').animateNumber({number: "<%= @conversion %>" },
+						  2000);
+						</script>
+		        <p>
+		            Tasa de conversión
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-percent" aria-hidden="true"></i>
+		    </div>
+		</div>
+	</div>
+	<div class="col col-lg-3 col-md-3 col-sm-6">
+		<div class="small-box bg-teal" data-toggle="tooltip" data-placement="top" title="Cantidad de clientes que han comprado más de 1 vez en el mes.">
+		    <div class="inner">
+		        <h3>
+		            <span id="repurchase">0</span> %
+		        </h3>
+						<script>
+						$('#repurchase').animateNumber({number: "<%= @repurchase %>" },
+						  2000);
+						</script>
+		        <p>
+		            Tasa de recompra
+		        </p>
+		    </div>
+		    <div class="icon">
+		        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+		    </div>
+		</div>
+	</div>
+</div>
+
+<!-- Gráficos -->
+<div class="row">
+	<div class="col col-lg-6 col-md-6 col-sm-6">
+		<div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title"> <i class="fa fa-bar-chart"></i>&nbsp; Ventas los últimos 6 meses</h3>
+           	</div>
+            <!-- /.box-header -->
+            <div class="box-body">
+				<div id="chart"></div>
+            </div>
+            <!-- /.box-body -->
+      	</div>
+      	<!-- /.box -->
+	</div>
+	<div class="col col-lg-6 col-md-6 col-sm-6">
+		<div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-tasks"></i>&nbsp; Órdenes</h3>
+           	</div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            	<h5>Órdenes completadas</h5>
+				<div class="progress">
+					<div id="complete-bar" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0"
+					aria-valuemin="0" aria-valuemax="100" style="width:0%">
+					0%
+					</div>
+				</div>
+				<h5>Órdenes en el carro</h5>
+				<div class="progress">
+					<div id="cart-bar"  class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="<%= @cart%>"
+					aria-valuemin="0" aria-valuemax="100" style="width:0%">
+					</div>
+				</div> 
+				<h5>Órdenes pendientes por indicar dirección</h5>
+				<div class="progress">
+					<div id="address-bar" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="0"
+					aria-valuemin="0" aria-valuemax="100" style="width:0%">
+					0%
+					</div>
+				</div>
+				<h5>Órdenes pendientes por delivery</h5>
+				<div class="progress">
+					<div  id="delivery-bar" class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="0"
+					aria-valuemin="0" aria-valuemax="100" style="width:0%">
+					0%
+					</div>
+				</div>
+				<h5>Órdenes pendientes de pago</h5>
+				<div class="progress">
+					<div id="payment-bar" class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="0"
+					aria-valuemin="0" aria-valuemax="100" style="width:0%">
+					0%
+					</div>
+				</div> 
+            </div>
+            <!-- /.box-body -->
+      	</div>
+      	<!-- /.box -->
+	</div>
+</div>
+
+ <!-- Otros -->
+<div class="row">
+	<div class="col container-fluid">
+		<div class="box box-primary">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-shopping-cart "></i> &nbsp; Últimas órdenes</h3>
+           	</div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive">
+            	<% if @orders.any? %>
+					  <table class="table table-condensed" id="listing_orders" data-hook>
+					    <thead>
+					      <tr data-hook="admin_orders_index_headers">
+					        <th><%= I18n.t(:created_at, scope: 'activerecord.attributes.spree/order') %></th>
+					        <th><%= I18n.t(:number, scope: 'activerecord.attributes.spree/order') %></th>
+					        <th><%= I18n.t(:considered_risky, scope: 'activerecord.attributes.spree/order') %></th>
+					        <th><%= I18n.t(:state, scope: 'activerecord.attributes.spree/order') %></th>
+					        <th><%= I18n.t(:email, scope: 'activerecord.attributes.spree/order') %></th>
+					        <th><%= I18n.t(:total, scope: 'activerecord.attributes.spree/order') %></th>
+					        <th data-hook="admin_orders_index_header_actions" class="actions"></th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    <% @orders.each do |order| %>
+					      <tr data-hook="admin_orders_index_rows" class="state-<%= order.state.downcase %> <%= cycle('odd', 'even') %>">
+					        <td>
+					          <%= order_time(@show_only_completed ? order.completed_at : order.created_at) %>
+					        </td>
+					        <td><%= link_to order.number, edit_admin_order_path(order) %></td>
+					        <td>
+					          <span class="label label-<%= order.considered_risky ? 'considered_risky' : 'considered_safe' %>">
+					            <%= order.considered_risky ? Spree.t("risky") : Spree.t("safe") %>
+					          </span>
+					        </td>
+					        <td>
+					          <span class="label label-<%= order.state.downcase %>"><%= Spree.t("order_state.#{order.state.downcase}") %></span>
+					        </td>
+					        <td>
+					          <% if order.user %>
+					            <%= link_to order.email, edit_admin_user_path(order.user) %>
+					          <% elsif !order.email.nil? %>
+					            <%= mail_to order.email %>
+					          <% else %>
+					          	Anónimo
+					          <% end %>
+					        </td>
+					        <td><%= order.display_total.to_html %></td>
+					        <td class='actions actions-1' data-hook="admin_orders_index_row_actions">
+					          <%= link_to_edit_url edit_admin_order_path(order), title: "admin_edit_#{dom_id(order)}", no_text: true %>
+					        </td>
+					      </tr>
+					    <% end %>
+					    </tbody>
+					  </table>
+					<% else %>
+					  <div class="alert alert-info no-objects-found">
+					    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Order)) %>,
+					    <%= link_to(Spree.t(:add_one), new_admin_order_url) if can? :create, Spree::Order %>!
+					  </div>
+					<% end %>
+            		<br>
+            		<a class="icon-link with-tip action-shopping-cart" href="/es/admin/orders" data-original-title="" title="Ver todos">Ver más <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+            <!-- /.box-body -->
+      	</div>
+      	<!-- /.box -->
+	</div>
+</div>
+<div class="row">
+	<div class="col container-fluid">
+		<div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title"> <i class="fa fa-bar-chart"></i>&nbsp;Top productos más vendidos</h3>
+           	</div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            	 <div id="product-chart"></div>
+            </div>
+            <!-- /.box-body -->
+      	</div>
+      	<!-- /.box -->
+
+	</div>
+</div>
+
+<div class="row">
+	<div class="col col-lg-12">
+		<div class="box box-warning">
+            <div class="box-header">
+              <h3 class="box-title"> <i class="fa fa-bar-chart"></i>&nbsp; Ventas por regiones</h3>
+           	</div>
+            <!-- /.box-header -->
+            <div class="box-body">
+				<div id="chart-sales-for-states"></div>
+            </div>
+            <!-- /.box-body -->
+      	</div>
+      	<!-- /.box -->
+	</div>
+</div>
+
+<script>
+
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
+$(function() {
+  var int1 = parseInt("<%= @complete%>");
+	var current_progress = 0;
+	if (int1 > 0){
+		var interval = setInterval(function() {
+		    current_progress += 1;
+		    $("#complete-bar")
+		    .css("width", current_progress + "%")
+		    .attr("aria-valuenow", current_progress)
+		    .text(current_progress + "%");
+		    if (current_progress >= int1)
+		        clearInterval(interval);
+		}, 80);
+	}
+});
+$(function() {
+  var int2 = parseInt("<%= @cart%>");
+  var current_progress = 0;
+  if (int2 > 0){
+	  var interval = setInterval(function() {
+	      current_progress += 1;
+	      $("#cart-bar")
+	      .css("width", current_progress + "%")
+	      .attr("aria-valuenow", current_progress)
+	      .text(current_progress + "%");
+	      if (current_progress >= int2)
+	          clearInterval(interval);
+	  }, 80);
+  }
+});
+$(function() {
+  var int3 = parseInt("<%= @address%>");
+  var current_progress = 0;
+  if (int3 > 0){
+	  var interval = setInterval(function() {
+	      current_progress += 1;
+	      $("#address-bar")
+	      .css("width", current_progress + "%")
+	      .attr("aria-valuenow", current_progress)
+	      .text(current_progress + "%");
+	      if (current_progress >= int3)
+	          clearInterval(interval);
+	  }, 80);
+  }
+});
+$(function() {
+  var int4 = parseInt("<%= @delivery%>");
+  var current_progress = 0;
+  if (int4 > 0){
+	  var interval = setInterval(function() {
+	      current_progress += 1;
+	      $("#delivery-bar")
+	      .css("width", current_progress + "%")
+	      .attr("aria-valuenow", current_progress)
+	      .text(current_progress + "%");
+	      if (current_progress >= int4)
+	          clearInterval(interval);
+	  }, 80);
+  }
+});
+$(function() {
+	var int5 = parseInt("<%= @payment%>");
+  var current_progress = 0;
+  if (int5 > 0){
+	  var interval = setInterval(function() {
+	      current_progress += 1;
+	      $("#payment-bar")
+	      .css("width", current_progress + "%")
+	      .attr("aria-valuenow", current_progress)
+	      .text(current_progress + "%");
+	      if (current_progress >= int5)
+	          clearInterval(interval);
+	  }, 80);
+  }
+});
+
+///Gŕafico de ventas por meses
+var months = Array();
+var ammount = Array();
+<% @ammount_by_month.each do |key,value| %>
+	months.push("<%= key %>")
+	ammount.push("<%= value %>")
+<% end %>
+months.reverse();
+ammount.reverse();
+ammount.unshift("Ingresos")
+var chart = c3.generate({
+    bindto: '#chart',
+    data: {
+      columns: [
+        ammount
+      ],
+      type: 'bar'
+    },
+    bar: {
+        width: {
+            ratio: 0.5 // this makes bar width 50% of length between ticks
+        }
+    },
+    axis: {
+        x: {
+            type: 'category',
+            categories: months
+        },
+        y : {
+            tick: {
+                format: d3.format("$,")
+			}
+        }
+    }
+});	
+
+///Gŕafico de ventas por provincia
+var provinces = Array();
+var quantity = Array();
+<% (0..(@sales_for_states.count-1)).each do |n|%>
+	provinces.push("<%= @sales_for_states[n][0] %>")
+	quantity.push("<%= @sales_for_states[n][1] %>")
+<% end %>
+quantity.unshift("Ventas")
+var chart = c3.generate({
+    bindto: '#chart-sales-for-states',
+    data: {
+      columns: [
+        quantity
+      ],
+      type: 'bar',
+      colors: {
+            Ventas: '#f39c12'
+         }
+    },
+    bar: {
+        width: {
+            ratio: 0.5 // this makes bar width 50% of length between ticks
+        }
+    },
+    axis: {
+        x: {
+            type: 'category',
+            categories: provinces
+        }
+    },
+    legend: {
+        show: false
+    }
+});	
+
+// Gráfico de ventas por productos
+
+var products = Array();
+var quantity = Array();
+
+<% (0..(@top_sellers.count-1)).each do |n|%>
+	products.push("<%= @top_sellers[n][0] %>")
+	quantity.push("<%= @top_sellers[n][1] %>")
+<% end %>
+quantity.unshift("Ventas")
+var chart = c3.generate({
+    bindto: '#product-chart',
+    data: {
+      columns: [
+        quantity
+      ],
+      type: 'bar',
+      colors: {
+            Ventas: '#7DB942'
+         }
+    },
+    bar: {
+        width: {
+            ratio: 0.5 // this makes bar width 50% of length between ticks
+        }
+    },
+    axis: {
+        x: {
+            type: 'category',
+            categories: products
+        }
+    },
+    legend: {
+        show: false
+    }
+});	
+</script>

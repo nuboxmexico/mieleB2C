@@ -1,0 +1,52 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:reports) %>
+<% end %>
+
+<table class="table table-hover">
+  <thead>
+    <tr data-hook="reports_header">
+      <th><%= Spree.t(:name) %></th>
+      <th><%= Spree.t(:description) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reports.each do |key, value| %>
+    <tr data-hook="reports_row">
+      <td><i class="fa fa-line-chart" aria-hidden="true"></i> <%= link_to value[:name], send("#{key}_admin_reports_url".to_sym) %></td>
+      <td><%= value[:description] %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td><i class="fa fa-ticket" aria-hidden="true"></i> <%= link_to "Promociones", send("promotions_admin_reports_url".to_sym) %></td>
+      <td>Datos de uso de los cupones de descuento generados</td>
+    </tr> 
+    <tr>
+      <td><i class="fa fa-gift" aria-hidden="true"></i> <%= link_to "Venta de productos", send("sales_product_total_admin_reports_url".to_sym) %></td>
+      <td>Total de ventas por cada uno de los productos de la tienda.</td>
+    </tr>
+    <tr>
+      <td><i class="fa fa-eye" aria-hidden="true"></i> <%= link_to "Vistas de productos", send("viewed_product_total_admin_reports_url".to_sym) %></td>
+      <td>Reporte del total de vistas para los productos de la tienda.</td>
+    </tr>
+    <tr>
+      <td><i class="fa fa-users" aria-hidden="true"></i> <%= link_to "Lealtad de clientes", send("loyal_customers_admin_reports_url".to_sym) %></td>
+      <td>Datos varios de fidelidad del los clientes con el ecommerce.</td>
+    </tr>
+    <tr>
+      <td><i class="fa fa-area-chart" aria-hidden="true"></i> <%= link_to "Ticket promedio últimos 12 meses", send("customers_over_time_admin_reports_url".to_sym) %></td>
+      <td>Análisis de tickets durante los últimos 12 meses.</td>
+    </tr>
+    <tr>
+      <td><i class="fa fa-bar-chart" aria-hidden="true"></i> <%= link_to "Visitas en los últimos 12 meses", send("visits_over_time_admin_reports_url".to_sym) %></td>
+      <td>Análisis de visitas a la tienda electrónica durante los últimos 12 meses.</td>
+    </tr>
+    <tr>
+      <td><i class="fa fa-file-text" aria-hidden="true"></i> <%= link_to "Páginas Visitadas", send("visits_by_page_admin_reports_url".to_sym) %></td>
+      <td>Reporte de visitas para las páginas de la tienda electrónica.</td>
+    </tr> 
+    <tr>
+      <td><i class="fa fa-search" aria-hidden="true"></i> <%= link_to "Palabras más buscadas", send("searches_admin_reports_url".to_sym) %></td>
+      <td>Reporte de palabras más buscadas por los clientes del ecommerce.</td>
+    </tr>               
+  </tbody>
+</table>

@@ -1,0 +1,13 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Productos vistos') do |sheet|
+  headers = ['TNR', 'Producto', 'Vistas', 'Porcentaje']
+  sheet.add_row headers
+  
+  @product_array.each do |product|
+    sheet.add_row [product['sku'],
+                   product['product'],
+                   number_to_currency(product["count"].to_i,precision: 0 ,unit: "", separator: "", delimiter: "."),
+                   "#{product['percent']}%"]
+  end
+end

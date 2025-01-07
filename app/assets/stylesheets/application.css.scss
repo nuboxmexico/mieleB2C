@@ -1,0 +1,110 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require alertify.min
+ *= require font-awesome
+ *= require taxon_nav
+ *= require stars
+ *= require box
+ *= require small_box 
+ *= require ribbon
+ *= require vertical_panel
+ *= require variant_radio_btn
+ *= require custom
+ *= requere mobile_nav
+ *= require select2.min
+ *= require loader
+ *= require suggestions
+ *= require tool-tip-custom
+ *= require filter-checkboxes
+ *= require checkout_steps
+ *= require amazon-menu
+ *= require mobile_nav
+ *= require spree/categories
+ *= require miele
+ *= require sweetalert2.min
+ *= require comparator
+ *= require contact
+ *= require simple-scrollbar
+ *= require errors
+ *= require swiper.min
+ *= require slick
+ *= require slick-theme
+ *= require_self
+ */
+
+.alertify-notifier {
+  z-index: 99999;
+}
+
+#cover-all-screen {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0, 0.3);
+  z-index: 999;
+  position: fixed;
+  top: 120px;
+}
+
+.text-left {
+  text-align: left;
+  text-align: left;
+}
+
+.material-icons {
+  font-family: 'Material Icons' !important;
+}
+
+.pagy-nav > span{
+  color: #1F1F1F;
+  background-color: #FFF;
+  border: none;
+  cursor: default;
+  z-index: 3;
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  text-decoration: none;
+  margin-right: 15px;
+  text-decoration: none; 
+}
+
+.pagy-nav > span:hover{
+  background-color: #fafafa;
+}
+
+.pagy-nav > .active{
+  color: #8C0014;
+  border: 1px solid #8C0014;
+}
+
+
+@import url("https://p.typekit.net/p.css?s=1&k=yiu2xvg&ht=tk&f=26053.26062.26063&a=3959545&app=typekit&e=css");
+
+@font-face {
+  font-family:"acumin-pro";
+  src:url("https://use.typekit.net/af/6d4bb2/00000000000000003b9acafc/27/l?subset_id=2&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/6d4bb2/00000000000000003b9acafc/27/d?subset_id=2&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/6d4bb2/00000000000000003b9acafc/27/a?subset_id=2&fvd=n7&v=3") format("opentype");
+  font-display:auto;font-style:normal;font-weight:700;
+}
+
+@font-face {
+  font-family:"acumin-pro";
+  src:url("https://use.typekit.net/af/46da36/00000000000000003b9acaf6/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/46da36/00000000000000003b9acaf6/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/46da36/00000000000000003b9acaf6/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+  font-display:auto;font-style:normal;font-weight:400;
+}
+
+@font-face {
+  font-family:"acumin-pro";
+  src:url("https://use.typekit.net/af/027dd4/00000000000000003b9acafa/27/l?subset_id=2&fvd=n6&v=3") format("woff2"),url("https://use.typekit.net/af/027dd4/00000000000000003b9acafa/27/d?subset_id=2&fvd=n6&v=3") format("woff"),url("https://use.typekit.net/af/027dd4/00000000000000003b9acafa/27/a?subset_id=2&fvd=n6&v=3") format("opentype");
+  font-display:auto;font-style:normal;font-weight:600;
+}

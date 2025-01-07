@@ -1,0 +1,68 @@
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-dirty is-upgraded">
+  <%= address_form.text_field :firstname, class: 'mdl-textfield__input', required: true, value: spree_current_user.try(:ship_address).try(:firstname) %>
+  <%= address_form.label 'Nombre', class: 'mdl-textfield__label' %>
+</div>
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-dirty is-upgraded">
+  <%= address_form.text_field :lastname, class: 'mdl-textfield__input', required: true, value: spree_current_user.try(:ship_address).try(:lastname) %>
+  <%= address_form.label 'Apellido', class: 'mdl-textfield__label' %>
+</div>
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-dirty is-upgraded">
+  <%= address_form.text_field :phone, class: 'mdl-textfield__input phone-input', required: true, value: spree_current_user.try(:ship_address).try(:phone) %>
+  <%= address_form.label 'Teléfono', class: 'mdl-textfield__label' %>
+</div>
+
+
+<h3>Ingresa tus datos de despacho e instalación</h3>
+<% if Spree::Config[:address_requires_state] %>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom is-dirty">
+    <div>
+      <%# have_states = address.country.states.any? if address %>
+      <%= address_form.label :state, class: 'mdl-textfield__label', id: "state-required" do %>
+        Región
+      <% end %>
+      <%== state_elements = [
+         address_form.collection_select(:state_id, @country.states,
+                            :id, :name,
+                            {include_blank: true, selected: spree_current_user.try(:ship_address).try(:state_id), required: true},
+                            {class: 'form-control required',  autocomplete: 'address-level1', id: 'state-selector'})
+         ].join.gsub('"', "'").gsub("\n", "")
+      %>
+    </div>
+    <noscript>
+      <%= address_form.text_field :state_name, class: 'required' %>
+    </noscript>
+  </div>
+<% end %>
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom is-dirty form-separator">
+  <%= address_form.label :comuna_id, class: 'mdl-textfield__label', id: "select_comuna" do %>
+    Comuna
+  <% end %>
+  <%= address_form.collection_select :comuna_id, [], :id, :name, {selected: nil, required: true}, {class: 'required'} %>
+</div>
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom">
+  <%= address_form.text_field :address1, class: 'mdl-textfield__input required', required: true, value: spree_current_user.try(:ship_address).try(:address1) %>
+  <%= address_form.label :address1, class: 'mdl-textfield__label' do %>
+    Dirección (Calle, número, depto)
+  <% end %>
+  <span class="mdl-textfield__error"></span>
+</div>
+
+<%= address_form.hidden_field :country_id, value: @country.id %>
+<%= address_form.hidden_field :city, value: '-' %>
+
+<script>
+  $('#state-selector').select2();
+  $('#quotation_address_comuna_id').select2();
+  $('#state-selector').change(function(){
+    getComunasByRegion('#state-selector', '#quotation_address_comuna_id', '<%= spree_current_user.try(:ship_address).try(:comuna_id) %>');
+  });
+  <% if spree_current_user.try(:ship_address).try(:state_id) %>
+    $('#state-selector').change();
+  <% end %>
+
+</script>

@@ -1,0 +1,69 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:reports), spree.admin_reports_url %> /
+  Informe de ticket promedio en los últimos 12 meses
+<% end %>
+<%= link_to(admin_download_customers_over_time_url(format: 'xlsx'), onclick: '$(".loader-page").remove();') do %>
+  <div class="btn btn-success"><i class="fa fa-download"></i> Descargar</div>
+<% end %>
+<br>
+<div id="clients-chart" style="margin-top: 15px"></div>
+<br>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Mes</th>
+        <th>Oŕdenes del Mes</th>
+        <th>Ingresos del Mes</th>
+        <th>Promedio de Tickets</th>
+      </tr>
+    </thead>
+    <tbody>
+       <% @last_year.each do |month| %>
+        <% total = month["orders"].sum(:total).to_i %>
+        <% quantity = month["orders"].size %>
+        <tr>
+        	<td><%= month["month"].capitalize%></td>
+        	<td><%= quantity %></td>
+        	<td>$ <%= number_to_currency(month["orders"].sum(:total).to_i,precision: 0 ,unit: "", separator: "", delimiter: ".") %></td>
+          <td>$ <%= quantity.zero? ? 0 : number_to_currency((total / quantity).to_i, precision: 0, unit: "", separator: "", delimiter: ".") %></td>
+        </tr>
+      <% end %>
+      <tr>
+      	<th>Resumen</th>
+      	<th><%= @orders %></th>
+      	<th>$ <%=  number_to_currency(@total.to_i,precision: 0 ,unit: "", separator: "", delimiter: ".") %></th>
+        <th>$ <%= @orders.zero? ? 0 : number_to_currency((@total / @orders).to_i, precision: 0, unit: "", separator: "", delimiter: ".") %></th>
+      </tr>
+    </tbody>
+</table>
+<script>
+  ///Gŕafico de ventas por meses
+var months = Array();
+var ticket_averages = Array();
+var orders = Array();
+<% @last_year.each do |month| %>
+  <% total = month["orders"].sum(:total).to_i %>
+  <% quantity = month["orders"].size %>
+  months.push("<%= month["month"] %>");
+  ticket_averages.push("<%= quantity.zero? ? 0 : total / quantity %>");
+  orders.push("<%= month["orders"].size %>");
+<% end %>
+ticket_averages.unshift("Promedio de tickets");
+orders.unshift("Número de órdenes");
+var chart = c3.generate({
+    bindto: '#clients-chart',
+    data: {
+      columns: [
+        ticket_averages,
+        orders
+      ],
+      type: 'line'
+    },
+    axis: {
+        x: {
+            type: 'category',
+            categories: months
+        }
+    }
+}); 
+</script>

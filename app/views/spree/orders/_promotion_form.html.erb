@@ -1,0 +1,25 @@
+<div id="promotional-code-form" class="col-xs-10 col-xs-offset-2">
+  <%= form_for order, url: custom_apply_coupon_path, method: :post, html: {id: "coupon_code_form_custom"}, remote: true do |order_form| %>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom">
+      <input class="mdl-textfield__input" type="text" name="order[coupon_code_custom]" id="order_coupon_code_custom">
+      <label class="mdl-textfield__label" for="order_coupon_code_custom">Código de descuento</label>
+    </div>
+    <div>
+      
+      <input type="hidden" value="<%=order.number%>" name="order[number]">
+      <button class="btn btn-primary btn-sm" type="submit" id="apply-coupon-code">
+        APLICAR
+      </button>
+    </div>
+  <% end %>
+</div>
+<script>
+  componentHandler.upgradeElements($('#coupon_code_form_custom .mdl-textfield').get());
+
+  $("#apply-coupon-code").off('click');
+  $("#apply-coupon-code").click(function(e) {
+    e.preventDefault()
+    $('.loader-page').fadeIn();
+    $(this).submit();
+  });
+</script>

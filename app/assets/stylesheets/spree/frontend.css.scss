@@ -1,0 +1,47 @@
+/*
+* This is a manifest file that includes stylesheets for spree_frontend
+ *= require spree/frontend/frontend_bootstrap
+ *= require_self
+*/
+
+@import "spree/frontend/variables";
+
+
+.customer-logo{
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+}
+.panel_opt, .panel_head_opt{
+	background-color: $brand-var2;
+	border-color:$brand-var2;
+}
+.panel_head_opt{
+	background-color:$brand-primary!important;
+}
+.decorator{
+	margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.product_tittle_show{
+ 	margin-bottom: -10px!important;
+}
+.borderless td, .borderless th {
+    border: none!important;
+}
+.tab-pane{
+	background-color: #fff!important;
+}
+.author{
+	font-weight: bold!important;
+	color: #757575!important;
+}
+.my-account{
+	font-size: 24px;
+	color: #1F1F1F;
+}
+.sign-out-text{
+	font-size: 14px;
+	color: $brand-primary;
+	text-transform: uppercase;
+}

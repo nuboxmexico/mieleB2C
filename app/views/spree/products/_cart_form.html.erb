@@ -1,0 +1,126 @@
+<%= form_for :order, url: populate_orders_path, remote: true, authenticity_token: true do |f| %>
+  <div class="row" id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+    <% if @product.variants_and_option_values(current_currency).any? %>
+      <div id="product-variants" class="row">
+        <h4 class="product-section-title"><%= Spree.t(:variant_placeholder) %></h4>
+        <ul class="list-group">
+          <% @product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+            <div class="div-radio">
+              <%= radio_button_tag "variant_id", variant.id, index == 0,
+                  'data-price' => variant.price_in(current_currency).money, 
+                  'data-in-stock' => variant.can_supply?,
+                   class: "radio"
+              %>
+              <%= label_tag "variant_id_#{ variant.id }", class: "label-radio" do %>
+                <span class="variant-description">
+                  <%= variant_options variant %>
+                </span>
+              <% end %>
+                <% if variant_price variant %>
+                  <span class="price diff"><%= variant_price variant %></span>
+                <% end %>
+                <% unless variant.can_supply? %>
+                  <span class="out-of-stock"><%= Spree.t(:out_of_stock) %></span>
+                <% end %>
+            </div>
+          <% end%>
+        </ul>
+      </div>
+    <% else %>
+      <%= hidden_field_tag "variant_id", @product.master.id %>
+    <% end %>
+
+    <% if @product.price_in(current_currency) && !@product.price.nil? %>
+      <%
+    	price = @product.price
+      offer_price = @product.master.prices[0].offer_price
+      if offer_price
+        if offer_price > 0
+          discount = 100 - ((offer_price.to_i)*100/price.to_i)
+        else
+          discount = 0
+        end
+      else
+        discount = 0
+      end
+    	%>
+      <div class="row">
+        
+
+        <% if @product.master.can_supply? %>
+          <link itemprop="availability" href="https://schema.org/InStock" />
+        <% elsif @product.variants.empty? %>
+          <div class="out-of-stock">
+            <%= inline_svg 'miele-icon-advertencia.svg' %>
+            <span><%= Spree.t(:without_stock) %></span>
+          </div>
+        <% end %>
+
+        <% if @product.can_supply? %>
+          <div>
+            <div class="add-to-cart-show">
+              <%= number_field_tag :quantity, 1, class: 'title quantity form-control pull-left hidden', min: 1 %>
+
+              <%= button_tag class: 'btn btn-tertiary', id: 'add-to-cart-button', type: :submit do %>
+                <span>Añadir al carro </span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div id="product-price">
+        <br />
+        <div>
+          <span class="price selling not-available" itemprop="price">
+            <%= Spree.t('product_not_available_in_this_currency') %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({ ecommerce: null });
+  dataLayer.push({
+    event: "view_item",
+    ecommerce: {
+      items: [
+        {
+          "item_name": "<%= @product.name %>", // Nombre del @producto: “Aspiradora ADER”
+          "item_id": "<%= @product.sku %>", // Identificador único del @producto “12345”
+          "item_brand": "Miele", // Marca del @producto : “Miele”
+          "item_category": "<%= @product.taxons.last.try(:name) %>", // Categoría del @producto : “aspiradoras”
+          "item_variant": "", // Variantes del @producto: “Azul”
+          "price": "<%= @product.price %>", // Precio neto del producto : 45000
+          "quantity": 1 // Valor numérico de cantidad: 1
+        } 
+      ]
+    }
+  });
+  $("#add-to-cart-button").off('click');
+  $("#add-to-cart-button").click(function(e) {
+    e.preventDefault()
+    $(this).empty().append($('<i>').attr('class', 'fa fa-spinner fa-spin'));
+    $(this).append('  Agregando al carro...');
+    $(this).submit();
+    dataLayer.push({ ecommerce: null });
+    dataLayer.push({
+      event: "add_to_cart",
+      ecommerce: {
+        items: [
+          {
+            "item_name": "<%= @product.name %>", // Nombre del producto: “Aspiradora ADER”
+            "item_id": "<%= @product.sku %>", // Identificador único del producto “12345”
+            "item_brand": "Miele", // Marca del producto : “Miele”
+            "item_category": "<%= @product.taxons.last.try(:name) %>", // Categoría del producto : “aspiradoras”
+            "item_variant": "", // Variantes del producto: “Azul”
+            "price": "<%= @product.price %>", // Precio neto del producto : 45000
+            "quantity": 1 // Valor numérico de cantidad: 1
+          } 
+        ]
+      }
+    });
+  });
+</script>

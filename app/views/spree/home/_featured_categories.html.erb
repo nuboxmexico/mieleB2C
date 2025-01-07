@@ -1,0 +1,168 @@
+<section  id="featured-categories-container" class="container-fluid container-fluid-custom category-container">
+    <div class="row">
+      <div class="item-category col col-sm-6">
+        <%
+        if @taxons.any? 
+          url = 'categories/default.jpg'
+          seourl =  (@taxons[0]).nil? ? "#" : seo_url(@taxons[0])
+          title = 'Categoria 1'
+          unless (banner = @banners.find_by(element_id: "category-edit-1")).nil?
+            url = banner.image.url(:large)
+          end
+          unless banner.try(:title_text).nil?
+            title = banner.title_text 
+          end
+          unless (taxon = @taxons.find_by(category_home_id: "category-edit-1")).nil?
+            seourl = seo_url(taxon)
+          end
+        end
+        %>
+        <figure class="image-category-container">
+          <%= link_to seourl do %>
+            <%= image_tag(url, class: "img-responsive") %> 
+            <figcaption class="item-category-title"><%= title%></figcaption>
+          <% end %>
+          <div class="overlay-category">
+          </div>
+        </figure>
+        <% unless current_spree_user.nil? %>
+          <% if current_spree_user.admin? %>
+            <a href="#" id="category-edit-1" onclick="handleBannerEdit(event)" class="btn btn-primary btn-edit-banner"><i class="glyphicon glyphicon-pencil"></i></a>
+          <%end%>
+        <%end%>   
+      </div>
+      <br class="hidden-sm hidden-md hidden-lg">
+      <div class="item-category col col-sm-6">
+        <%
+        if @taxons.any?
+          url = 'categories/default.jpg'
+          seourl =  (@taxons[1]).nil? ? "#" : seo_url(@taxons[1])
+          title = 'Categoria 2'
+          unless (banner = @banners.find_by(element_id: "category-edit-2")).nil?
+            url = banner.image.url(:large)
+          end
+          unless banner.try(:title_text).nil?
+            title = banner.title_text 
+          end
+          unless (taxon = @taxons.find_by(category_home_id: "category-edit-2")).nil?
+            seourl = seo_url(taxon)
+          end
+        end
+        %>
+        <figure class="image-category-container">
+          <%= link_to seourl do %>
+            <%= image_tag(url, class: "img-responsive") %> 
+            <figcaption class="item-category-title"><%= title%></figcaption>
+          <% end %>
+          <div class="overlay-category">
+          </div>
+        </figure>
+        <% unless current_spree_user.nil? %>
+          <% if current_spree_user.admin? %>
+            <a href="#" id="category-edit-2" onclick="handleBannerEdit(event)" class="btn btn-primary btn-edit-banner"><i class="glyphicon glyphicon-pencil"></i></a>
+          <%end%>
+        <%end%>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="item-category2 col col-sm-4">
+        <%
+        if @taxons.any?
+          url = 'categories/default.jpg'
+          seourl =  (@taxons[2]).nil? ? "#" : seo_url(@taxons[2])
+          title = 'Categoria 3'
+          unless (banner = @banners.find_by(element_id: "category-edit-3")).nil?
+            url = banner.image.url(:large)
+          end
+            
+          unless banner.try(:title_text).nil?
+            title = banner.title_text 
+          end
+          unless (taxon = @taxons.find_by(category_home_id: "category-edit-3")).nil?
+            seourl = seo_url(taxon)
+          end
+        end
+        %>
+        <figure class="image-category-container">
+          <%= link_to seourl do %>
+            <%= image_tag(url, class: "img-responsive") %> 
+            <figcaption class="item-category-title"><%= title%></figcaption>
+          <% end %>
+          <div class="overlay-category">
+          </div>
+        </figure>
+        <% unless current_spree_user.nil? %>
+          <% if current_spree_user.admin? %>
+            <a href="#" id="category-edit-3" onclick="handleBannerEdit(event)" class="btn btn-primary btn-edit-banner"><i class="glyphicon glyphicon-pencil"></i></a>
+          <%end%>
+        <%end%>    
+      </div>
+      <br class="hidden-sm hidden-md hidden-lg">
+      <div class="item-category2 col col-sm-4">
+        <%
+        if @taxons.any?
+          url = 'categories/default.jpg'
+          seourl =  (@taxons[3]).nil? ? "#" : seo_url(@taxons[3])
+          title = 'Categoria 4'
+          unless (banner = @banners.find_by(element_id: "category-edit-4")).nil?
+            url = banner.image.url(:large)
+          end
+            
+          unless banner.try(:title_text).nil?
+            title = banner.title_text 
+          end
+          unless (taxon = @taxons.find_by(category_home_id: "category-edit-4")).nil?
+            seourl = seo_url(taxon)
+          end
+        end
+        %>
+        <figure class="image-category-container">
+          <%= link_to seourl do %>
+            <%= image_tag(url, class: "img-responsive") %> 
+            <figcaption class="item-category-title"><%= title%></figcaption>
+          <% end %>
+          <div class="overlay-category">
+          </div>
+        </figure>
+        <% unless current_spree_user.nil? %>
+          <% if current_spree_user.admin? %>
+            <a href="#" id="category-edit-4" onclick="handleBannerEdit(event)" class="btn btn-primary btn-edit-banner"><i class="glyphicon glyphicon-pencil"></i></a>
+          <%end%>
+        <%end%>    
+      </div>
+      <br class="hidden-sm hidden-md hidden-lg">
+      <div class="item-category2 col col-sm-4">
+        <%
+        if @taxons.any?
+          url = 'categories/default.jpg'
+          seourl =  (@taxons[4]).nil? ? "#" : seo_url(@taxons[4])
+          title = 'Categoria 5'
+          unless (banner = @banners.find_by(element_id: "category-edit-5")).nil?
+            url = banner.image.url(:large)
+          end
+            
+          unless banner.try(:title_text).nil?
+            title = banner.title_text 
+          end
+          unless (taxon = @taxons.find_by(category_home_id: "category-edit-5")).nil?
+            seourl = seo_url(taxon)
+          end
+        end
+        %>
+        <figure class="image-category-container">
+          <%= link_to seourl do %>
+            <%= image_tag(url, class: "img-responsive") %> 
+            <figcaption class="item-category-title"><%= title%></figcaption>
+          <% end %>
+          <div class="overlay-category">
+          </div>
+        </figure>
+        <% unless current_spree_user.nil? %>
+          <% if current_spree_user.admin? %>
+            <a href="#" id="category-edit-5" onclick="handleBannerEdit(event)" class="btn btn-primary btn-edit-banner"><i class="glyphicon glyphicon-pencil"></i></a>
+          <%end%>
+        <%end%>    
+      </div>
+  </div>
+</section>

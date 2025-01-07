@@ -1,0 +1,27 @@
+<%
+url = 'carousel/head01.jpg'
+title = 'Título Test'
+banner_link = "#"
+if (banner = banners.find_by(element_id: banner_id))
+  url = banner.image.url(:large)
+  banner_link = banner.link if banner.link and banner.link != ''
+  if banner.title_text
+    title = banner.title_text 
+  end
+  banner_button = banner.link_button? ? 'Si' : 'No'
+end 
+%>
+<%= link_to banner_link, target: "_blank" do %>
+  <%= image_tag(url, class: "img-responsive img-info-banner")%>
+<% end %>
+<% if current_spree_user and current_spree_user.admin? %>
+  <a href="#" class="btn btn-primary link-edit-banner" id="<%= banner_id %>" data-display="<%= banner_button %>" onclick="handleBannerEdit(event)">
+    <i class="glyphicon glyphicon-pencil"></i>
+  </a>
+<%end%>    
+<div class="carousel-caption-custom hidden-xs" align="left">
+  <h1 class="tittle-1"><%= title%></h1>
+  <% if banner && banner.link && banner.link != '' && banner.link_button?  %>
+    <%= link_to 'Ver más', banner_link, class: 'btn btn-primary btn-lg btn-carousel', target: "_blank" %>
+  <% end %>
+</div>

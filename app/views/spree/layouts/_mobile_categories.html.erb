@@ -1,0 +1,69 @@
+<header class="nav-top">
+  <%= inline_svg_tag 'menu.svg', class: 'hamburger', id: 'ham' %>
+  <%= inline_svg_tag 'search.svg', id: 'mobile-search-btn' %>
+</header>
+
+<nav class="nav-drill">
+  <ul class="nav-items nav-level-1">
+    <% if @taxonomies %>
+      <% @taxonomies.each do |taxonomy| %>
+        <li class="nav-item nav-expand">
+          <a href="#" class="nav-link nav-expand-link">
+            <%= taxonomy.name.try(:capitalize) %>
+          </a>
+          <ul class="nav-items nav-expand-content">
+            <li class="nav-item">
+              <%= link_to seo_url(taxonomy.root), class: 'nav-link go-to-taxon' do %> 
+                Ir a <%=  taxonomy.name.try(:capitalize) %>
+              <%end%>
+            </li>
+            <% if taxonomy.root %>
+              <% taxonomy.root.children.each do |taxon| %>
+                <li class="nav-item nav-expand">
+                  <a href="#" class="nav-link nav-expand-link">
+                    <%=  taxon.name.try(:capitalize) %>
+                  </a>
+                  <ul class="nav-items nav-expand-content">
+                    <li class="nav-item">
+                      <%= link_to seo_url(taxon), class: 'nav-link go-to-taxon' do %> 
+                        Ir a <%=  taxon.name.try(:capitalize) %>
+                      <% end %>
+                    </li>
+                    <% taxon.children.each do |sub_category| %>
+                      <li class="nav-item nav-expand">
+                        <a href="#" class="nav-link nav-expand-link">
+                          <%=  sub_category.name.try(:capitalize) %>
+                        </a>
+                        <ul class="nav-items nav-expand-content">
+                          <li class="nav-item">
+                            <%= link_to seo_url(sub_category), class: 'nav-link go-to-taxon' do %> 
+                              Ir a <%=  sub_category.name.try(:capitalize) %>
+                            <% end %>
+                          </li>
+                          <% sub_category.children.each do |specific| %>
+                            <li class="nav-item">
+                              <%= link_to seo_url(specific), class: 'nav-link last-taxon' do %>
+                                <%= specific.name.try(:capitalize) %>
+                              <% end %>
+                            </li>
+                          <% end %>
+                        </ul>
+                      </li>
+                    <% end %>
+                  </ul>
+                </li>
+              <% end %>
+            <% end %>
+          </ul> 
+        </li>
+      <% end %>
+      <li class="nav-item">
+        <%= link_to cyberday, spree.oportunities_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Agendar cita virtual', main_app.new_virtual_support_path, class: 'nav-link' %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+

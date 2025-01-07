@@ -1,0 +1,8 @@
+<%# more info: https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce %>
+ga('require', 'ecommerce');
+ga('set', '&cu', '<%= current_currency %>');
+
+// Add the step number and additional info about the checkout to the action.
+//ga('ecommerce:setAction','checkout', {
+//  'step': <%= step_number %>
+//});

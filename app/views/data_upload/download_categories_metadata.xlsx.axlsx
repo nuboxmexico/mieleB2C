@@ -1,0 +1,21 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Metadata de categorías') do |sheet|
+  headers = [
+    'Name',
+    'Meta title',
+    'Meta description',
+    'Meta keywords'
+  ]
+  sheet.add_row headers
+  
+  @taxons.each do |taxon|
+    
+    sheet.add_row [
+      taxon.name,
+      taxon.meta_title,
+      taxon.meta_description,
+      taxon.meta_keywords
+    ]
+  end
+end

@@ -1,0 +1,25 @@
+<div class="row checkout-shipping">
+  <% if false # spree_current_user and spree_current_user.ship_address %>
+    <%= form.fields_for :shipments do |ship_form| %>
+      <% ship_form.object.shipping_rates.each do |rate| %>
+        <div class="col-xs-8 col-sm-4 col-md-4 col-lg-3 option unselected">
+          <i class="material-icons">local_shipping</i>
+          <p>
+            <%= rate.name %>
+          </p>
+          <div class="hidden">
+            <%= ship_form.radio_button :selected_shipping_rate_id, rate.id %>
+          </div>
+        </div>
+        <!-- ESPACIO PARA AGREGAR EL RESTO DE COURIERS -->
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="col-xs-8 col-sm-4 col-md-4 col-lg-3 option unselected" id="form-shipping-button">
+      <i class="material-icons">local_shipping</i>
+      <p>
+        Despacho e instalación a domicilio
+      </p>
+    </div>
+  <% end %>
+</div>

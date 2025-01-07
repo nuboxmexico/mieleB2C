@@ -1,0 +1,244 @@
+<div>
+  <% 
+  address =  Spree::Address.new
+  address.firstname = @user.name
+  address.lastname = @user.last_name
+  if @type == 'ship'
+    unless @user.ship_address.nil?
+      address =  @user.ship_address  
+    end  
+  elsif @type == 'bill'
+    unless @user.bill_address.nil?
+      address =  @user.bill_address
+    end
+  end
+  @country_id = 1 
+  %>
+  <%= form_for address, url: "/user/update", method: :post do |form| %>                        
+    <input type="hidden" value="<%= @type%>" name="address[type]">
+    <% if @type == 'bill'%>
+      <div class="row">
+        <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="firstname" %> >
+            <%= form.text_field :firstname, class: 'mdl-textfield__input required',autocomplete: 'given-name', value: address.firstname %>
+            <%= form.label :firstname, class: 'mdl-textfield__label' do %>
+              Razón Social<abbr class="required" title="required">*</abbr>
+            <% end %>
+          </div>
+        </div>
+        <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="lastname" %> >
+              <%= form.text_field :rut, class: 'mdl-textfield__input required', autocomplete: 'family-name', value: address.rut,'aria-describedby' => "helpBlock", oninput: "validateRut(this);" %>
+              <%= form.label :rut, class: 'mdl-textfield__label' do %>
+                RUT<abbr class="required" title="required">*</abbr> <b id="helpBlock" class="help-block"></b>
+              <% end %>
+            </div>
+        </div>
+      </div>
+      <%= hidden_field_tag 'address[lastname]', current_spree_user.last_name %>
+    <% else %>
+      <div class="row">
+        <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="firstname" %> >
+            <%= form.text_field :firstname, class: 'mdl-textfield__input required',autocomplete: 'given-name', value: address.firstname %>
+            <%= form.label :firstname, class: 'mdl-textfield__label' do %>
+              <%= Spree.t(:first_name) %><abbr class="required" title="required">*</abbr>
+            <% end %>
+          </div>
+        </div>
+        <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="lastname" %> >
+              <%= form.text_field :lastname, class: 'mdl-textfield__input required',autocomplete: 'family-name', value: address.lastname %>
+              <%= form.label :lastname, class: 'mdl-textfield__label' do %>
+                <%= Spree.t(:last_name) %><abbr class="required" title="required">*</abbr>
+              <% end %>
+            </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="col col-lg-3 col-md-3 col-sm-3 col-xs-4">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom is-dirty">
+          <%= form.label :street_type, class: 'mdl-textfield__label' do %>
+            Tipo de Calle
+          <% end %>
+          <%= form.select :street_type, Spree::Address.street_types.invert.to_a, {include_blank: true}, {class: 'form-control required'} %>
+        </div>
+      </div>
+      <div class="col col-lg-5 col-md-5 col-sm-5 col-xs-8">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="address1" %> >
+          <%= form.text_field :address1, class: 'mdl-textfield__input required',autocomplete: 'address-line1', value: address.address1 %>
+          <%= form.label :address1, class: 'mdl-textfield__label' do %>
+            <%= Spree.t(:street_address) %><abbr class="required" title="required">*</abbr>
+          <% end %>
+        </div>
+      </div>
+      <div class="col col-lg-2 col-md-2 col-sm-2 col-xs-3">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="number" %> >
+          <%= form.text_field :number, class: 'mdl-textfield__input required',autocomplete: 'address-line1', value: address.number %>
+          <%= form.label :number, class: 'mdl-textfield__label' do %>
+            <%= Spree.t(:street_address_number) %><abbr class="required" title="required">*</abbr>
+          <% end %>
+        </div>
+      </div>
+      <div class="col col-lg-2 col-md-2 col-sm-2 col-xs-3">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="apartment" %> >
+          <%= form.text_field :apartment, class: 'mdl-textfield__input required',autocomplete: 'address-line1', value: address.apartment %>
+          <%= form.label :apartment, class: 'mdl-textfield__label' do %>
+            <%= Spree.t(:street_address_apartment) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="address2" %> >
+          <%= form.text_field :address2, class: 'mdl-textfield__input required',autocomplete: 'address-line2', value: address.address2 %>
+          <%= form.label :address2, class: 'mdl-textfield__label' do %>
+            <%= Spree.t(:street_address_2) %><abbr class="required" title="required">*</abbr>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom is-dirty">
+        <%= form.label :country_id, class: 'mdl-textfield__label' do %>
+            <%= Spree.t(:country) %><abbr class="required" title="required">*</abbr>
+          <% end %>
+          <span id=<%="country-selection" %>>
+            <%= form.collection_select :country_id, available_countries, :id, :name, {}, {class: 'form-control required', id:"#{@type}country_id", autocomplete: 'country-name'} %>
+          </span>
+        </div>
+      </div>
+      <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="city" %> >
+            <%= form.text_field :city, class: 'mdl-textfield__input',autocomplete: 'address-level2', value: address.city, required: true %>
+            <%= form.label :city, class: 'mdl-textfield__label' do %>
+              <%= Spree.t(:city) %>
+            <% end %>
+          </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <% if Spree::Config[:address_requires_state] %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom is-dirty">
+            <% have_states = true %>
+            <%= form.label :state, class: "mdl-textfield__label" do %>
+              Región<abbr class='required' title="required" id=<%="state-required"%>>*</abbr>
+            <% end %>
+            <select class="form-control" name="address[state_id]" id="<%=@type%>select_state" autocomplete='address-level1'></select>
+            </div>
+        <% end %>
+      </div>
+      <div class="col col-lg-6 col-md-6 col-sm-6 col-xs-6">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom is-dirty">
+          <label for="<%= @type%>select_comuna required" class="mdl-textfield__label">Comuna <abbr class="required" title="required">*</abbr></label>
+          <%= form.collection_select :comuna_id, [], :id, :name, {}, {class: 'form-control required', id: "#{@type}comuna_id"} %>
+        </div>
+      </div>
+    </div>
+  
+  <% if Spree::Config[:company] %>
+    <p class="form-group" id=<%="company" %>>
+      <%= form.label :company, Spree.t(:company) %>
+      <%= form.text_field :company, class: 'form-control' %>
+    </p>
+  <% end %>
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom mdl-full-width" id=<%="phone" %> >
+    <%= form.phone_field :phone, class: "mdl-textfield__input #{'required' if address.require_phone?}",autocomplete: 'tel-national', value: address.phone %>
+    <%= form.label :phone, class: 'mdl-textfield__label' do %>
+      <%= Spree.t(:phone) %><% if address.require_phone? %><abbr class="required" title="required">*</abbr><% end %>
+    <% end %>
+  </div>
+
+  <% if Spree::Config[:alternative_shipping_phone] %>
+    <p class="form-group" id=<%="altphone" %>>
+      <%= form.label :alternative_phone, Spree.t(:alternative_phone) %>
+      <%= form.phone_field :alternative_phone, class: 'form-control' %>
+    </p>
+  <% end %>
+
+  <button class="btn btn-primary">Guardar</button>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $.get( ("/api/v1/states?country_id="+$("#<%=@type%>country_id").val()), function(data) {
+      current_id = null;
+      <% unless address.state_id.nil? %>
+        current_id = <%= address.state_id%>
+      <% end %>
+      for (var i = 0; i < data.states.length; i++) {
+        if (current_id == data.states[i].id){
+          $('#<%=@type%>select_state').append('<option value="' + data.states[i].id + '" selected>' + data.states[i].name + '</option>');
+            $.ajax({
+              url: '/comunas/comuna_by_region',
+              type: 'get',
+              dataType: 'json',
+              data: {region_id: data.states[i].id},
+              success: function(data2) {           
+                $('#<%=@type%>comuna_id').html("");
+                for (var i = 0; i < data2.length; i++) {
+                  current_comuna_id = null
+                  <% unless address.nil? %>
+                    current_comuna_id = "<%= address.comuna_id %>" 
+                  <% end %>
+                  if (current_comuna_id != null && current_comuna_id == data2[i][0] ){
+                    $('#<%=@type%>comuna_id').append('<option value="' + data2[i][0] + '" selected>' + data2[i][1] + '</option>');
+
+                  }else{
+                    $('#<%=@type%>comuna_id').append('<option value="' + data2[i][0] + '">' + data2[i][1] + '</option>');
+                  }
+
+                }
+              },
+              error: function(hxr) {
+                console.log("problemas");
+              }
+            });
+        }
+        else{
+          $('#<%=@type%>select_state').append('<option value="' + data.states[i].id + '">' + data.states[i].name + '</option>');
+        }
+        
+      }             
+    });
+    $("#<%=@type%>country_id").change(function() {
+      
+      $.get( ("/api/v1/states?country_id="+$("#<%=@type%>country_id").val()), function(data) {
+        $('#<%=@type%>select_state').html("");
+        for (var i = 0; i < data.states.length; i++) {
+          $('#<%=@type%>select_state').append('<option value="' + data.states[i].id + '">' + data.states[i].name + '</option>');
+        }             
+      });
+    });
+
+
+    $('#<%=@type%>select_state').change(function(){
+      if($('#<%=@type%>select_state').val() != "" && $('#<%=@type%>select_state').val() != undefined){
+      $.ajax({
+        url: '/comunas/comuna_by_region',
+        type: 'get',
+        dataType: 'json',
+        data: {region_id: $('#<%=@type%>select_state').val()},
+        success: function(data) {           
+          $('#<%=@type%>comuna_id').html("");
+          for (var i = 0; i < data.length; i++) {
+            $('#<%=@type%>comuna_id').append('<option value="' + data[i][0] + '">' + data[i][1] + '</option>');
+          }
+        },
+        error: function(hxr) {
+
+        }
+      });
+    }
+    });
+  });
+</script>

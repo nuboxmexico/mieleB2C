@@ -1,0 +1,8 @@
+<% if !spree_current_user %>
+  <li id="link-to-login" class="sign-in">
+    <a href="<%= spree.login_path%>" class="user-mobile">
+      <%= inline_svg 'user.svg', class: 'user-icon' %> &nbsp;
+      <span class="hidden-xs"><%= Spree.t(:login) %></span> 
+    </a>
+  </li>
+<% end %>

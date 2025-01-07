@@ -1,0 +1,152 @@
+<% if Spree.user_class && can?(:admin, Spree.user_class) %>
+  <ul class="nav nav-sidebar">
+    <%= tab Spree.t(:dashboard), icon: "dashboard", url: '/admin/reports/dashboard' %>
+  </ul>
+<% end %>
+
+<% if can? :admin, Spree::Order %>
+  <ul class="nav nav-sidebar">
+    <%= tab *Spree::BackendConfiguration::ORDER_TABS, icon: 'shopping-cart' %>
+  </ul>
+<% end %>
+<!--
+<% if can?(:admin, Spree::ReturnAuthorization) || can?(:admin, Spree::CustomerReturn) %>
+  <ul class="nav nav-sidebar">
+    <% main_menu_tree Spree.t(:returns), icon: "transfer", sub_menu: "returns", url: "#sidebar-returns" %>
+  </ul>
+<% end %>
+-->
+
+<% if can? :admin, Spree::Product %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree Spree.t(:products), icon: "th-large", sub_menu: "product", url: "#sidebar-product" %>
+  </ul>
+<% end %>
+
+<% if can? :admin, Spree::Admin::ReportsController %>
+  <ul class="nav nav-sidebar">
+    <%= tab *Spree::BackendConfiguration::REPORT_TABS, icon: 'file'  %>
+  </ul>
+<% end %>
+
+<% if can? :admin, Spree::Promotion %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree Spree.t(:promotions), icon: "gift", sub_menu: "promotion", url: "#sidebar-promotions" %>
+  </ul>
+<% end %>
+
+<% if Spree.user_class && can?(:admin, Spree.user_class) %>
+  <ul class="nav nav-sidebar">
+     <li class="sidebar-menu-item"><a data-toggle="collapse" data-parent="#sidebar" href="#sidebar-data-people" aria-expanded="false" class="collapsed"><span class="icon icon-user"></span><span class="text"> Personas</span><span class="icon pull-right icon-chevron-left"></span></a>
+      <ul id="sidebar-data-people" class="nav nav-pills nav-stacked collapse" aria-expanded="false" style="height: 1px;">
+        <%= tab *Spree::BackendConfiguration::USER_TABS, url: spree.admin_users_path %>
+        <li class="sidebar-menu-item"><a class="icon-link with-tip" href="/admin/new_users" data-original-title="" title=""><span class="text">Usuarios nuevos</span></a></li>
+        <%= tab Spree.t(:subscribers), url: '/newsletter_subscribers' %>
+      </ul>
+    </li>
+  </ul>
+
+<% end %>
+<% if Spree.user_class && can?(:admin, Spree.user_class) %>
+  <ul class="nav nav-sidebar">
+    <li class="sidebar-menu-item">
+      <a data-toggle="collapse" data-parent="#sidebar" href="#sidebar-data-upload" aria-expanded="false" class="collapsed">
+        <span class="icon icon-upload"></span>
+        <span class="text"> Carga de datos</span>
+        <span class="icon pull-right icon-chevron-left"></span>
+      </a>
+      <ul id="sidebar-data-upload" class="nav nav-pills nav-stacked collapse" aria-expanded="false" style="height: 1px;">
+        <%= tab Spree.t(:data_upload), url: '/dataUpload/uploadData' %>
+        
+      </ul>
+    </li>
+  </ul>
+<% end %>
+
+<% if spree_current_user.has_spree_role?('admin') %>
+<ul class="nav nav-sidebar">
+  <li class="sidebar-menu-item">
+    <a data-toggle="collapse" data-parent="#sidebar" href="#sidebar-banners" aria-expanded="false" class="collapsed">
+      <span class="icon icon-picture"></span>
+      <span class="text"> Banners e Imágenes</span>
+      <span class="icon pull-right icon-chevron-left"></span>
+    </a>
+    <ul id="sidebar-banners" class="nav nav-pills nav-stacked collapse" aria-expanded="false" style="height: 1px;">
+      <%= tab 'Banners promocionales', url: main_app.promotional_banners_path %>
+      <%= tab 'Imágenes Categorías', url: main_app.categories_banners_path %>
+      <%= tab "Imágenes Slider", url: '/dataUpload/uploadBanner' %>
+    </ul>
+  </li>
+</ul>
+<ul class="nav nav-sidebar">
+  <%= tab 'Páginas estáticas', url: main_app.static_pages_path, icon: 'list-alt' %>
+</ul>
+
+<ul class="nav nav-sidebar">
+  <%= tab 'Anuncios', icon: 'bullhorn', url: main_app.store_notices_path %>
+</ul>
+
+<ul class="nav nav-sidebar">
+  <%= tab 'CITAS VIRTUALES', icon: 'inbox', url: main_app.virtual_support_path %>
+</ul>
+
+<ul class="nav nav-sidebar">
+  <%= tab 'OPORTUNIDADES', icon: 'money', url: main_app.miele_configs_path %>
+</ul>
+  
+<ul class="nav nav-sidebar">
+    <%= tab Spree.t(:configurations), icon: "wrench", url: admin_configurations_path %>
+</ul>
+
+<ul class="nav nav-sidebar">
+  <%= tab 'Mesa de ayuda', icon: "question-sign", url: Rails.application.secrets.service_desk %>
+</ul>
+<% end %>
+
+<ul class="nav nav-sidebar">
+  <li class="sidebar-menu-item">
+    <a class="icon-link with-tip no-cursor" href="" data-original-title="" title="" id="version-software">
+      <span class="fa fa-desktop fa-lg"></span>
+      &nbsp;&nbsp;&nbsp;
+      <span class="text">Versión <%= Rails.configuration.version.gsub('v', '') %></span></a>
+  </li>
+</ul>
+
+<!--
+<% if can? :admin, current_store %>
+  <ul class="nav nav-sidebar">
+    <%= main_menu_tree Spree.t(:configurations), icon: "wrench", sub_menu: "configuration", url: "#sidebar-configuration" %>
+  </ul>
+<% end %>
+-->
+<script>
+  $( document ).ready(function() {      
+    menu_side_bar();
+    $(".action-question-sign").attr('target', '_blank');
+    $("#version-software").click(function(event){
+      event.preventDefault();
+    })
+  });
+  $(window).resize(function() {
+    menu_side_bar();
+  });
+  function menu_side_bar() {
+    var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+    var wrapper = $('#wrapper');
+    var main    = $('#main-part');
+    var sidebar = $('#main-sidebar');
+    if (isMobile.matches) {
+      wrapper.addClass('sidebar-minimized');
+      main
+        .removeClass('col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2')
+        .addClass('col-sm-12 col-md-12 sidebar-collapsed');
+      $.cookie('sidebar-minimized', 'true', { path: '/admin' });
+    }else{
+      wrapper.removeClass('sidebar-minimized');
+      main
+        .removeClass('col-sm-12 col-md-12 sidebar-collapsed')
+        .addClass('col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2');
+      $.cookie('sidebar-minimized', 'false', { path: '/admin' });  
+    }
+  }
+</script>

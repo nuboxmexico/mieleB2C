@@ -1,0 +1,11 @@
+<br>
+<div class="container-fluid-custom">
+	<div class="container-fluid default-padding well">
+		<h1>Productos más nuevos</h1>
+	</div>
+	<div class="container-fluid">
+		<% @recents.each do |product| %>
+		<%= render partial: 'spree/shared/product', locals: { product: product} %>
+		<% end %>
+	</div>
+</div>

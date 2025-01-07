@@ -1,0 +1,35 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:reports), spree.admin_reports_url %> /
+  Informe de productos vistos
+<% end %>
+<%= link_to(admin_download_viewed_product_total_url(format: 'xlsx'), onclick: '$(".loader-page").remove();') do %>
+  <div class="btn btn-success"><i class="fa fa-download"></i> Descargar</div>
+<% end %>
+<br>
+<% if @product_array.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>TNR</th>
+        <th colspan="2">Producto</th>
+        <th>Vistas</th>
+        <th>Porcentaje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @product_array.each do |product| %>
+        <tr>
+          <td class="sku"><%= product["sku"] %></td>
+          <td class="image"><%= product["product"] %></td>
+          <td><%= link_to product["product"].try(:name), edit_admin_product_path(product["product"]) %></td>
+        	<td><%= number_to_currency(product["count"].to_i,precision: 0 ,unit: "", separator: "", delimiter: ".")%></td>
+        	<td><%= product["percent"]%> %</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    No existen productos en la base de datos
+  </div>
+<% end %>

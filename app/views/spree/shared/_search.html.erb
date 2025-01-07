@@ -1,0 +1,25 @@
+<% @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots %>
+<%= form_tag spree.products_path, method: :get do %>
+  <div class="search-container">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+     mdl-textfield--floating-label" style="color: #FFF;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="keywords">
+        <%= inline_svg_tag 'search.svg' %>
+      </label>
+      <div class="mdl-textfield__expandable-holder">
+        <%= search_field_tag :keywords, nil, class: "mdl-textfield__input search-input", autocomplete: "off"%>
+        <!-- <input class="mdl-textfield__input" type="text" id="keywords"> -->
+        <label class="search-label mdl-textfield__label" for="keywords">
+          <span>Ingresa tu búsqueda</span>
+        </label>
+      </div>
+      <div class="action-btn">
+        <input type="submit" 
+               name="commit" 
+               value="Buscar" 
+               class="btn btn-secondary btn-sec-search btn-sm"
+               id="search-button">
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,131 @@
+<%
+if current_spree_user &&
+ current_spree_user.bill_address && 
+ current_spree_user.ship_address
+ @order.bill_address = current_spree_user.bill_address
+ @order.ship_address = current_spree_user.ship_address
+ @order.bill_address.id = nil
+ @order.ship_address.id = nil
+end
+%>
+
+
+<div class="checkout-address">
+  <div id="shipping-address-container">
+    <p>Ingresa tus datos para el envío</p>
+
+    <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom">
+      <%= form.text_field :email, class: 'mdl-textfield__input' %>
+      <%= form.label :email, class: 'mdl-textfield__label' %>
+    </div>
+    
+    <%#= render 'spree/shared/address', address: current_spree_user.ship_address %>
+    <%= form.fields_for :ship_address do |ship_form| %>        
+    <%= render partial: 'spree/address/form', 
+    locals: { 
+     form: ship_form, 
+     address_type: 'shipping', 
+     address: ship_address
+   } %>
+   <% end %>
+
+   <div class="tributary-document-form">
+    <p>Selecciona documento tributario</p>
+
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="same-btn">
+      <input type="radio" id="same-btn" class="mdl-radio__button" name="options" value="ticket" checked>
+      <span class="mdl-radio__label">Boleta</span>
+    </label>
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect form-radio-separator" for="billing-option">
+      <input type="radio" id="billing-option" class="mdl-radio__button" name="options" value="bill">
+      <span class="mdl-radio__label">Factura</span>
+    </label>
+  </div>
+</div>
+<div id="billing-address-container">
+  <%= form.fields_for :bill_address do |bill_form| %>
+  <%= render partial: 'spree/address/form', locals: { form: bill_form, address_type: 'billing', address: @order.bill_address } %>
+  <% end %>
+</div>
+</div>
+
+<script>
+
+  $('#factura-btn').click(function () {
+    $("#shipping-div").removeClass("col-sm-12");
+    $("#shipping-div").addClass("col-sm-6");  
+    $("#billing-div").addClass("col-sm-6");  
+    $("#billing-div").show("slow");
+    $("#boleta-label").removeClass("active");
+    $("#factura-label").addClass("active");
+    $("#document-type").val("factura");  
+  });
+  $('#boleta-btn').click(function () {
+    $("#document-type").val("boleta");  
+    $("#factura-label").removeClass("active");
+    $("#boleta-label").addClass("active");
+    $("#billing-div").hide("slow");
+    setTimeout(function(){
+      $("#billing-div").removeClass("col-sm-6");
+      $("#shipping-div").removeClass("col-sm-6");
+      $("#shipping-div").addClass("col-sm-12");
+    }, 500);
+  });
+  $('#edit_ship').click(function(e) {
+    if ($("#collapseship").hasClass('in')) {
+      $('#collapseship').collapse('hide');
+      $('#ship-info').show("slow");
+    }
+    else{
+      $('#collapseship').collapse('show');
+      $('#ship-info').hide("slow");
+    }
+  });
+  $('#edit_bill').click(function(e) {
+    if ($("#collapsebill").hasClass('in')) {
+      $('#collapsebill').collapse('hide');
+      $('#bill-info').show("slow");
+      
+    }
+    else{
+      $('#collapsebill').collapse('show');
+      $('#bill-info').hide("slow");
+      
+    }
+  });
+  check_same();
+  $('#same-btn').change(function() {
+    check_same();       
+  });
+  $("form").submit(function(e) {
+    if ($('#same-btn').is(":checked")){
+      <%
+      @order.bill_address = @order.ship_address
+      %>
+    }
+  });
+
+  $('#billing-option').click(function(){
+    if($( document ).width() > 992){
+      $(".checkout-continue").css('height','110vh');
+    }
+  })
+  function check_same() {
+    if ($('#same-btn').is(":checked")){
+      $("#edit_bill").addClass("disabled");
+      $('#collapsebill').collapse('hide');
+      $('#same-input').val('true');
+      if($( document ).width() > 992){
+        $(".checkout-continue").css('height','80vh');
+      }
+    }
+    else{
+      if($( document ).width() > 992){
+        $(".checkout-continue").css('height','110vh');
+      }
+      $("#edit_bill").removeClass("disabled");
+      $('#same-input').val('false');
+    } 
+  }
+</script>
+

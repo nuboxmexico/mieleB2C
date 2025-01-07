@@ -1,0 +1,48 @@
+<% content_for :page_title do %>
+  Administración del módulo de Citas Virtuales
+<% end %>
+<% if @virtual_support %>
+  <%= form_for @virtual_support, url: main_app.virtual_support_path, multipart: true do |f| %>
+    <div class="form-group">
+      <%= f.label :active, '¿Activo?' %>
+      <%= f.check_box :active, class: 'form-control align-left' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :description, 'Descripción' %>
+      <%= f.text_area :description, class: 'form-control', required: true, maxlength: 300 %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :url %>
+      <%= f.url_field :url, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :subtitle, 'Subtítulo' %>
+      <%= f.text_area :subtitle, class: 'form-control', required: true, maxlength: 300 %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :subdescription, 'Párrafo inferior' %>
+      <%= f.text_area :subdescription, class: 'form-control', required: true, maxlength: 300 %>
+    </div>
+
+    <div class="form-group">
+      <% if @virtual_support.background_image.present? %>
+        <div class="col-xs-12 col-sm-3 no-padding">
+          <%= label_tag 'Imagen actual' %>
+          <%= image_tag @virtual_support.background_image, class: 'img-responsive' %>
+          <%= f.label :background_image, 'Cambiar imagen de fondo' %>
+        </div>
+      <% else %>
+        <%= f.label :background_image, 'Imagen de fondo' %>
+      <% end %>
+      <%= f.file_field :background_image, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit 'Guardar', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>

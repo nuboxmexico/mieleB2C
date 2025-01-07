@@ -1,0 +1,26 @@
+<% 
+flash.each do |name, msg| %>
+<%
+  type = name.to_s     
+  if type.eql? "alert" %>
+      <%= javascript_tag do %>
+       alertify.error("<%= msg %>");
+     <% end %>  
+  <% elsif  type.eql? "error" %>
+     <%= javascript_tag do %>
+     alertify.error("<%= msg %>");
+    <% end %>
+  <% elsif  type.eql? "notice" %>
+     <%= javascript_tag do %>
+     alertify.success("<%= msg %>");
+    <% end %>
+  <% elsif  type.eql? "success" %>
+     <%= javascript_tag do %>
+     alertify.success("<%= msg %>");
+    <% end %>
+  <% elsif  type.eql? "info" %>
+   <%= javascript_tag do %>
+     alertify.message("<%= msg %>");
+   <% end %>
+  <% end
+end %>

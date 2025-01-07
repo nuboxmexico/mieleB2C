@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html class="nojs html css_verticalspacer" lang="en-GB">
+ <head>
+
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+  <meta name="generator" content="2017.0.1.363"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+  <title>Reporte</title>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="css/site_global.css?crc=443350757"/>
+  <link rel="stylesheet" type="text/css" href="css/index.css?crc=3814339282" id="pagesheet"/>
+  <!-- IE-only CSS -->
+  <!--[if lt IE 9]>
+  <link rel="stylesheet" type="text/css" href="css/iefonts_index.css?crc=323769760"/>
+  <![endif]-->
+  <style type="text/css">
+	
+  </style>
+  <!-- Other scripts -->
+  <!-- JS includes -->
+  <script type="text/javascript">
+   document.write('\x3Cscript src="' + (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//webfonts.creativecloud.com/open-sans:n4,n7:default.js" type="text/javascript">\x3C/script>');
+  </script>
+  <style>
+	.tittle{
+	  font-family: 'Helvetica', 'Arial', sans-serif;
+	  font-size: 13.5px;
+	  font-weight: bold;
+	  text-transform: uppercase;
+	  text-align: center;
+      padding: 0 10px;
+	}
+	.img-responsive{
+	  width: 100%;
+	}
+	.head-table{
+	  margin-left: 30px;
+	}
+	table {
+	  background-color: transparent;
+	}
+	th {
+	  text-align: left;
+	}
+	.table {
+	  width: 100%;
+	  max-width: 100%;
+	  margin-bottom: 20px;
+	}
+	.table > thead > tr > th,
+	.table > tbody > tr > th,
+	.table > tfoot > tr > th,
+	.table > thead > tr > td,
+	.table > tbody > tr > td,
+	.table > tfoot > tr > td {
+	  padding: 8px;
+	  line-height: 1.42857143;
+	  vertical-align: top;
+	  border-top: 1px solid #ddd;
+	}
+	.table > thead > tr > th {
+	  vertical-align: bottom;
+	}
+	.table > caption + thead > tr:first-child > th,
+	.table > colgroup + thead > tr:first-child > th,
+	.table > thead:first-child > tr:first-child > th,
+	.table > caption + thead > tr:first-child > td,
+	.table > colgroup + thead > tr:first-child > td,
+	.table > thead:first-child > tr:first-child > td {
+	  border-top: 0;
+	}
+	.container{
+	  margin-left: 20px;
+	  margin-right: 20px;
+	} 
+	#brake{
+		display:block!important; clear:both!important; page-break-after:always!important;
+	 }
+
+	 .gradient{
+
+	  background: rgb(5,35,45); /* For browsers that do not support gradients */
+	  background: -webkit-linear-gradient(right, rgb(5,35,45) , rgb(19,58,71)); /* For Safari 5.1 to 6.0 */
+	  background: -o-linear-gradient(right, rgb(5,35,45), rgb(19,58,71)); /* For Opera 11.1 to 12.0 */
+	  background: -moz-linear-gradient(right, rgb(5,35,45), rgb(19,58,71)); /* For Firefox 3.6 to 15 */
+	  background: linear-gradient(to right, rgb(5,35,45) , rgb(19,58,71)); /* Standard syntax */      
+	}
+	table, tr, td, th, tbody, thead, tfoot {
+	  page-break-inside: avoid !important;
+	}
+  </style>
+  </head>
+  <body>
+	<br>
+	<div class="container">
+      <%= render 'spree/admin/reports/head', tittle: tittle %>
+	  <br>
+	  <% if promotions.any? %>
+		<% i = 1 %>
+		<table class="table">
+		  <thead class="gradient" style="border: none;">
+			<tr style="color: white;">
+			  <th><%= Spree.t(:name) %></th>
+        <th><%= Spree.t(:code) %></th>
+        <th><%= Spree.t(:usage_limit) %></th>
+      	<th>Ganancias</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<% promotions.each do |promotion| %>
+			  <% if i < 20 %>
+				<tr>
+				  <td><%= promotion.name %> (<%= promotion.description %>)</td>
+		          <td><%= promotion.code %></td>
+		          <td><%= promotion.usage_limit.nil? ? "∞" : promotion.usage_limit  %> (<%= Spree.t(:current_promotion_usage, count: promotion.credits_count) %>)</td>
+		        	<td>$ <%= number_to_currency(promotion.orders.sum(:total).to_i,precision: 0 ,unit: "", separator: "", delimiter: ".")%></td>
+		        	<td></td>
+				</tr>
+			  <% else %>
+				<% i = 1 %>
+				  </tbody>
+				</table>
+				<div id="brake"></div>
+				<br><br><br>
+				<table class="table">
+				  <thead>
+					<tr>
+					  <th><%= Spree.t(:name) %></th>
+		        <th><%= Spree.t(:code) %></th>
+		        <th><%= Spree.t(:usage_limit) %></th>
+		      	<th>Ganancias</th>
+					</tr>
+				  </thead>
+				  <tbody>
+			  <% end %>
+			  <% i+= 1 %>
+			<% end %>
+		  </tbody>
+		</table>
+	  <% else %>
+		<div class="alert alert-info no-objects-found">
+		  No existen registros en la base de datos
+		</div>
+	  <% end %>
+	</div>
+  </body>
+</html>

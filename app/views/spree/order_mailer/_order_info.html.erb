@@ -1,0 +1,366 @@
+<style type="text/css">
+
+.summary-disclaimer < mail-content {
+  text-align: left !important; 
+}
+
+  .text-center {
+    text-align: center;
+  }
+  h1, h2 {
+    font-size: 18px;
+    line-height: 22px;
+    color: #1F1F1F;
+    margin: 0;
+  }
+  h3 {
+    font-size: 18px;
+    line-height: 22px;
+    color: #1F1F1F;
+    font-weight: normal;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .customer-data {
+    width: 100%;
+    border-bottom: 2px solid #BBB;
+    padding-bottom: 20px;
+  }
+
+  .customer-data .user-name, 
+  .customer-data .ship-address, 
+  .customer-data .bill-address {
+    text-transform: capitalize;
+  }
+
+  .number-order {
+    color: #8C0014;
+    font-size: 21px;
+    line-height: 25px;
+  }
+
+  .customer-data p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .customer-data td {
+    padding-bottom: 20px;
+  }
+
+  .customer-data .data-label {
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+  }
+
+  .currency-value {
+    text-align: right;
+  }
+
+  .contact-container {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .contact-info {
+    text-decoration: none;
+    color: #8C0014;
+  }
+
+  .cart-data {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .cart-data tr td {
+
+    font-size: 14px;
+    line-height: 25px;
+  }
+
+  .description .sku {
+    font-size: 12px;
+    line-height: 14px;
+    color: #707070;
+    margin: 0;
+  }
+
+  .description .name {
+    font-size: 14px;
+    line-height: 17px;
+    color: #1F1F1F;
+    margin: 0;
+  }
+
+  .cart-data tr .currency-value {
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  .cart-data .bottom-padding td {
+    padding-bottom: 20px;
+  }
+
+  .cart-data .top-border td {
+    padding-top: 20px;
+    border-top: 1px solid #BBB;
+  }
+
+  .cart-data .top-border td:first-child {
+    border-top: none;
+  }
+
+  .actions-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .actions-container .btn {
+    font-size: 13px;
+  }
+
+  .mail-content {
+    margin-top: 0px;
+    margin-bottom: 5px;
+  }
+
+</style>
+<% order = @order if @order %>
+<div>
+  <% if order.miele_state == 'shipped' %>
+    <h1>Gracias por elegir Miele. Tu Pedido ha sido enviado y se encuentra en camino.</h1>
+    <br>
+    <h3 class="mail-content">¡Gracias por tu compra!</h3>
+  <% elsif order.miele_state == 'ready' %>
+    <h1>Gracias por elegir Miele. Tu Pedido ha sido aprobado y se encuentra en preparación para ser enviado.</h1>
+    <br>
+    <h3 class="mail-content">¡Gracias por tu compra!</h3>
+    <br>
+  <% elsif order.miele_state == 'delivered' %>
+    <h1>Gracias por elegir Miele. Tu pedido ya ha sido entregado y recibido.</h1>
+    <br>
+    <h3 class="mail-content">¡Gracias por tu compra!</h3>
+    <br>
+  <% elsif order.miele_state == 'paid' %>
+    <h1>Gracias por elegir Miele! Estamos procesando tu orden. Te notificaremos cuando tu pago haya sido confirmado.</h1>
+    <br>
+    <h3 class="mail-content">¡Gracias por tu compra!</h3>
+    <br>  
+  <% end %>
+</div>
+<h3>
+  Información del pedido
+</h3>
+<table class="customer-data">
+  <tbody>
+    <tr>
+      <td>
+        <p>
+          <%= order.email %>
+        </p>
+        <% if order.user %>
+          <p class="user-name">
+            <%= order.user.try(:name) %> <%= order.user.try(:last_name) %>
+          </p>
+          <p>
+            <%= order.user.try(:rut) %>
+          </p>
+        <% else %>
+          <p class="user-name">
+            <%= order.ship_address.try(:firstname) %> <%= order.ship_address.try(:lastname) %>
+          </p>
+          <p>
+            <%= order.ship_address.try(:rut) %>
+          </p>
+        <% end %> 
+        <p>
+          <%= order.ship_address.try(:phone) %>
+        </p> 
+      </td>
+      <td>
+        <p>Número pedido</p>
+        <p class="number-order">
+          <%= order.number %>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="data-label">
+          Método de pago
+        </p>
+        <p>
+          <%= order.payments.try(:last).try(:payment_method).try(:name) %>
+        </p>
+        <p>
+         ID <%= order.tbk_transaction_id %>
+       </p>
+       <% if order.webpay_data.present? %>
+         <% data = order.webpay_data.gsub('[','').gsub(']','').gsub('"','').split(',') rescue nil %>
+         <% if data %>
+       
+          <p>
+            Tipo de Pago: <%= 'Webpay Plus Débito' if data[8].to_s.strip == 'VD' %><%= 'Webpay Plus Crédito' if data[8].to_s.strip != 'VD' %> 
+          </p>
+          <p>
+            Tipo de Cuotas: 
+            <%= 'Sin Cuotas' if data[8].to_s.strip == 'VD' %>
+            <%= 'Sin Cuotas' if data[8].to_s.strip == 'VN' %>
+            <%= 'Cuotas normales' if data[8].to_s.strip == 'VC' %>
+            <%= 'Sin interés' if data[8].to_s.strip == 'SI' %>
+            <%= 'Sin interés' if data[8].to_s.strip == 'S2' %>
+            <%= 'Sin interés' if data[8].to_s.strip == 'NC' %>
+          </p>
+          <p>
+            Cantidad de Cuotas: <%= data[9] %>
+          </p>
+         <% end %>
+       <% end %>
+     </td>
+     <td>
+      <p class="data-label">
+        Método de envío
+      </p>
+      <p>
+        <%= order.shipments.try(:first).try(:selected_shipping_rate).try(:name) %>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p class="data-label">
+        Dirección de envío
+      </p>
+      <p class="ship-address">
+        <%= order.ship_address.try(:address1) %> Nº <%= order.ship_address.try(:number)%>,
+      </p>
+      <% if order.ship_address.try(:apartment) && order.ship_address.try(:apartment).try(:length) > 0%>
+        <p>
+          Depto. <%= order.ship_address.try(:apartment) %>,
+        </p>
+      <%end%>
+      <p>
+        <%= order.ship_address.try(:comuna).try(:name) %>,
+      </p>
+      <p>
+        <%= order.ship_address.try(:state).try(:name) %>.
+      </p>
+    </td>
+
+    <td>
+      <p class="data-label">
+        Dirección de facturación
+      </p>
+      <p class="bill-address">
+        <%= order.bill_address.try(:address1) %> Nº <%= order.bill_address.try(:number)%>,
+      </p>
+      <% if  order.bill_address.try(:apartment) && order.bill_address.try(:apartment).try(:length) > 0%>
+        <p>
+          Depto. <%= order.bill_address.try(:apartment) %>,
+        </p>
+      <%end%>
+      <p>
+        <%= order.bill_address.try(:comuna).try(:name) %>,
+      </p>
+      <p>
+        <%= order.bill_address.try(:state).try(:name) %>.
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <p class="data-label">
+        Notas de envío
+      </p>
+      <p class="del-note">
+        <%= order.ship_address.try(:complementary_data) %>
+      </p>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<h3>Detalle del pedido</h3>
+
+<table class="cart-data">
+  <tbody>
+    <% order.line_items.each do |item| %>
+    <tr class="bottom-padding">
+      <td></td>
+      <td class="description">
+        <p class="sku">
+          <%= item.product.sku %>
+        </p>
+        <p class="name">
+          <%= item.name %>
+        </p>
+        <% if item.product.try(:specific_attribute).try(:category) == "MDA" || item.instalation == true %>
+          <p class="summary-disclaimer" >
+            <p style="color: #707070 !important; opacity: 1 !important; letter-spacing: 0px !important;">Los productos instalados por Miele tendrán una <strong>garantía de 2 años.</strong> </p>
+          </p>
+        <% elsif item.product.try(:specific_attribute).try(:category) == "PAI" %>
+          
+        <% else %>
+          <p class="summary-disclaimer">
+            <p style="color: #707070 !important;">Los productos instalados por terceros tendrán una <strong>garantía de 3 meses.</strong> </p>
+          </p>
+        <% end %>
+      </td>
+      <td>
+        <%= item.quantity %> un.
+      </td>
+      <td class="currency-value">
+        <%= Spree::Money.new(item.total, currency: order.currency, no_cents: true).to_s %>
+      </td>
+    </tr>
+    <% end %>
+    <tr class="top-border">
+      <td></td>
+      <td class="amounts-label">Subtotal</td>
+      <td></td>
+      <td class="currency-value">
+        <%= Spree::Money.new(order.item_total, currency: order.currency, no_cents: true) %>
+      </td>
+    </tr>
+    <tr class="">
+      <td></td>
+      <td class="amounts-label">Despacho</td>
+      <td></td>
+      <td class="currency-value">
+        <%= Spree::Money.new(order.shipment_total, currency: order.currency, no_cents: true) %>
+      </td>
+      <tr class="bottom-padding">
+        <td></td>
+        <td class="amounts-label">Instalación</td>
+        <td></td>
+        <td class="currency-value">
+          <%= Spree::Money.new((order.instalation_value && order.instalation_value.to_d || 0)) %>
+        </td>
+      </tr>
+    </tr>
+    <% if order.adjustments.eligible.any? %>
+    <tr class="bottom-padding">
+      <td></td>
+      <td class="amounts-label">Descuentos aplicados</td>
+      <td></td>
+      <td class="currency-value">
+        <%= Spree::Money.new(order.adjustments.eligible.sum(:amount), currency: order.currency, no_cents: true) %>
+      </td>
+    </tr>
+    <% end %>
+    <tr class="top-border">
+      <td></td>
+      <td class="amounts-label">Total pedido</td>
+      <td></td>
+      <td class="currency-value">
+        <%= Spree::Money.new(order.total, currency: order.currency, no_cents: true) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="contact-container">
+  Para más información o si tienes alguna duda respecto a tu pedido, favor comunicarte al correo <%= link_to Spree.t(:email_contact), "mailto:#{Spree.t(:email_contact)}", class: 'contact-info' %>
+</p>

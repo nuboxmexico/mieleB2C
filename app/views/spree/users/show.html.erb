@@ -1,0 +1,160 @@
+<br>
+<div class="container">
+  <div class="row">
+    <h3 class="my-account sm-padding">Mi cuenta</h3>
+    <br>
+    <div>
+      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-10 bhoechie-tab-menu sm-padding">
+        <div class="list-group">
+          <a href="#" class="list-group-item text-center">
+            Mis Datos
+          </a>
+          <a href="#" class="list-group-item text-center">
+            Dirección de envio
+          </a>
+          <a href="#" class="list-group-item text-center">
+            Dirección de facturación
+          </a>
+          <a href="#" class="list-group-item active text-center">
+            Mis pedidos
+          </a>
+        </div>
+        <br>
+        <div class="list-group">
+          <h4 class="my-account sign-out-text">
+            <i class="fa fa-power-off"></i>
+            <%= link_to Spree.t(:logout), spree.logout_path, class: "sign-out-text" %>      
+          </h4>
+        </div>         
+
+      </div>
+      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 bhoechie-tab user-bottom">
+        <!-- flight section -->
+        <div class="bhoechie-tab-content container-fluid">
+          <h4 class="bhoechie-tittle">Información personal
+          </h4>
+          <div data-hook="account_summary" class="bhoechie-tab-content-body account-summary">
+            <div class="pull-right">
+              <%= link_to spree.edit_account_path, class: "btn btn-primary" do %>
+              <i class="fa fa-pencil"></i> <%= Spree.t(:edit)%>
+              <% end %>
+            </div>
+            <h4 class="bhoechie-tittle"><%= @user.try(:name) %> <%= @user.try(:last_name) %></h4>
+            <br><br>
+            <table class="table">
+              <tr>
+                <td>RUT:</td>
+                <td><%= @user.try(:rut) %></td>
+              </tr>
+              <tr>
+                <td><%= Spree.t(:email) %>:</td>
+                <td><%= @user.try(:email) %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="bhoechie-tab-content user-bottom">
+          <h4 class="bhoechie-tittle">Dirección de envío
+          </h4>
+          <div class="container-fluid panel-body white-back custom-panel-padding">
+            <div class="pull-right">
+              <button id="edit_ship" class="btn btn-primary"><i class="fa fa-pencil"></i> <%= Spree.t(:edit)%></button>
+            </div>
+            <% if !@user.ship_address.nil?%>
+            <div id = "ship-info">
+              <%= render 'spree/shared/address', address: @user.ship_address %>
+            </div>
+            <% else %>
+            <div class="alert alert-danger">
+              No existe dirección de envío
+            </div>
+            <% end %>
+          </div>
+          <div id="collapseship" class="panel-collapse collapse">
+            <div class="panel-body white-back custom-panel-padding">
+              <h4> 
+                Editar dirección de envío
+              </h4>
+              <% @type = "ship"%>
+              <%= render :partial =>'spree/users/address_form', locals: { user: @user, type: @type}  %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="bhoechie-tab-content user-bottom">
+          <h4 class="bhoechie-tittle">Dirección de facturación
+          </h4>
+          <div class="container-fluid panel-body white-back custom-panel-padding">
+            <div class="pull-right">
+              <button id="edit_bill" class="btn btn-primary"><i class="fa fa-pencil"></i> <%= Spree.t(:edit)%></button>
+            </div>
+            <% if @user.bill_address %>
+              <div id = "bill-info" >
+                <%= render 'spree/shared/address', address: @user.bill_address %>
+              </div>
+            <% else %>
+              <div class="alert alert-danger">
+                No existe dirección de factura
+              </div>
+            <% end %>
+          </div>
+          <div id="collapsebill" class="panel-collapse collapse">                  
+            <div class="panel-body white-back custom-panel-padding">
+              <h4> 
+                Editar dirección de facturación
+              </h4>
+              <% @type = "bill"%>
+              <%= render :partial =>'spree/users/address_form', locals: { user: @user, type: @type}  %>
+            </div>
+          </div>
+        </div>
+        <div class="bhoechie-tab-content active">
+          <h4 class="bhoechie-tittle">Últimos pedidos
+          </h4>
+          <div class="">
+            <%= render :partial =>'my_orders', locals: { orders: @orders}%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>         
+</div>
+
+<script>
+
+  $('#edit_bill').on('click', function(e) {
+    if ($("#collapsebill").hasClass('in')) {
+      $('#collapsebill').collapse('hide');
+      $('#bill-info').show("slow");
+    }
+    else{
+      $('#collapsebill').collapse('show');
+      $('#bill-info').hide("slow");
+      
+    }
+  });
+  $('#edit_ship').on('click', function(e) {
+    if ($("#collapseship").hasClass('in')) {
+      $('#collapseship').collapse('hide');
+      $('#ship-info').show("slow");
+    }
+    else{
+      $('#collapseship').collapse('show');
+      $('#ship-info').hide("slow");
+      
+    }
+  });
+  $(document).ready(function() {
+    $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+      e.preventDefault();
+      $(this).siblings('a.active').removeClass("active");
+      $(this).addClass("active");
+      var index = $(this).index();
+      $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
+      $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
+    });
+  });
+</script>
+

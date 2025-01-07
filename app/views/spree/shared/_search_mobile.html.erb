@@ -1,0 +1,22 @@
+<div class="row row-search" id="mobile-search-container">
+  <div class="col-xs-12">
+    <%= form_tag spree.products_path, method: :get do %>
+      <div class="search-container">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-upgraded">
+          <%= search_field_tag :keywords, nil, class: "mdl-textfield__input search-mobile-input", autocomplete: "off"%>
+          <label class="mdl-textfield__label" for="sample3">
+            Ingresa tu búsqueda
+          </label>
+        </div>
+
+        <div class="action-btn">
+          <input type="submit" 
+                 name="commit" 
+                 value="Buscar" 
+                 class="btn btn-tertiary btn-sm"
+                 id="search-button-mobile">
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie ie6" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
+<head data-hook="inside_head">
+  <meta name="facebook-domain-verification" content="ddup3xkdnsh6fncr0lbj1pfr7tt2lb" />
+  <meta name="google-site-verification" content="IruIXjGLecEYOtt9kudLJ8f8zY4noCBO6wg4JbDhTCI" />
+  <% if !Rails.env.production? %>
+    <meta name="robots" content="noindex">
+  <% end%>
+  <!--<meta name="google-site-verification" content="PcoGSQ6YNi-WvOBABX9yvV7BK-29Dh-iIHIYjZGLdZY" />-->
+ <!-- Google Tag Manager -->
+  <% if @tag_manager and @tag_manager.active %>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','<%= @tag_manager.tag_manager_id %>');
+    </script>
+  <%end%>
+<!-- End Google Tag Manager -->
+<!-- localbusiness schema -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeGoodsStore",
+    "name": "Miele Experience Center Chile",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Nueva Costanera 4055",
+      "addressLocality": "Santiago",
+      "addressRegion": "",
+      "postalCode": ""
+    },
+    "image": "https://www.miele.cl/media/domestic_cl/media/assets_442_x/fotosede-Nueva-Costanera-contacto.jpg",
+    "email": "info@miele.cl",
+    "telePhone": "+56 2 2957 0073",
+    "url": "shop.miele.cl",
+    "paymentAccepted": [ "cash", "credit card", "invoice" ],
+    "openingHours": "Mo,Tu,We,Th,Fr 09:00-18:00",
+    "openingHoursSpecification": [ {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    } ],
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "-33.3959043",
+      "longitude": "-70.59926"
+    },
+    "priceRange":"$$$$"
+
+  }
+</script>
+<!-- END localbusiness schema -->
+
+  
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= render partial: 'spree/shared/head' %>
+</head>
+<body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
+  <!-- Google Tag Manager (noscript) -->
+  <%if @tag_manager and @tag_manager.active %>
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=<%= @tag_manager.tag_manager_id %>"
+              height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+  <%end%>
+  <!-- End Google Tag Manager (noscript) -->
+  <%# render partial: 'spree/shared/google_analytics.js' %>
+  <%= render partial: 'spree/shared/header' %>
+  <%= render partial: 'spree/layouts/flash_messages' %>
+  <%= render 'spree/shared/loader' %>  
+  <section id="ajax-sidebar">
+    <%= render partial: 'spree/shared/cart_sidenav' %>
+  </section> 
+
+  <section id="main-home-content" class="container-main">
+    <%= render 'spree/shared/store_notice', locals: { store_notice: @store_notice } %>
+    <div class="overlay"></div>
+    <div class="row" data-hook>
+      <%= render partial: 'spree/shared/sidebar' if content_for? :sidebar %>
+
+      <div id="content" data-hook>
+        <%= yield %>
+      </div>
+      <!-- <div id="contador-comparator">
+        <%#= render partial: 'spree/shared/contador_comparator', locals: { items_comp: @items_comp} %>
+      </div> -->
+
+      <%= yield :templates %>
+    </div>
+  </section>  
+  <!-- Load Facebook SDK for JavaScript -->
+  <section id="customer-extras">
+    <%= render partial: "spree/layouts/chat" %>
+  </section>
+  <%= render partial: 'spree/shared/footer' %>
+  <div id="newsletter-popup"></div>
+</body>
+</html>
+<!-- <a href="#" id="back-to-top" title="Back to top"><i class="fa fa-chevron-circle-up fa-4x" aria-hidden="true"></i></a> -->

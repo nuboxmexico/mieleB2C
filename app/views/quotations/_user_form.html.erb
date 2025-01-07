@@ -1,0 +1,10 @@
+<b id="helpBlock" class="help-block"></b>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-dirty is-upgraded">
+  <%= user_form.text_field :rut, class: 'mdl-textfield__input', required: true, oninput: "validateRut(this);", value: spree_current_user.try(:rut), maxlength: "15", disabled: (spree_current_user.try(:rut) != nil) %>
+  <%= user_form.label 'RUT', class: 'mdl-textfield__label' %>
+</div>
+
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-dirty is-upgraded">
+  <%= user_form.email_field :email, class: 'mdl-textfield__input', required: true, value: spree_current_user.try(:email), disabled: (spree_current_user.try(:email) != nil) %>
+  <%= user_form.label 'Correo electrónico', class: 'mdl-textfield__label' %>
+</div>

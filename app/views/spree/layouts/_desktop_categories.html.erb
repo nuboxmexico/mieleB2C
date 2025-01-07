@@ -1,0 +1,61 @@
+<div id="sub-categories">
+  <% @taxonomies.each do |taxonomy| %>
+    <div id="<%= taxonomy.name.downcase.gsub(' ', '-') %>-category" 
+         class="sub-category-container container-fluid-custom">
+      <div class="sub-category-list">
+        <ul>
+          <% if taxonomy.root %>
+            <% taxonomy.root.children.each do |taxon| %>
+              <li class="header-sub-category" 
+                  data-category="<%= taxon.name.downcase.gsub(' ', '-') %>">
+                <%= link_to seo_url(taxon) do %> 
+                  <%=  taxon.name %>
+                <%end%>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      <% if taxonomy.root %>
+        <% taxonomy.root.children.each do |taxon| %>
+          <% if taxon.children.size > 0 %>
+            <div id="<%= taxon.name.downcase.gsub(' ', '-') %>-sub-category" 
+                 class="sub-family-container">
+              <div class="sub-family-list">
+                <ul>
+                  <% taxon.children.each do |sub_category| %>
+                    <li class="header-specific"
+                        data-category="<%= sub_category.name.downcase.gsub(' ', '-') %>">
+                      <%= link_to seo_url(sub_category) do %> 
+                        <%=  sub_category.name %>
+                      <%end%>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+              <div class="specific-container">
+                <% taxon.children.each do |sub_category| %>
+                  <div class="specific-list specific-list-hide <%= sub_category.name.downcase.gsub(' ', '-') %>-specific">
+                    <ul>
+                      <% sub_category.children.each do |specific| %>
+                        <li>
+                          <%= link_to seo_url(specific) do %>
+                            <%= specific.name %>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+      <div class="category-bar-image">
+        <%= category_bar_banner %>
+      </div>
+    </div>
+    <div id="cover-screen"></div>
+  <% end %>
+</div>

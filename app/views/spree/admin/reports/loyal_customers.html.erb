@@ -1,0 +1,40 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:reports), spree.admin_reports_url %> /
+  Informe de fidelidad de clientes
+<% end %>
+<%= link_to(admin_download_loyal_customers_url(format: 'xlsx'), onclick: '$(".loader-page").remove();') do %>
+  <div class="btn btn-success"><i class="fa fa-download"></i> Descargar</div>
+<% end %>
+
+<% if @buyers.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Email</th>
+      	<th>Primera Orden</th>
+      	<th>Última Orden</th>
+      	<th>Órdenes a la fecha</th>
+      	<th>Valor promedio de Orden</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @buyers.each do |buyer| %>
+        <tr>
+          <% if !buyer['user_id'].zero? %>
+      	    <td><%= link_to buyer['email'], admin_user_url(buyer['user_id']), target: "_blank" %></td>
+          <% else %>
+            <td><%= buyer['email'] %></td>
+          <% end %>
+				  <td><%= buyer['first_order'].strftime("%d/%m/%Y a las %H:%M:%S") %></td>
+				  <td><%= buyer['last_order'].strftime("%d/%m/%Y a las %H:%M:%S") %></td>
+				  <td><%= buyer['count'] %></td>
+				  <td>$ <%= number_to_currency( buyer['total'].to_i, precision: 0 ,unit: "", separator: "", delimiter: ".") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    No se han encontrado clientes
+  </div>
+<% end %>

@@ -1,0 +1,34 @@
+<% content_for :page_title do %>
+  <%= link_to Spree.t(:promotions), admin_promotions_url %> /
+  <%= @promotion.name %>
+<% end %>
+<% content_for :page_actions do %>
+  <%= render partial: 'spree/admin/shared/help', locals: {title_help: t(:admin_help_edit_promotion_title), body_help: t(:admin_help_edit_promotion_body)} %>
+<% end %>
+<%= form_for @promotion, url: object_url, method: :put do |f| %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= render partial: 'form', locals: { f: f } %>
+      <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+    </div>
+  </div>
+
+<% end %>
+<div class="pull-right">	
+  <%= render partial: 'spree/admin/shared/help', locals: {title_help: t(:admin_help_edit_promotion_rules_title), body_help: t(:admin_help_edit_promotion_rules_body), option_id: "rules"} %>
+</div>
+<br><br><br>
+<div id="promotion-filters" class="row">
+  <div id="rules_container" class="col-md-6">
+    <div class="panel panel-default">
+      <%= render partial: 'rules' %>
+    </div>
+  </div>
+
+  <div id="actions_container" class="col-md-6">
+    <div class="panel panel-default">
+      <%= render partial: 'actions' %>
+    </div>
+  </div>
+</div>
+<%= render partial: "spree/admin/variants/autocomplete", formats: [:js] %>

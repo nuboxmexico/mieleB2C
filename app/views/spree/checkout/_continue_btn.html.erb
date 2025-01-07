@@ -1,0 +1,52 @@
+<div  class="form-buttons" data-hook="buttons">
+  <%= submit_tag Spree.t(:continue), id: ("continue-on-"+position) , class: 'btn btn-primary', disabled: true %>
+  <% if @order.state == "payment" %>
+    <script>Spree.disableSaveOnClick();</script>
+  <% end %> 
+</div>
+<script>
+  $("#continue-on-<%= position%>").click(function() {
+    if ("<%= @order.state%>" === "payment") {
+      if (!$("#terms_check").is(":checked")) {
+        swal({
+         title: 'Debe aceptar los términos de servicio antes de continuar',
+         type: 'warning'
+        })
+        $("#block-terms").addClass("alert-danger");
+        return false;
+      }
+      else {
+        $("#checkout_form_<%= @order.state%>").submit();
+      }
+    }
+    else {
+      if ($("#sstate_id").val() != "<%= @region_metropolitana_state.try(:id).to_s %>" && 
+          ($("#added-service<%= @previsit_service_variant.try(:product).try(:id).to_s %>").length || 
+          $("#added-service<%= @home_program_service_variant.try(:product).try(:id).to_s %>").length)) {
+        const parent = document.getElementsByClassName("stock-contents")[0];
+        let item_id = -1;
+        for (let i = 0; i < parent.children.length; i++) {
+          let variant = parent.children[i].dataset.variant;
+          if (variant == "<%= @previsit_service_variant.try(:id).to_s %>" || variant == "<%= @home_program_service_variant.try(:id).to_s %>") {
+            item_id = parent.children[i].dataset.item;
+            break;
+          }
+        }
+        swal({
+          title: 'Tiene un servicio en el carro solamente disponible para Región Metropolitana',
+          type: 'warning',
+          showCancelButton: false,
+          confirmButtonText: 'Ok',
+          confirmButtonClass: 'btn btn-success',
+        }).then(function(confirm){
+          if (confirm.value) {
+            $('.loader-page').fadeIn();
+            $.post('/orders/remove_item', {id: item_id});
+          }
+        });
+        return false;
+      }
+      else $("#checkout_form_<%= @order.state%>").submit();
+    }
+  });
+</script>

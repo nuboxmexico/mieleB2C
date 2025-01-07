@@ -1,0 +1,13 @@
+<% @body_id = 'home-page' %>
+<%= render partial: 'spree/home/info_carousel' %>
+<%= render 'promotional_banners' if @promotional_banners.any? %>
+<% if @featured.any? %>
+  <div class="featured-title">Productos destacados</div>
+  <div id="products-home" data-hook="homepage_products" class="featured">
+    <% @featured.each do |product| %>
+      <div class="col-sm-6 col-md-4 product-card-container">
+        <%= render partial: 'spree/shared/product', locals: { product: product}%>
+      </div>
+    <% end %>
+  </div>
+<% end %>

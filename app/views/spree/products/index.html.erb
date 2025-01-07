@@ -1,0 +1,38 @@
+<div class="taxon-container">
+  <div class="section-header">
+    <div class="title">
+      <h1>Resultados de la búsqueda</h1>
+    </div>
+  </div>
+  <div class="row taxon-header">
+    <div class="col-xs-12 no-padding">
+      <p class="total-products">
+        Mostrando <%= pluralize(@products.count, 'producto') %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <% if @promotional_banner %>
+      <div class="hidden-xs hidden-sm col-md-2">
+          <div class="sidebar-banner-container">
+            <%= link_to @promotional_banner.link do %>
+              <%= image_tag @promotional_banner.image.url(:large), 
+                            alt: @promotional_banner.alt %>
+            <% end %>
+          </div>
+      </div>
+    <% end %>
+    <div class="col-xs-12 <%= (@promotional_banner.nil? ? "col-md-12" : "col-md-10")%>">
+      <div class="row">
+        <% @products.each do |product| %>
+          <div class="col-sm-6 col-md-4 product-card-container">
+            <%= render partial: 'spree/shared/product', 
+                       locals: { product: product } %>
+            
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

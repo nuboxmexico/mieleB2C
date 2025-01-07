@@ -1,0 +1,31 @@
+<div class="subscriber-container">
+  <%= form_for @newsletter_subscriber, html: { class: "form-inline" }, url: newsletter_create_path, method: :post do |f| %>
+    <% if @newsletter_subscriber.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@newsletter_subscriber.errors.count, "error") %> prohibited this newsletter_subscriber from being saved:</h2>
+
+        <ul>
+        <% @newsletter_subscriber.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <h3>Mantente en Contacto</h3>
+    
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-invalid no-margin-top">
+      <%= f.email_field :email, class: 'mdl-textfield__input', required: true, pattern: "^([0-9]{9})|([A-Za-z0-9._%\+\-]+@[a-z0-9.\-]+\.[a-z]{2,3})$" %>
+      <%= f.label 'Regístrate para recibir novedades', class: 'mdl-textfield__label' %>
+    </div>
+
+    <div class="form-group hidden">
+      <%= f.label :active %>
+      <%= f.check_box :active, {checked: true} %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

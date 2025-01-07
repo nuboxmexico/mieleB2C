@@ -1,0 +1,11 @@
+<% unless @errors.present? %>
+  // $('#promotional-code-container')
+  //   .empty()
+  //   .html("<%= j render 'spree/checkout/summary_discounts' %>");
+  $('#checkout-summary')
+    .empty()
+    .html("<%= j render 'spree/checkout/summary', order: @order %>");
+<% else %>
+  alertify.error("<%= @errors %>");
+<% end %>
+$(".loader-page").fadeOut("slow");

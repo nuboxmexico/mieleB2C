@@ -1,0 +1,170 @@
+<% #cache(@taxon.present? ? [I18n.locale, current_currency, @taxon, product] : cache_key_for_product(product)) do %>
+<%= form_for :order, url: populate_orders_path, :html => { :id => "product_form#{product.id.to_s + type_v}" } do |f| %>
+  <div class="row" id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+    <% if product.variants_and_option_values(current_currency).any? %>
+      <!-- Variant panel -->
+      <!-- 
+      <div class="container-fluid" id="product-variants" align="center">
+        <div id="variant_btn<%= product.id.to_s + type_v %>" class="btn btn-primary"> Ver variantes</div>
+        <div id="variant_pane<%= product.id.to_s + type_v %>" class="panel panel-collapse collapse variant-panel">
+          <div class="panel-body white-back">
+            <ul class="list-group">
+              <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+                <% if variant.can_supply? %>
+                  <div class="div-radio">
+                    <%= radio_button_tag "variant_id", variant.id, index == 0,
+                        'data-price' => variant.price_in(current_currency).money, 
+                        'data-in-stock' => variant.can_supply?,
+                         class: "radio"
+                    %>
+                    <%= label_tag "variant_id_#{ variant.id }", class: "label-radio" do %>
+                      <span class="variant-description">
+                        <%= variant_options variant %>
+                      </span>
+                    <% end %>
+                      <br>
+                      <% if variant_price variant %>
+                        <span class="price diff"><%= variant_price variant %></span>
+                      <% end %>
+                  </div>
+                <% end %>
+              <% end%>
+            </ul>      
+          </div>
+        </div>
+        <script>
+          $('#variant_btn<%= product.id.to_s + type_v %>').on('click', function(e) {
+            if ($("#variant_pane<%= product.id.to_s + type_v %>").hasClass('in')) {
+              $('#variant_pane<%= product.id.to_s + type_v %>').collapse('hide');
+            }
+            else{
+              $('#variant_pane<%= product.id.to_s + type_v %>').collapse('show');
+               
+            }
+          });
+        </script>
+      </div>
+       -->
+    <% else %>
+    <% end %>
+    <%= hidden_field_tag "variant_id", product.master.id %>
+
+    <% if product.price_in(current_currency) && !product.price.nil? %>
+      <div data-hook="product_price" class="col-md-11">
+        <div id="product-price">
+          <% if product.master.can_supply? %>
+            <link itemprop="availability" href="https://schema.org/InStock" />
+          <% elsif product.variants.empty? %>
+            
+          <% end %>
+        <% if product.can_supply? %>
+         <%= hidden_field_tag :quantity, 1, class: 'title form-control', min: 1 %> 
+        <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div id="product-price">
+        <br />
+        <div>
+          <span class="price selling" itemprop="price">
+            <%= Spree.t('product_not_available_in_this_currency') %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<%# end %>
+
+<% if product.can_supply? %>
+  <div class="row">
+    <div title="Agregar al comparador" id="product-btn<%= product.master.id.to_s + type_v%>" class="btn btn-tertiary-sm ">  
+      <i class="fa fa-balance-scale"></i> Comparar 
+    </div>
+    <a href="<%= spree.product_path(product, taxon_id: @taxon.try(:id)) %>" title="Información del producto" id="" class="btn btn-tertiary-sm product-<%= product.id.to_s  + type_v%>-action">  
+      <i class="glyphicon glyphicon-info-sign"></i> Detalles    
+    </a>
+    <%# unless product.variants_and_option_values(current_currency).any? %>
+      <div title="Agregar al carro" id="add-to-cart-button<%= product.id.to_s + type_v%>" class="btn btn-tertiary-sm product-<%= product.id.to_s  + type_v%>-action">  
+        <i class="glyphicon glyphicon-shopping-cart"></i> Agregar <span class="hidden-xs">al carro</span> 
+      </div>
+    <%# end %>
+    <div id="product-<%= product.id.to_s + type_v%>-variants" class="hidden">
+      <% product.variants_and_option_values(current_currency).each_with_index do |variant, index| %>
+        <% if index < 3 %>
+          <div class="btn btn-tertiary-sm variant-option" id="product-variant-<%= variant.id.to_s  + type_v%>" variant="<%= variant.id %>">
+            <%= variant.option_values.first.name %>
+          </div>
+        <% else %>
+          <a href="<%= spree.product_path(product, taxon_id: @taxon.try(:id)) %>" 
+             class="btn btn-tertiary-sm variant-option">  
+            Ver todas las variantes
+          </a>
+          <% break %>
+        <% end %>
+        <script>
+          $('#product-variant-<%= variant.id.to_s  + type_v%>').click(function(){
+            $('input[name="variant_id"]').val($(this).attr('variant'));
+            addProductToCart("<%= product.id.to_s + type_v%>");
+          });
+        </script>
+      <% end %>
+    </div>
+  </div>
+  <script>
+    $("#add-to-cart-button<%= product.id.to_s + type_v%>").click(function() {
+      dataLayer.push({ ecommerce: null });
+      dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+          items: [
+            {
+              "item_name": "<%= @product.name %>", // Nombre del producto: “Aspiradora ADER”
+              "item_id": "<%= @product.sku %>", // Identificador único del producto “12345”
+              "item_brand": "Miele", // Marca del producto : “Miele”
+              "item_category": "<%= @product.taxons.last.try(:name) %>", // Categoría del producto : “aspiradoras”
+              "item_variant": "", // Variantes del producto: “Azul”
+              "price": "<%= @product.price %>", // Precio neto del producto : 45000
+              "quantity": 1 // Valor numérico de cantidad: 1
+            } 
+          ]
+        }
+      });
+      if (<%= product.variants_and_option_values(current_currency).any? %>) {        
+        $('.product-<%= product.id.to_s + type_v%>-action').addClass('fadeOutLeft')
+            .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+              $('.product-<%= product.id.to_s  + type_v%>-action').hide()
+              $('#product-<%= product.id.to_s + type_v%>-variants').removeClass('hidden').addClass('fadeInRight');
+            });
+      }
+      else {
+        addProductToCart("<%= product.id.to_s + type_v%>");
+      }
+    });
+
+    $("#product-btn<%= product.master.id.to_s + type_v%>").on('click',function() {
+      $('#loader<%= product.id.to_s + type_v%>').removeClass("hidden");
+      $('#product-main<%= product.id.to_s + type_v%>').addClass("hidden");
+      $.ajax({
+        type: "POST",
+        url: "/comparator/add_product",
+        data: "variant_id=<%=product.master.id%>",
+        success: function(msg){
+          $('#product-main<%= product.id.to_s + type_v%>').removeClass("hidden");
+          $('#loader<%= product.id.to_s + type_v%>').addClass("hidden");
+          alertify.success("Se ha agregado el producto satisfactoriamente.");
+        },
+        error(xhr, status, error) {
+          $('#product-main<%= product.id.to_s + type_v%>').removeClass("hidden");
+          $('#loader<%= product.id.to_s + type_v%>').addClass("hidden");
+          alertify.error("Puede comparar como máximo 4 productos.");
+        }
+      });
+               
+    });
+
+  </script>
+<% else %>
+  <div class="center-block out-of-stock"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> &nbsp;<%= Spree.t(:out_of_stock) %>
+  </div> 
+<% end %>

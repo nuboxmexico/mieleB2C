@@ -1,0 +1,14 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Total de ventas') do |sheet|
+  headers = ['Moneda', 'Total del Artículo', 'Total de ajuste', 'Total de envío', 'Total de venta']
+  sheet.add_row headers
+  
+  @totals.each do |key, row|
+    sheet.add_row [key,
+                   Spree::Money.new(row[:item_total], { currency: key }),
+                   Spree::Money.new(row[:adjustment_total], { currency: key }),
+                   Spree::Money.new(row[:shipments_total], { currency: key }),
+                   Spree::Money.new(row[:sales_total], { currency: key })]
+  end
+end

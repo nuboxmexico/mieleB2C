@@ -1,0 +1,48 @@
+wb = xlsx_package.workbook
+title = wb.styles.add_style(b: true, sz:12, buser: {style: :thin, color: "00000000", edges: [:top, :left, :right, :bottom]})
+wb.add_worksheet(name: "Ordenes") do |sheet|
+  
+  #sheet.add_row headers, style: title
+  headers = [
+    "Número orden", 
+    "Fecha de compra", 
+    "Fecha pago", 
+    "Hora de compra",
+    "Email", 
+    "Nombre cliente",
+    "Rut cliente",
+    "Teléfono cliente",
+    "Calle/Dirección",
+    "Comuna", 
+    "Región", 
+    "Método pago", 
+    "ID Transacción TBK",
+    "Total Neto Productos",
+    "Total Bruto Productos",
+    "Valor bruto despacho",
+    "Total Orden"
+  ]
+  sheet.add_row headers, style: title
+  @orders.each do |order|
+      row = [
+        order.try(:number), 
+        order.completed_at.strftime("%d/%m/%Y"), 
+        order.payments.last.try(:updated_at).try(:strftime, "%d/%m/%Y"), 
+        order.completed_at.strftime("%H:%M"),
+        order.try(:email),
+        order.user ? order.user.full_name : order.ship_address.user_full_name,
+        order.user ? order.user.rut : order.ship_address.rut, 
+        order.ship_address.phone, 
+        order.ship_address.address1,
+        order.ship_address.try(:comuna).try(:name), 
+        order.ship_address.try(:state).try(:name), 
+        order.payments.last.try(:payment_method).try(:name), 
+        order.tbk_transaction_id,
+        (order.item_total/1.19).round(0),
+        order.item_total,
+        order.shipment_total,
+        order.total
+      ]
+      sheet.add_row row
+  end    
+end

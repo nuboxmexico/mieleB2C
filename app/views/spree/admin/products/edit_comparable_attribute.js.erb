@@ -1,0 +1,6 @@
+<% if @attribute %>
+  $('#attribute-<%= @attribute.id %>').empty();
+  $('#attribute-<%= @attribute.id %>')
+    .append('<%= j render partial: "edit_comparable_attribute_form" %>');
+<% end %>
+$('.loader-page').fadeOut('slow');

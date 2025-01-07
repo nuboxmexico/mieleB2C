@@ -1,0 +1,183 @@
+<% address_id = address_type.chars.first 
+if address_id == 's'
+  address_name = 'ship'
+  current_address = current_spree_user.try(:ship_address)
+elsif address_id == 'b'
+  address_name = 'bill'
+  current_address = current_spree_user.try(:bill_address)
+end
+%>
+<div class="inner" data-hook=<%="#{address_type}_inner" %>>
+  <div class="hidden">
+    <%= form.collection_select :country_id, available_countries, :id, :name, {selected: (address.country_id ? address.country_id : @country.id)}, {class: 'form-control required', autocomplete: 'country-name'} %>
+    <%= form.text_field :city, value: 'default', autocomplete: 'address-level2', class: 'form-control' %>
+  </div>
+  <% if address_name != 'bill' %>
+  <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-dirty is-upgraded form-separator">
+    <%= form.text_field :rut, class: 'mdl-textfield__input required', value: current_spree_user.try(:rut), 'aria-describedby' => "helpBlock", oninput: "validateRut(this);" %>
+    <%= form.label 'RUT', class: 'mdl-textfield__label' %>
+    <span class="mdl-textfield__error">Debe ingresar un rut válido</span>
+  </div>
+  <% end %>
+
+  <div class="<%= (!current_spree_user.nil? && address_name != 'bill') ? 'hidden' : '' %>">
+    <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom">
+      <%= form.text_field :firstname, class: 'mdl-textfield__input required', value: (address.firstname ? address.firstname : current_spree_user.try(:name)) %>
+      <%= form.label (address_name != 'bill' ? :firstname : "Razón social" ), class: 'mdl-textfield__label' %>
+    </div>
+    <% if address_name != 'bill' %>
+    <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom form-separator">
+      <%= form.text_field :lastname, class: 'mdl-textfield__input required', value: (address.lastname ? address.lastname : current_spree_user.try(:last_name)) %>
+      <%= form.label :lastname, class: 'mdl-textfield__label' %>
+    </div>
+    <% else %>
+    <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom is-dirty is-upgraded form-separator">
+      <%= form.text_field :rut, class: 'mdl-textfield__input required', 'aria-describedby' => "helpBlock", oninput: "validateRut(this);" %>
+      <%= form.label 'RUT Empresa', class: 'mdl-textfield__label' %>
+      <span class="mdl-textfield__error">Debe ingresar un rut válido</span>
+    </div>
+    <%= hidden_field_tag 'order[bill_address_attributes][last_name]', 'default'%>
+    <% end %>
+  </div>
+  <div>
+    <% if Spree::Config[:address_requires_state] %>
+    <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom is-dirty">
+      <div id=<%="#{address_id}state" %>>
+        <% have_states = address.country.states.any? if address %>
+        <%= form.label :state, class: 'mdl-textfield__label', id: "#{address_id}state-required" do %>
+        Región
+        <% end %>
+        <%== state_elements = [
+         form.collection_select(:state_id, address.country.states,
+          :id, :name,
+          {include_blank: true, selected: address.state_id},
+          {class: have_states ? 'form-control required' : 'form-control hidden',  autocomplete: 'address-level1',
+            disabled: !have_states, id: (address_id+"state_id")}) +
+         form.text_field(:state_name,
+          class: !have_states ? 'form-control required' : 'form-control hidden', autocomplete: 'address-level1',
+            disabled: have_states)
+       ].join.gsub('"', "'").gsub("\n", "")
+       %>
+     </div>
+     <noscript>
+      <%= form.text_field :state_name, class: 'required' %>
+    </noscript>
+  </div>
+  <% end %>
+
+  <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom is-dirty form-separator">
+    <%= form.label :comuna_id, class: 'mdl-textfield__label', id: "#{address_id}select_comuna" do %>
+    Comuna
+    <% end %>
+    <%= form.collection_select :comuna_id, [], :id, :name, {selected: address.comuna_id}, {class: 'required'} %>
+  </div>
+</div>
+
+<div>
+  <div class="mdl-textfield street-type-width mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom is-dirty">
+    <%= form.label :street_type, class: 'mdl-textfield__label' do %>
+      Tipo de Calle
+    <% end %>
+    <%= form.select :street_type, Spree::Address.street_types.invert.to_a, {include_blank: true}, {class: 'required'} %>
+  </div>
+
+  <div class="mdl-textfield address1-width mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom">
+    <%= form.text_field :address1, autocomplete: 'address-line1', class: 'mdl-textfield__input required', value: address.address1 %>
+    <%= form.label :address1, class: 'mdl-textfield__label' do %>
+    Nombre Calle
+    <% end %>
+    <span class="mdl-textfield__error"></span>
+  </div>
+
+  <div class="address-input-container">
+    <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom">
+      <%= form.text_field :number, class: 'mdl-textfield__input required', value: address.number, placeholder: '123' %>
+      <%= form.label 'Número', class: 'mdl-textfield__label' %>
+    </div>
+
+    <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom">
+      <%= form.text_field :apartment, class: 'mdl-textfield__input', value: address.apartment, placeholder: 'depto A, 123' %>
+      <%= form.label 'Depto', class: 'mdl-textfield__label' %>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label  mdl-textfield-custom">
+    <%= form.text_field :complementary_data, autocomplete: 'address-line1', class: 'mdl-textfield__input' %>
+    <%= form.label :complementary_data, class: 'mdl-textfield__label' do %>
+    <%= (address_name != 'bill' ? 'Notas para envío' : 'Comentarios') %>
+    <% end %>
+  </div>
+  
+  <div class="mdl-textfield half-width mdl-js-textfield mdl-textfield--floating-label mdl-textfield-custom form-separator">
+    <%= form.text_field :phone, class: 'mdl-textfield__input phone-input', value: address.phone %>
+    <%= form.label 'Teléfono móvil', class: 'mdl-textfield__label' %>
+    <span class="mdl-textfield__error">Debe ingresar un número de teléfono móvil válido</span>
+  </div>
+</div>
+
+<% if Spree::Config[:company] %>
+<p class="form-group" id=<%="#{address_id}company" %>>
+  <%= form.label :company, Spree.t(:company) %>
+  <%= form.text_field :company, class: 'form-control' %>
+</p>
+<% end %>
+
+<% if Spree::Config[:alternative_shipping_phone] %>
+<p class="form-group" id=<%="#{address_id}altphone" %>>
+  <%= form.label :alternative_phone, Spree.t(:alternative_phone) %>
+  <%= form.phone_field :alternative_phone, class: 'form-control' %>
+</p>
+<% end %>
+</div>
+
+<script>
+  $('select').select2();
+  getComunasByRegion('#<%= address_id %>state_id', 
+   '#order_<%=address_name%>_address_attributes_comuna_id',
+   <%= current_address.try(:comuna_id) %>);
+  $('#<%= address_id %>state_id').change(function(){
+    getComunasByRegion('#<%= address_id %>state_id', 
+     '#order_<%=address_name%>_address_attributes_comuna_id');
+  });
+
+    /*
+    FUNCIÓN PARA ACTUALIZAR EL COSTO DE DESPACHO CADA VEZ QUE CAMBIE LA COMUNA O LA REGIÓN
+    $('#order_<%=address_name%>_address_attributes_comuna_id').change(function(){
+      $('.loader-page').fadeIn();
+      var params = {
+        id: <%= @order.id %>,
+        state_id: $('#<%= address_id %>state_id').val(),
+        comuna_id: $('#order_<%=address_name%>_address_attributes_comuna_id').val()
+      };
+      $.post('/orders/update/shipping_address/ajax', params)
+        .done(function(){
+          $('.loader-page').fadeOut();
+        });
+    });
+    */
+  
+  $(document).ready(function() {
+    $("#form-shipping-button").click(function(){
+      var previsitAddButton = $("#service<%= @previsit_service_variant.try(:product).try(:id).to_s %>");
+      var homeprogramAddButton = $("#service<%= @home_program_service_variant.try(:product).try(:id).to_s %>");
+      if ($("#sstate_id").val() == "<%= @region_metropolitana_state.try(:id).to_s %>") {
+        previsitAddButton.prop("disabled", false);
+        homeprogramAddButton.prop("disabled", false);
+      }
+      $("#sstate_id").change(function(e){
+        var previsitAddButton = $("#service<%= @previsit_service_variant.try(:product).try(:id).to_s %>");
+        var homeprogramAddButton = $("#service<%= @home_program_service_variant.try(:product).try(:id).to_s %>");
+        if (e.target.value == "<%= @region_metropolitana_state.try(:id).to_s %>") {
+          previsitAddButton.prop("disabled", false);
+          homeprogramAddButton.prop("disabled", false);              
+        }
+        else {
+          previsitAddButton.prop("disabled", true);
+          homeprogramAddButton.prop("disabled", true);
+        }
+      });
+    });
+  });
+</script>

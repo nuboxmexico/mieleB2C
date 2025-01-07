@@ -1,0 +1,47 @@
+<% content_for :page_title do %>
+  Clientes con subscripción de correo
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to 'Ingresar nuevo subscriptor', '/newsletter_subscribers/new', class: "btn btn-success" %>
+  <%= link_to 'download_subscriptors', class: 'btn btn-info no-loading' do %>
+  <i class="fa fa-download"></i> Descargar subscriptores
+  <% end %>
+  <%= render partial: 'spree/admin/shared/help', locals: {title_help: t(:admin_help_newsletter_title), body_help: t(:admin_help_newsletter_body)} %>
+<% end %>
+<% if @newsletter_subscribers.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Activo</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @newsletter_subscribers.each do |newsletter_subscriber| %>
+        <tr>
+          <td><%= newsletter_subscriber.email %></td>
+          <td>
+            <span class="label <%= newsletter_subscriber.active? ? 'label-success' : 'label-danger'%>">
+              <i class="fa <%= newsletter_subscriber.active? ? 'fa-check' : 'fa-remove'%>"></i>
+            </span>
+          </td>
+          <td>
+            <%= link_to '/newsletter_subscribers/'+newsletter_subscriber.id.to_s+'/edit', class: "btn btn-primary btn-sm icon-link with-tip action-edit no-text" do %>
+              <i class="icon icon-edit"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to_delete newsletter_subscriber, no_text: true, url: '/newsletter_subscribers/'+newsletter_subscriber.id.to_s %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+<%else%>
+  <div class="alert alert-success">No existen registros actualmente.</div>
+<%end%>

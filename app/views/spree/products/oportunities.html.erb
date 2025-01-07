@@ -1,0 +1,34 @@
+<div class="taxon-container">
+  <div class="row taxon-header">
+    <h1>
+      <%= cyberday %>
+    </h1>
+    <div class="col-xs-12 col-md-6 no-padding">
+      <ul class="taxon-tree">
+        <li>
+          <%= cyberday %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-md-6 no-padding">
+      <p class="total-products" id="porducts-in-offer-quantity">
+      </p>
+    </div>
+  </div>
+  <div class="row products-container">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+      <div class="row" id="products-in-offer-container">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $.get('/oportunities.js')
+      .done(function(){
+        $('.loader-page').fadeOut();
+      })
+  })
+</script>

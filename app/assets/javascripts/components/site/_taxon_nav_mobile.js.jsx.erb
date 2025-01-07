@@ -1,0 +1,54 @@
+class TaxonNavMobile extends React.Component {
+  constructor(props) {
+    super(props);
+  	this.state = {
+      taxonomies: []
+    };
+  }
+  componentDidMount() {
+    $.getJSON('/products.json?utf8=✓&taxonomies="true"', (response) => { this.setState({ taxonomies: response }) });
+  }  
+  render() {
+  	const itemsMobile = [];
+    
+    if(this.state.taxonomies){
+      this.state.taxonomies.forEach((taxon) => {
+        itemsMobile.push(
+          <TaxonParentMobile 
+            key={taxon.id}
+              taxon={taxon}
+              taxon_name={this.props.taxon_name}
+              taxon_id={this.props.taxon_id}
+              onhandleTaxonChange={this.props.onhandleTaxonChange}
+          />     
+        );
+      });
+	  }
+    return ReactDOM.createPortal(
+      <React.Fragment>
+        <ul className="nav navi nav-list mobile-nav hidden-lg hidden-md">
+          <div id="wrapper">
+            <div className="overlay"></div>
+              <nav className="navbar navbar-inverse navbar-fixed-top scroll-navi" id="sidebar-wrapper" role="navigation">
+                  <ul className="nav sidebar-nav">
+                      <li className="sidebar-brand">
+                        <figure>
+                          <a href="/">
+                            <%= image_tag('logo/logo.png', alt: 'Logo', className: "customer-logo")%>
+                          </a> 
+                        </figure>
+                      </li>
+                      {itemsMobile}
+                  </ul>
+              </nav>
+              <div id="page-content-wrapper">
+                <button type="button" id="nav-burger" className="hamburger is-closed" data-toggle="offcanvas">
+                  <i className="fa fa-align-justify fa-2x white" id="hamburger-categories" aria-hidden="true"></i>
+                </button>
+              </div>
+          </div>
+        </ul>
+      </React.Fragment>
+      ,document.getElementById('categories-react-mobile'))
+  }
+}

@@ -1,0 +1,46 @@
+<style>
+	.collapse{
+		background: #fff!important;
+	}
+</style>
+<% content_for :page_title do %>
+Sección oportunidades
+<% end %>
+
+<div class="alert alert-info no-objects-found">
+	En esta sección podrás configurar el nombre de la categoría "Oportunidades", además de programar el cambio de acuerdo a las campañas de comercio electrónico :)
+</div>
+
+<%= form_for @config, url: main_app.miele_config_path(@config), method: :put do |f| %>
+<div class="row">
+	<div class="col-md-4 col-xs-12">
+		<%= f.label :title_oportunities, 'Título de la sección' %>
+		<%= f.text_field :title_oportunities, class: 'form-control' %>
+	</div>
+	<div class="col-md-4 col-xs-12">
+		<%= f.label :start_oportunities, 'Fecha de inicio' %>
+		<%= f.text_field :start_oportunities, value: @config.start_oportunities.strftime("%d/%m/%Y %H:%M"), class: 'form-control' %>
+	</div>
+	<div class="col-md-4 col-xs-12">
+		<%= f.label :end_oportunities, 'Fecha de término' %>
+		<%= f.text_field :end_oportunities, value: @config.end_oportunities.strftime("%d/%m/%Y %H:%M"), class: 'form-control' %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12 col-xs-12 text-right">
+		<%= f.submit 'Guardar', class:'btn btn-success' %>
+	</div>
+</div>
+<% end %>
+
+<script>
+	$(document).ready(function(){
+		$('#miele_config_start_oportunities').datetimepicker({
+			locale: 'es'
+		});
+		$('#miele_config_end_oportunities').datetimepicker({
+			locale: 'es'
+		});
+	});
+</script>

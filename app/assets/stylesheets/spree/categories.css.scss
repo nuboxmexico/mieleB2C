@@ -1,0 +1,152 @@
+@import "spree/frontend/variables";
+
+.header-categories {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-categories li {
+  display: inline-block;
+  color: $white-color;
+  padding: 15px 15px 5px 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: -5px;
+  font-size: 13px;
+
+  a {
+    color: $white-color;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+#virtual-support-section {
+  margin-left: auto;
+}
+
+.header-categories li::after {
+  content: '';
+  display: block;
+  transform: scaleX(0);
+  height: 2px;
+  background: $brand-primary;
+  transition: transform .75s;
+  margin-top: 10px;
+}
+.header-categories li:hover::after {
+  transform: scaleX(1);
+  height: 2px;
+}
+
+.sub-category-container a {
+  text-transform: capitalize;
+}
+
+.sub-category-container ul {
+  list-style-type: none;
+  color: $white-color;
+  padding-left: 15px;
+  padding-right: 40px;
+}
+
+.sub-category-container {
+  display: none;
+  background-color: $brand-secondary;
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 25px;
+}
+
+.sub-category-container div {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.sub-category-list, .sub-family-list {
+  border-right: 1px solid #BBB;
+}
+
+.sub-category-container:hover {
+  display: block !important;
+}
+.sub-family-container:hover,
+.specific-container:hover {
+  display: inline-block !important;
+}
+
+.sub-family-container {
+  display: none;
+}
+
+.specific-list {
+  display: inline-block !important;
+}
+
+.specific-list-hide {
+  display: none !important;
+}
+.specific-list-hide:hover {
+  display: inline-block !important;
+}
+
+.sub-family-container ul {
+  padding: 0 40px;
+}
+
+.header-sub-category a, 
+.sub-family-container ul li a,
+.specific-list ul li a {
+  color: $white-color;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 3;
+  text-decoration: none;
+}
+
+.header-sub-category a:hover, 
+.sub-family-container ul li a:hover {
+  color: #BBB;
+  text-decoration: none;
+}
+
+.sub-category-container:hover + #cover-screen {
+  height: 100vh;
+  background-color: rgba(0,0,0, 0.3);
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  display: block;
+  margin-top: 25px;
+}
+
+#oportunities-section {
+  a {
+    color: inherit;
+    font-weight: normal;
+  }
+
+  a:hover {
+    color: inherit;
+    font-weight: normal;
+    text-decoration: none;     
+  }
+}
+
+.category-bar-image {
+  float: right;
+  padding-right: 5%;
+  width: 25%;
+}
+
+@media (max-width: 940px) {
+  .category-bar-image {
+    display: none !important;
+  }  
+}

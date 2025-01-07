@@ -1,0 +1,42 @@
+.suggestions {
+  margin: 0;
+  padding: 0;
+  position: absolute!important;
+  z-index: 1000;
+  /*perspective:20px;*/
+}
+.suggestions .li-suggest {
+  width: 400px;
+  background:white;
+  list-style: none;
+  border-bottom: 1px solid #D8D8D8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
+  margin:0;
+  padding:0;
+  transition:background 0.2s;
+  display: block!important;
+}
+.suggestions .li-suggest a {
+  color: #000!important;
+  padding: 0px!important;
+  line-height: 15px!important;
+  display: block;
+  padding: 15px!important;
+}
+.suggestions .li-suggest a:hover {
+  background-color: #D8D8D8!important;
+}
+.suggestions .li-suggest a div{
+  margin-left: 0px!important;
+  border-right: 0px!important;
+  display: inherit!important;
+}
+.suggestions .li-suggest div{
+  margin-left: 0px!important;
+  border-right: 0px!important;
+  display: block!important;
+}
+.suggestions .li-suggest:hover {
+  background-color: #D8D8D8;
+  cursor: pointer;
+}
