@@ -29,7 +29,7 @@ services:
     networks:
       - local
     environment:
-      POSTGRES_HOST: 44.201.192.191
+      POSTGRES_HOST: ec2-44-202-164-140.compute-1.amazonaws.com
       POSTGRES_DB: mieleb2c
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root

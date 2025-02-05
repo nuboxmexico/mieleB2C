@@ -13,7 +13,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: 44.201.192.191
+  host: ec2-44-202-164-140.compute-1.amazonaws.com
   username: root
   password: root
   pool: 5
