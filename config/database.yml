@@ -19,10 +19,9 @@ default: &default
   pool: 5
   timeout: 5000
 
-# development:
-#   <<: *default
- production:
-   <<: *default
+ development:
+  <<: *default
+
 #host: postgres
   database: mieleb2c
 
