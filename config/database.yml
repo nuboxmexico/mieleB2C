@@ -13,14 +13,16 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: ec2-44-202-164-140.compute-1.amazonaws.com
+  host: 44.202.164.140
   username: root
   password: root
   pool: 5
   timeout: 5000
 
-development:
-  <<: *default
+# development:
+#   <<: *default
+ production:
+   <<: *default
 #host: postgres
   database: mieleb2c
 
